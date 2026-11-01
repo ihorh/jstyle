@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 12009,
+  "stop_reason": "end_turn",
+  "session_id": "0b251649-6f4f-4333-a671-d9dfbaadb7dc",
+  "total_cost_usd": 0.075099,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 15028,
+    "cache_read_input_tokens": 24550,
+    "output_tokens": 1252,
+    "output_tokens_details": {
+      "thinking_tokens": 395
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 15028,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1252,
+      "cacheReadInputTokens": 24550,
+      "cacheCreationInputTokens": 15028,
+      "webSearchRequests": 0,
+      "costUSD": 0.075099,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 395,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 5,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "\"\"\"Read one CSV row from a text stream and return it with a truncation flag.\n\nA row ends at the first newline that is not inside double quotes, so a quoted\nfield can contain newlines. The row is returned as raw text. The terminating\nnewline is not included, and the quotes are not parsed or removed. Open files\nwith `newline=\"\"` so line endings reach this function unchanged. With CRLF\ninput, the row keeps its trailing `\"\\r\"`.\n\nRows longer than `max_row_bytes` are cut short. The limit is measured in\nUTF-8 bytes, and it counts quote characters and newlines inside quotes. The\nreturned text is cut at a character boundary, so it never exceeds the limit.\nThe rest of that row is read and discarded up to the next newline, whether or\nnot the newline is quoted. After a truncation the stream is therefore\npositioned at the start of the next line. The truncated text can end inside an\nopen quote, so don't assume its quotes are balanced.\n\nArgs:\n    stream: A text stream (such as a file opened in text mode) with a\n        `read(1)` method. It is read one character at a time, and its\n        position advances past the row.\n    max_row_bytes: The most UTF-8 bytes of row text to keep. Defaults to\n        `DEFAULT_MAX_ROW_BYTES` (65536).\n\nReturns:\n    A tuple `(row, truncated)`.\n\n    - `(text, False)`: a complete row. A blank line gives `(\"\", False)`.\n      A final row with no trailing newline is returned like any other.\n    - `(text, True)`: the row exceeded `max_row_bytes`, and `text` holds\n      only its first part.\n    - `(None, False)`: the stream is exhausted and no row remains. Call\n      `read_row()` in a loop and stop when `row is None`.\n\"\"\"",
+  "ttft_ms": 1536,
+  "type": "result",
+  "duration_ms": 12159,
+  "uuid": "df8df911-e518-4ff6-b2b5-0e95ad53a055",
+  "ttft_stream_ms": 1138,
+  "time_to_request_ms": 101,
+  "first_content_frame_ms": 1139,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1252,
+      "cacheReadInputTokens": 24550,
+      "cacheCreationInputTokens": 15028,
+      "webSearchRequests": 0,
+      "costUSD": 0.075099,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 395,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

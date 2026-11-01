@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 19889,
+  "stop_reason": "end_turn",
+  "session_id": "99b380e1-0cbe-47de-ba7d-ef3e0eeeac7d",
+  "total_cost_usd": 0.1041116,
+  "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 9219,
+    "cache_read_input_tokens": 16118,
+    "output_tokens": 1356,
+    "output_tokens_details": {
+      "thinking_tokens": 472
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 9219,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1356,
+      "cacheReadInputTokens": 16118,
+      "cacheCreationInputTokens": 9219,
+      "webSearchRequests": 0,
+      "costUSD": 0.1041116,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 472,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 4,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "**Water shutoff on Tuesday 18 November**\n\nDear neighbours,\n\nOn Tuesday 18 November, Brightwater Plumbing will replace the main water valve in the basement. The water will be off for the whole building from 9:00.\n\n**What will be off**\n\n- Cold water and hot water will both be off. The boiler has to be switched off while the old valve is out.\n- The heating runs on a separate circuit, so it will stay on.\n\n**When the water comes back**\n\nThe plumbers' foreman expects to finish by mid-afternoon, probably around 3:00. He can't promise that time, because it depends on what they find once the old valve is out. I'll put a notice on the noticeboard as soon as the water is back on.\n\n**Why it's being done**\n\nIn October the old valve leaked and flooded the basement storage. Our insurer wants the valve replaced before the building's policy is renewed in December.\n\n**What to do**\n\nYou don't need to do anything to your own taps or pipes. Ana from the committee suggests a few things to make the day easier:\n\n- The night before, fill a few bottles and your kettle.\n- Keep a bucket of water ready for flushing the toilet.\n- Don't start the washing machine or the dishwasher that morning.\n\nWhen the water comes back on, it may run brown or cloudy for a minute. Run the cold kitchen tap until the water is clear. The pipes may also bang for a while, because there is air in them. Both are normal.\n\n**Basement storage**\n\nThe basement storage will stay locked all day. Please don't leave anything in the basement corridor.\n\n**If you need help**\n\nIf you need water that day for medical reasons, or you can't carry water yourself, please tell me by Friday 14 November. Ana can bring water up to your flat.\n\n**Questions**\n\nBrightwater has asked tenants not to call them, so please bring any questions to me:\n\nJonas, flat 3B\nPhone: 0176 555 0142\nEmail: jonas.linden3b@example.org\n\nThank you for your patience,\nJonas\nSecretary, Linden Court Residents' Committee\n\n---\n\n*For Jonas, not part of the note:* I've used the weekdays from the notes. But 18 November 2026 is a Wednesday and 14 November 2026 is a Saturday. Those weekdays only match 2025. Please check the dates with Brightwater before you send this.",
+  "ttft_ms": 3024,
+  "type": "result",
+  "duration_ms": 20133,
+  "uuid": "e8017160-871a-4155-b8d3-7641b02b6317",
+  "ttft_stream_ms": 2534,
+  "time_to_request_ms": 233,
+  "first_content_frame_ms": 2535,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1356,
+      "cacheReadInputTokens": 16118,
+      "cacheCreationInputTokens": 9219,
+      "webSearchRequests": 0,
+      "costUSD": 0.1041116,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 472,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

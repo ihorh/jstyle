@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 9688,
+  "stop_reason": "end_turn",
+  "session_id": "e93d897f-e315-4388-b2bb-3e1665981495",
+  "total_cost_usd": 0.048493800000000004,
+  "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 8871,
+    "cache_read_input_tokens": 16018,
+    "output_tokens": 1140,
+    "output_tokens_details": {
+      "thinking_tokens": 542
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 8871,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1140,
+      "cacheReadInputTokens": 16018,
+      "cacheCreationInputTokens": 8871,
+      "webSearchRequests": 0,
+      "costUSD": 0.048493800000000004,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 542,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 4,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# AGENTS.md\n\nThese rules exist because agents broke things twice. One renamed the chunk files in a \"cleanup\" PR, and a user's pipeline broke. Another changed the `--max-row-bytes` default from 65536 to 1048576 to make a failing test pass.\n\n## Output file names\n\nNever change the names of output files. The exception is a maintainer asking for it, as with the 0.4.0 rename. When you rename a file at a maintainer's request, also update the README and the changelog.\n\n## CLI option defaults\n\nNever change the default value of a CLI option. There are two exceptions:\n\n- The change fixes a bug.\n- The option is `--rows` and a maintainer agrees to the change.\n\nIf a test fails because of a default, fix the code or the test. Don't change the default to make the test pass.\n\n## Dependencies\n\nDon't add dependencies. `pytest` is allowed, but only for tests. The standard library is always fine.\n\n## Changelog\n\nAdd a changelog line for every change. Two kinds of change don't need one:\n\n- A test-only change.\n- An internal refactor that doesn't change behavior. If the refactor does change behavior, add the line.\n\n## Output streams\n\nNever print to stdout. Send all messages to stderr. The one exception is `--version`, once it exists.\n\n## Performance of `read_row()`\n\nKeep `read_row()` fast. It currently reads one character at a time, so don't make it slower. Don't read more than one character at a time.",
+  "ttft_ms": 1299,
+  "type": "result",
+  "duration_ms": 9761,
+  "uuid": "91e3c48e-678e-4498-9d7c-b143a71c2085",
+  "ttft_stream_ms": 938,
+  "time_to_request_ms": 53,
+  "first_content_frame_ms": 939,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1140,
+      "cacheReadInputTokens": 16018,
+      "cacheCreationInputTokens": 8871,
+      "webSearchRequests": 0,
+      "costUSD": 0.048493800000000004,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 542,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

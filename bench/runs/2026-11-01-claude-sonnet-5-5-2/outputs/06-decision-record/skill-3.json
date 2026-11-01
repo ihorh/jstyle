@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 27691,
+  "stop_reason": "end_turn",
+  "session_id": "e7884940-7f3c-4683-a5c3-c04ab38dcf0b",
+  "total_cost_usd": 0.10634640000000001,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 15816,
+    "cache_read_input_tokens": 49464,
+    "output_tokens": 3812,
+    "output_tokens_details": {
+      "thinking_tokens": 836
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 15816,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3812,
+      "cacheReadInputTokens": 49464,
+      "cacheCreationInputTokens": 15816,
+      "webSearchRequests": 0,
+      "costUSD": 0.10634640000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 836,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 12,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# 0001: Keep newlines inside quoted fields, and bound the damage from a stray quote\n\nStatus: accepted, merged 2026-10-02, ships in 0.4.0. Discussed in issue #42.\n\n## Context\n\nBefore 0.4.0, `read_row()` ended a row at the first `\\n` and ignored quotes. That was a deliberate choice in 0.1. If the reader tracks quotes, one stray `\"` makes it treat the rest of the file as a single field. The authors preferred \"never swallow the file\" over \"handle quoted newlines\".\n\nThe cost showed up in #42. A CRM export had a `notes` column with line breaks inside quoted fields, which RFC 4180 allows. splitlane cut those records in two, and the second half had the wrong number of columns. The downstream importer rejected the whole chunk. Two teams (billing and support analytics) were blocked. Neither had ever seen a malformed quote in their data.\n\nPlain quote tracking was implemented first and hit the original worry. A test file of 400k rows with one stray `\"` in row 12 produced a chunk with a header and one enormous row.\n\n## Decision\n\n`read_row()` tracks quotes, so a newline inside quotes stays in the row. The `--max-row-bytes` limit (default 65536) bounds the damage from a stray quote:\n\n- When a row grows past the limit, `read_row()` stops, cuts the row there, and skips ahead to the next newline. Reading then continues normally.\n- `read_row()` returns a flag saying the row was truncated.\n- `split_file()` counts truncated rows, and the CLI prints the count to stderr at the end of a run, so a shortened row is never silent.\n\n## Alternatives considered\n\n- **Keep splitting at every newline.** This is safe against a stray quote, but it breaks every valid multi-line field. We rejected it because valid multi-line fields look more common in real exports. We have no data either way. The reporters have never seen a malformed quote.\n- **Quote tracking with no bound.** Rejected after the 400k-row test above.\n- **Treat a quoted field as broken after N lines.** Rejected because a legitimate note can have many lines. A byte limit separates the two cases better, and the option already existed.\n\n## Consequences\n\n- Valid multi-line fields now come through intact. The output file format does not change.\n- A stray quote still damages data, but only up to the point where the limit is hit. The rest of the file is kept.\n- This is our inference from reading `read_row()`, and we have not tested it. The truncated row holds everything from the stray quote up to the limit, so any short rows in that span are absorbed into it. Up to roughly `--max-row-bytes` of input can be lost per stray quote, which may be more than one row. The issue discussion described it as \"one damaged row\".\n- Callers who need to detect this must check the truncation flag (library) or the stderr count (CLI). The importer in #42 will not notice a shortened row on its own.\n\n## Known limitation\n\nAfter a truncation, the skip goes to the next newline whether or not that newline is inside quotes. The reader can therefore resume in the middle of a real multi-line field and read its tail as a new row. This was raised on 2026-10-03, judged rare, and left unfixed. A fix has to decide what counts as a safe resync point when the quote state is already unreliable.",
+  "ttft_ms": 1743,
+  "type": "result",
+  "duration_ms": 27825,
+  "uuid": "2c0b6a11-1c75-4843-9c53-8b371ba2ad0e",
+  "ttft_stream_ms": 1040,
+  "time_to_request_ms": 84,
+  "first_content_frame_ms": 1041,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3812,
+      "cacheReadInputTokens": 49464,
+      "cacheCreationInputTokens": 15816,
+      "webSearchRequests": 0,
+      "costUSD": 0.10634640000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 836,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

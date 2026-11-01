@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 13492,
+  "stop_reason": "end_turn",
+  "session_id": "0f46c7a7-bcdd-4264-a13c-0e0c7e0a38bb",
+  "total_cost_usd": 0.06260969999999999,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 11063,
+    "cache_read_input_tokens": 45417,
+    "output_tokens": 1380,
+    "output_tokens_details": {
+      "thinking_tokens": 467
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 11063,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1380,
+      "cacheReadInputTokens": 45417,
+      "cacheCreationInputTokens": 11063,
+      "webSearchRequests": 0,
+      "costUSD": 0.06260969999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 467,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 7,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Your export isn't UTF-8, and splitlane reads input as UTF-8 by default. The file is almost certainly Latin-1 or Windows-1252 (the byte `0xe9` is `é` in both). `file` reports it as ISO-8859, and the sample rows you pasted have only ASCII names. The first accented character is somewhere after the first 180 or so rows.\n\nWhen splitlane hit that byte, it stopped and exited with code 3, which is its encoding-error code. By then it had already written `chunks/part-0001.csv`, so that file is a partial chunk (183 lines, not 20,000 rows). It's not a usable result, so delete it.\n\nTo fix it, tell splitlane the input encoding and write to a clean directory:\n\n```bash\nrm -r chunks\nsplitlane exports/customers-2026-10.csv --rows 20000 --out chunks --encoding cp1252\n```\n\nUse `cp1252` if the file came from Excel or Windows, and `latin-1` otherwise. They differ only in a few punctuation characters such as curly quotes and `€`. If a `latin-1` run fails or shows odd characters, try the other one. The chunks are always written as UTF-8, whichever encoding you read the input with.\n\nAfter the run, spot-check a chunk that contains accented names, such as `Ribeiro`-style surnames or city names, to confirm they look right.\n\nIf you want, open a separate issue for the error message. It could suggest `--encoding` when decoding fails, and it could clean up the partial output.",
+  "ttft_ms": 1522,
+  "type": "result",
+  "duration_ms": 13607,
+  "uuid": "79196fe2-0409-449b-a8b1-1f5e05e9d880",
+  "ttft_stream_ms": 1157,
+  "time_to_request_ms": 53,
+  "first_content_frame_ms": 1158,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1380,
+      "cacheReadInputTokens": 45417,
+      "cacheCreationInputTokens": 11063,
+      "webSearchRequests": 0,
+      "costUSD": 0.06260969999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 467,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

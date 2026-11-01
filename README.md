@@ -31,8 +31,48 @@ creative writing.
 
 ## Before and After
 
-Coming soon: passages from the benchmark, written by the same model without
-the skill and with it.
+Two prompts, each run once on Opus 5.5 without the skill and once with it.
+These are first attempts, cut to the passage where they differ most.
+[bench/examples/RESULTS.md](bench/examples/RESULTS.md) has them in full, with
+the prompts and the notes the agent wrote from.
+
+**A water shutoff notice** from a residents' committee to its tenants.
+
+Without the skill:
+
+> On **Wednesday 18 November**, the water will be turned off for the whole
+> building **from 9:00**. This includes **hot water**. Heating is on a separate
+> circuit and will stay on.
+>
+> **Why:** Brightwater Plumbing is replacing the main water valve in the
+> basement. The old valve leaked in October and flooded the basement storage,
+> and our insurer wants it replaced before the policy is renewed in December.
+
+With the skill:
+
+> On Wednesday 18 November, Brightwater Plumbing will replace the main water
+> valve in the basement. The water will go off for the whole building at 9 am.
+> Hot water will go off too, because the boiler has to be switched off while
+> the valve is out. The heating is on a separate circuit and will stay on.
+
+**A pitch for this skill,** one paragraph written from this README.
+
+Without the skill:
+
+> In the first blind benchmark, the maintainer preferred Opus 5.5's writing
+> with the skill in 8 of 10 tasks. The project is early. It has been tested
+> only in English with Claude models, and a session with it costs about 1.8
+> times as much and takes about twice as long.
+
+With the skill:
+
+> In the first benchmark, the maintainer compared Opus 5.5 with and without
+> the skill, without knowing which output was which, and preferred the one
+> with the skill in 8 of 10 writing tasks. That's one judge so far, and a
+> session with the skill costs about 1.8 times as much and takes about twice
+> as long.
+
+Neither version of either text invented a fact.
 
 ## Install
 

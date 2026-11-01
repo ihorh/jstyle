@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 18270,
+  "stop_reason": "end_turn",
+  "session_id": "3d72b9a0-4b58-413e-85a9-11e13b9798f1",
+  "total_cost_usd": 0.10076940000000001,
+  "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 9454,
+    "cache_read_input_tokens": 16007,
+    "output_tokens": 1096,
+    "output_tokens_details": {
+      "thinking_tokens": 561
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 9454,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1096,
+      "cacheReadInputTokens": 16007,
+      "cacheCreationInputTokens": 9454,
+      "webSearchRequests": 0,
+      "costUSD": 0.10076940000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 561,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 2,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "AI agents often write as if every word costs them. They drop small words like *that*, leave phrases without a verb, and nest clauses three deep, and the reader has to read the sentence twice to make up for the token the agent saved. jstyle is a Claude Code plugin with one skill, `/jstyle:write`, that works against this habit. Before the agent writes any prose, it lists its facts and where each one came from. It cuts sentences that carry nothing but keeps the small words that let the rest read in one pass, and it watches for patterns that make readers stop and reread, such as garden-path sentences and stacked negations. For text that gets one chance with its reader, like an email, a README, or release notes, it gives the draft to a fresh subagent for a cold read. That way the gaps the writer's own context hides get caught before your reader runs into them. You don't need to remember to call it, because the agent loads the skill on its own when it drafts text for someone outside the conversation. In the first blind benchmark, the maintainer preferred Opus 5.5's writing with the skill in 8 of 10 tasks. The project is early. It has been tested only in English with Claude models, and a session with it costs about 1.8 times as much and takes about twice as long. The full benchmark runs are in the repository so you can judge them yourself. To try it, run `/plugin install jstyle --marketplace ihorh/jstyle` in Claude Code 2.1.275 or later.",
+  "ttft_ms": 6244,
+  "type": "result",
+  "duration_ms": 18514,
+  "uuid": "6f334cf0-ddc5-4256-9eef-32b81e17579c",
+  "ttft_stream_ms": 5925,
+  "time_to_request_ms": 219,
+  "first_content_frame_ms": 5926,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1096,
+      "cacheReadInputTokens": 16007,
+      "cacheCreationInputTokens": 9454,
+      "webSearchRequests": 0,
+      "costUSD": 0.10076940000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 561,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

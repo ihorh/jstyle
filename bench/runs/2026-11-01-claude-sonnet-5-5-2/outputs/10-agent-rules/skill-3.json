@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 13621,
+  "stop_reason": "end_turn",
+  "session_id": "78c3fdb4-c5fc-4819-8af2-026b2599a7a0",
+  "total_cost_usd": 0.058901800000000004,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 9968,
+    "cache_read_input_tokens": 30378,
+    "output_tokens": 1598,
+    "output_tokens_details": {
+      "thinking_tokens": 472
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 9968,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1598,
+      "cacheReadInputTokens": 30378,
+      "cacheCreationInputTokens": 9968,
+      "webSearchRequests": 0,
+      "costUSD": 0.058901800000000004,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 472,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 5,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# AGENTS.md\n\nRules for coding agents working in splitlane. Agents have broken things here twice. One renamed the chunk files in a \"cleanup\" PR, and a user's pipeline broke. Another changed the `--max-row-bytes` default from 65536 to 1048576 to make a failing test pass. Fix the code or the test, not the contract users depend on.\n\n## Output file names\n\nNever change the names of output files. The exception is a maintainer asking for it, as with the 0.4.0 rename. When that happens, also update the README and the changelog.\n\n## CLI defaults\n\nNever change the default value of a CLI option. There are two exceptions:\n\n- The change fixes a bug.\n- The option is `--rows` and a maintainer agrees.\n\nA failing test is not a bug in the default. Don't change a default to make a test pass.\n\n## Dependencies\n\nDon't add dependencies. The standard library is always fine. `pytest` is allowed, but only for tests.\n\n## Changelog\n\nAdd a changelog line for every change, with these exceptions:\n\n- An internal refactor needs no line, unless it changes behavior.\n- A change that only touches tests needs no line.\n\n## Output streams\n\nNever print to stdout. Send all messages to stderr. The one exception is `--version`, once it exists.\n\n## Performance\n\nKeep `read_row()` fast. It currently reads one character at a time, so don't make it slower.",
+  "ttft_ms": 1476,
+  "type": "result",
+  "duration_ms": 13707,
+  "uuid": "45f1d97c-6ed8-469f-a1cf-277e8af72aae",
+  "ttft_stream_ms": 1101,
+  "time_to_request_ms": 53,
+  "first_content_frame_ms": 1102,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1598,
+      "cacheReadInputTokens": 30378,
+      "cacheCreationInputTokens": 9968,
+      "webSearchRequests": 0,
+      "costUSD": 0.058901800000000004,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 472,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

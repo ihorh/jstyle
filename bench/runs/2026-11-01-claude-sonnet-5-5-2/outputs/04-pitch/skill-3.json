@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 7817,
+  "stop_reason": "end_turn",
+  "session_id": "0a9e13ae-82cf-4bc7-8821-b234af3fc6e9",
+  "total_cost_usd": 0.0450571,
+  "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 8954,
+    "cache_read_input_tokens": 16031,
+    "output_tokens": 763,
+    "output_tokens_details": {
+      "thinking_tokens": 143
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 8954,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 763,
+      "cacheReadInputTokens": 16031,
+      "cacheCreationInputTokens": 8954,
+      "webSearchRequests": 0,
+      "costUSD": 0.0450571,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 143,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 5,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Hi Devi, the progress bar is a nice addition. I'd like to suggest one change before it merges.\n\nThe branch counts every row before splitting so it can show a percentage. That means reading the whole input twice. I haven't timed it, but on our biggest exports I expect the first pass alone to take a noticeable while before any output appears.\n\n**Proposal:** drop the pre-count and make a single pass over the input. The bar would show rows processed and chunks written instead of a percentage. `split_file()` already reads row by row, so the change should be confined to the CLI code in this branch.\n\n**The cost:** there would be no percentage and no ETA. I know users ask for those, so I don't want to wave that away.\n\n**Middle ground:** estimate the percentage as bytes read divided by file size. That needs no pre-count, so it keeps the single pass. I don't know yet whether it's accurate enough. Rows vary in length, so the estimate will drift on files with long notes. We could try it on a few real exports and see how far off it gets.\n\nI'd lean toward the bytes-read estimate if it holds up, and toward rows and chunks if it doesn't. What do you think? I'm happy to pair on it if you'd like.",
+  "ttft_ms": 1532,
+  "type": "result",
+  "duration_ms": 7902,
+  "uuid": "cd22eb13-3c02-4a23-b767-a057aafa857c",
+  "ttft_stream_ms": 1325,
+  "time_to_request_ms": 53,
+  "first_content_frame_ms": 1326,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 763,
+      "cacheReadInputTokens": 16031,
+      "cacheCreationInputTokens": 8954,
+      "webSearchRequests": 0,
+      "costUSD": 0.0450571,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 143,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

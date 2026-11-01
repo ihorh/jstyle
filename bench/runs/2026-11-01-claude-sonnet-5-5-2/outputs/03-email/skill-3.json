@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 21375,
+  "stop_reason": "end_turn",
+  "session_id": "0b3490e1-0524-4be5-83fd-383238097898",
+  "total_cost_usd": 0.08628160000000001,
+  "usage": {
+    "input_tokens": 10,
+    "cache_creation_input_tokens": 14027,
+    "cache_read_input_tokens": 61736,
+    "output_tokens": 2398,
+    "output_tokens_details": {
+      "thinking_tokens": 755
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 14027,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 2398,
+      "cacheReadInputTokens": 61736,
+      "cacheCreationInputTokens": 14027,
+      "webSearchRequests": 0,
+      "costUSD": 0.08628160000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 755,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 13,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "**Subject:** Decision needed: ship splitlane 0.4.0 now, or wait for a Windows fix?\n\nHi Priya,\n\nI need you to decide whether we release splitlane 0.4.0 now, or hold it until one Windows problem is fixed.\n\n**Why 0.4.0 matters**\nThe billing team and the support analytics team can't use splitlane on their CRM exports today. When a note in the export contains a line break, splitlane cuts that customer's record in two, and their importer rejects the whole file. 0.4.0 fixes this. Both teams run on Linux, and the fix has been tested on Linux and macOS. The release also makes splitlane report when it had to cut an over-long row short, so the loss no longer goes unnoticed.\n\n**The Windows problem**\nOn Windows only, splitlane can fail when you run it a second time into a folder that already holds files from an earlier run. If one of those old files is open in Excel, Windows won't let splitlane overwrite it, and splitlane stops with an error. By then it has already replaced the files before that one. The error doesn't say which ones, so the user is left with a mix of new and old files and no way to tell them apart. That could pass unnoticed and feed wrong data into someone's work.\n\nI can fix this properly, but the fix touches every place splitlane writes a file. I haven't estimated it, so I can't tell you how long a hold would be. We also have no usage data, so I don't know how many of our users are on Windows.\n\n**One more change to know about**\n0.4.0 renames the output files from `chunk_1.csv` to `part-0001.csv`. Anyone whose scripts look for the old names will need to update them. We had a user's pipeline break from a rename like this before. It's in the changelog and the README, but I'd mention it in the release announcement as well.\n\n**Your options**\n1. **Ship 0.4.0 now, with a known-issue note for Windows.** The note would tell Windows users to close the old files before re-running. Billing and support analytics get unblocked right away. The risk is that a Windows user misses the note and ends up with mixed files.\n2. **Hold 0.4.0 until the Windows problem is fixed.** Nobody gets the mixed-file risk, but both teams stay blocked for an unknown time.\n\nI lean toward option 1, because two teams are blocked now and the Windows problem only appears when someone re-runs over files that are still open. If you'd rather not take the risk, option 2 is a reasonable call. Tell me which you prefer and I'll act on it.\n\nThanks,\nDevi",
+  "ttft_ms": 1354,
+  "type": "result",
+  "duration_ms": 21504,
+  "uuid": "56727506-8bd6-4b40-b1ba-c60727af3b0b",
+  "ttft_stream_ms": 1003,
+  "time_to_request_ms": 53,
+  "first_content_frame_ms": 1004,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 2398,
+      "cacheReadInputTokens": 61736,
+      "cacheCreationInputTokens": 14027,
+      "webSearchRequests": 0,
+      "costUSD": 0.08628160000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 755,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

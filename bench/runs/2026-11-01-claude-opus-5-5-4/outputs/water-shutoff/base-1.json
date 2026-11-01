@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 13662,
+  "stop_reason": "end_turn",
+  "session_id": "914457b0-4d51-41d2-8863-7bd8a4e26373",
+  "total_cost_usd": 0.0670382,
+  "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 5727,
+    "cache_read_input_tokens": 15931,
+    "output_tokens": 901,
+    "output_tokens_details": {
+      "thinking_tokens": 182
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 5727,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 901,
+      "cacheReadInputTokens": 15931,
+      "cacheCreationInputTokens": 5727,
+      "webSearchRequests": 0,
+      "costUSD": 0.0670382,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 182,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 2,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "**Water shutoff: Wednesday 18 November, from 9:00**\n\nDear neighbours,\n\nOn **Wednesday 18 November**, the water will be turned off for the whole building **from 9:00**. This includes **hot water**. Heating is on a separate circuit and will stay on.\n\n**Why:** Brightwater Plumbing is replacing the main water valve in the basement. The old valve leaked in October and flooded the basement storage, and our insurer wants it replaced before the policy is renewed in December.\n\n**When will the water be back?** We don't know for sure yet. The plumbers expect to finish by mid-afternoon, probably around 15:00, but it depends on what they find once the old valve is out. Please plan for the water to be off longer than that. I'll put a notice on the noticeboard as soon as the water is back on.\n\n**What to do beforehand**\nYou don't need to do anything to your own taps or pipes. To get through the day more easily:\n- Fill a few bottles and your kettle the night before.\n- Keep a bucket of water for flushing the toilet.\n- Don't start the washing machine or dishwasher that morning.\n\n**When the water comes back**\n- The water may run brown or cloudy for a minute. Run the cold tap in the kitchen until it's clear.\n- The pipes may bang for a while because of air in them. This is normal.\n\n**Need help?**\nIf you need water that day for medical reasons, or can't carry water yourself, please tell me **by Friday 13 November**. Ana from the committee can bring water up to your flat.\n\n**Basement**\nThe basement storage will be locked all day. Please don't leave anything in the basement corridor.\n\n**Questions**\nBrightwater has asked tenants not to call them directly, so please send all questions to me:\nJonas, flat 3B\nPhone: 0176 555 0142\nEmail: jonas.linden3b@example.org\n\nThank you for your patience.\n\nJonas\nSecretary, Linden Court Residents' Committee",
+  "ttft_ms": 3441,
+  "type": "result",
+  "duration_ms": 13851,
+  "uuid": "69ddc7c0-f077-43c9-bbd8-425961725fec",
+  "ttft_stream_ms": 3044,
+  "time_to_request_ms": 166,
+  "first_content_frame_ms": 3045,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 901,
+      "cacheReadInputTokens": 15931,
+      "cacheCreationInputTokens": 5727,
+      "webSearchRequests": 0,
+      "costUSD": 0.0670382,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 182,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

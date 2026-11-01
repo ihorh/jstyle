@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 22319,
+  "stop_reason": "end_turn",
+  "session_id": "5915b051-7563-4fc1-9303-11d619cc51fe",
+  "total_cost_usd": 0.09093110000000001,
+  "usage": {
+    "input_tokens": 10,
+    "cache_creation_input_tokens": 14614,
+    "cache_read_input_tokens": 63251,
+    "output_tokens": 2613,
+    "output_tokens_details": {
+      "thinking_tokens": 743
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 14614,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 2613,
+      "cacheReadInputTokens": 63251,
+      "cacheCreationInputTokens": 14614,
+      "webSearchRequests": 0,
+      "costUSD": 0.09093110000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 743,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 14,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "**Subject:** Decision needed: ship splitlane 0.4.0 now, or wait for a Windows fix?\n\nHi Priya,\n\nI need you to decide whether we ship splitlane 0.4.0 now or hold it until a Windows bug is fixed. I recommend shipping now.\n\n**What 0.4.0 gives us**\n- Billing and support analytics have been blocked since September. splitlane breaks any record whose text contains a line break, such as a customer note, into two broken records, and their importer rejects the whole file. 0.4.0 fixes this. Both teams run on Linux.\n- Another new feature protects against a different problem. A single stray quotation mark can make splitlane treat the rest of a file as one giant record. Now it damages at most one record and prints how many it cut at the end of the run. Maya's team will check for that message in their scripts.\n- `--rows 0` used to make splitlane loop forever. It now stops with an error message.\n- When splitlane can't read a file's text encoding, it now stops with an error and a distinct exit code (3), so scripts can tell this failure apart.\n- The output files are renamed from `chunk_1.csv` to `part-0001.csv`. Anyone whose scripts look for the old names will need to update them.\n\nEverything above is merged and tested on Linux and macOS.\n\n**The Windows problem (issue #57)**\nSuppose someone re-runs splitlane into a folder that already holds files from an earlier run, and one of those files is open in Excel. Windows won't let splitlane replace an open file. splitlane stops with an error that doesn't say which file caused it. By then it has already replaced the files before that one. The folder is left with a mix of new and old files, and the user can't tell which is which. This doesn't happen on Linux or macOS.\n\nWe don't know how many of our users are on Windows, because splitlane collects no usage data. The bug only appears when a user re-runs into an existing folder with a file open in Excel.\n\n**Your options**\n1. **Ship 0.4.0 now, with a known-issue note for Windows.** The note would tell Windows users to close their output files in Excel, or use a fresh folder, before re-running. Billing and support analytics are unblocked right away. The risk is that some Windows user hits the bug and gets a confusing mix of files before we fix it.\n2. **Hold 0.4.0 until #57 is fixed.** Nobody gets the mixed-files bug, but the two blocked teams keep waiting. I haven't estimated the fix. It means changing splitlane to write into a temporary folder and move everything into place at the end, which touches every place it writes files. I can give you an estimate if you want to weigh this option.\n\n**My recommendation:** option 1. Two teams are blocked now, the Windows bug needs a specific set of circumstances, and the error stops the run instead of silently producing bad output. I'd then fix #57 in the next release. This is my judgment, and I can't back it with Windows usage numbers.\n\nPlease reply with \"ship\" or \"hold\". If you pick ship, I'll write the Windows note and release it right away.\n\nThanks,\nDevi",
+  "ttft_ms": 1334,
+  "type": "result",
+  "duration_ms": 22447,
+  "uuid": "aa041b8c-c37f-436c-a1cc-4d4262382ec2",
+  "ttft_stream_ms": 980,
+  "time_to_request_ms": 52,
+  "first_content_frame_ms": 980,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 2613,
+      "cacheReadInputTokens": 63251,
+      "cacheCreationInputTokens": 14614,
+      "webSearchRequests": 0,
+      "costUSD": 0.09093110000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 743,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

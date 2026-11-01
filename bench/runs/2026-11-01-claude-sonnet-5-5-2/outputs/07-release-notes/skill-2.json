@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 18521,
+  "stop_reason": "end_turn",
+  "session_id": "43b4b0dc-7e65-4e3d-96e8-8450d99ffe75",
+  "total_cost_usd": 0.0839543,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 14210,
+    "cache_read_input_tokens": 44283,
+    "output_tokens": 2267,
+    "output_tokens_details": {
+      "thinking_tokens": 516
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 14210,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 2267,
+      "cacheReadInputTokens": 44283,
+      "cacheCreationInputTokens": 14210,
+      "webSearchRequests": 0,
+      "costUSD": 0.0839543,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 516,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 14,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# splitlane 0.4.0\n\nThis release fixes how quoted fields with line breaks are handled, and it renames the output files. If you're upgrading from 0.3.1, read the first two sections before you run it on a real pipeline.\n\n## Changes that may break your setup\n\n**Output files have new names.** Chunks were `chunk_1.csv`, `chunk_2.csv`, and so on. They are now zero-padded: `part-0001.csv`, `part-0002.csv`. Update any script or pipeline that looks for the old names. A glob such as `chunk_*.csv` will no longer match.\n\n**Undecodable input now exits with status 3.** If the input can't be decoded with the chosen `--encoding`, splitlane prints `cannot decode <file> as <encoding>` and exits with status 3. If the file isn't UTF-8, pass the right `--encoding`. Chunks written before the bad byte are not removed, so a failed run can leave a partial `part-0001.csv` in the output directory.\n\n## Fixes\n\n- **Quoted fields with line breaks stay in one row (#42).** A line break inside a quoted field no longer ends the row, so a multi-line note in a CRM export stays in a single row. Before, it became two rows, and the second had the wrong number of columns.\n- **A stray quote no longer swallows the rest of the file (#42).** An unmatched `\"` used to make the reader treat everything after it as one field. Now the row stops at `--max-row-bytes`, is counted as truncated, and reading resumes at the next line. One bad quote damages one row.\n- **`--rows 0` no longer loops forever.** It now prints `--rows must be at least 1` and exits with status 2.\n\n## New\n\n- **Truncated rows are reported.** At the end of a run, splitlane prints a warning to stderr with the number of rows that went over `--max-row-bytes` and were cut. A truncated row is shortened, and your importer may not notice. If that matters to you, check for this warning in your scripts.\n\n## Known issues\n\n- **Resync after a truncated row can land inside a quoted field.** The reader resumes at the next line break even if that break is inside quotes. In that rare case, one more row can come out damaged.\n- **Windows: overwriting an open chunk crashes the run (#57).** If a chunk from an earlier run is open in Excel, splitlane stops with a `PermissionError`. Chunks written before that point stay on disk, and the error doesn't say which chunk failed. You end up with a mix of new and old files. Close the files, or write to an empty output directory.",
+  "ttft_ms": 1556,
+  "type": "result",
+  "duration_ms": 18616,
+  "uuid": "78ee4f37-9dbd-48b5-ab23-c09e8127a98e",
+  "ttft_stream_ms": 1154,
+  "time_to_request_ms": 53,
+  "first_content_frame_ms": 1155,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 2267,
+      "cacheReadInputTokens": 44283,
+      "cacheCreationInputTokens": 14210,
+      "webSearchRequests": 0,
+      "costUSD": 0.0839543,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 516,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

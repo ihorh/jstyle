@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 11427,
+  "stop_reason": "end_turn",
+  "session_id": "5abe9dd3-8f40-4e47-9fe4-fc2f6950a382",
+  "total_cost_usd": 0.06431700000000001,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 12175,
+    "cache_read_input_tokens": 31850,
+    "output_tokens": 1242,
+    "output_tokens_details": {
+      "thinking_tokens": 193
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 12175,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1242,
+      "cacheReadInputTokens": 31850,
+      "cacheCreationInputTokens": 12175,
+      "webSearchRequests": 0,
+      "costUSD": 0.06431700000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 193,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 7,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# splitlane\n\nSplit a large CSV file into smaller files with the same header.\n\n## Install\n\nFrom a checkout:\n\n```bash\npip install .\n```\n\n## Usage\n\n```bash\nsplitlane data/export.csv --rows 50000 --out chunks\n```\n\nThis writes `chunks/part-0001.csv`, `chunks/part-0002.csv`, and so on. Each\nchunk starts with the input's header row.\n\nOptions:\n\n- `--rows N`: rows per chunk, not counting the header. Default 100000.\n- `--out DIR`: output directory, created if missing. Default `out`.\n- `--max-row-bytes N`: longest row kept whole, measured in UTF-8 bytes. Longer\n  rows are truncated (see below). Default 65536.\n- `--encoding NAME`: input encoding. Default `utf-8`.\n\n## Long rows\n\nA newline inside a quoted field stays part of its row, so multi-line notes\nsurvive. To keep an unclosed quote from swallowing the rest of the file,\nsplitlane limits how long a row can grow.\n\nIf a row passes `--max-row-bytes`, splitlane cuts it at the limit and drops the\nrest of it, up to the next newline. The shortened row is still written to its\nchunk, so it looks like any other row, and your importer won't notice it. At\nthe end of the run, splitlane prints a warning to stderr with the number of\ntruncated rows:\n\n```\nsplitlane: warning: 3 row(s) longer than 65536 bytes were truncated\n```\n\nIf your data has legitimately long rows, raise `--max-row-bytes`. If your\nscripts must not accept damaged rows, check for this warning.\n\nThe skip after a cut stops at the next newline even when that newline is inside\nquotes. In rare cases, splitlane may resume reading in the middle of a real\nmulti-line field.",
+  "ttft_ms": 1893,
+  "type": "result",
+  "duration_ms": 11538,
+  "uuid": "10389650-a610-45bf-9198-b9c0464f52b6",
+  "ttft_stream_ms": 1489,
+  "time_to_request_ms": 56,
+  "first_content_frame_ms": 1490,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1242,
+      "cacheReadInputTokens": 31850,
+      "cacheCreationInputTokens": 12175,
+      "webSearchRequests": 0,
+      "costUSD": 0.06431700000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 193,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 11310,
+  "stop_reason": "end_turn",
+  "session_id": "15b1da9e-474b-4e3a-aa42-79849f6ff3d8",
+  "total_cost_usd": 0.0508448,
+  "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 9326,
+    "cache_read_input_tokens": 16028,
+    "output_tokens": 1193,
+    "output_tokens_details": {
+      "thinking_tokens": 415
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 9326,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1193,
+      "cacheReadInputTokens": 16028,
+      "cacheCreationInputTokens": 9326,
+      "webSearchRequests": 0,
+      "costUSD": 0.0508448,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 415,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 4,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "```python\n\"\"\"Read one CSV row from a text stream and return it as raw text.\n\nThe row is returned unparsed, without its line terminator, so you can pass\nit to `csv.reader` or `count_columns()`. A newline ends the row unless it\nfalls inside double quotes, so a quoted field can span several lines. Quotes\nare only tracked, never removed. A doubled quote (`\"\"`) inside a field\ntoggles the state twice and leaves it unchanged, as CSV expects.\n\nCall it repeatedly to walk through a file. Each call consumes exactly one\nrow, including its newline, so the next call starts at the following row.\n\nArgs:\n    stream: A text stream whose `read(1)` returns one character, such as a\n        file opened with `newline=\"\"`. With that setting, a CRLF file keeps\n        its `\\r` at the end of each returned row. Otherwise Python converts\n        line endings before this function sees them.\n    max_row_bytes: The most UTF-8 bytes a row may hold, counted without the\n        terminating newline. Newlines inside quotes do count. Defaults to\n        `DEFAULT_MAX_ROW_BYTES` (65536).\n\nReturns:\n    A tuple `(row, truncated)`.\n\n    - `(row, False)`: a complete row. A blank line gives `(\"\", False)`.\n      The last row is returned even when the input has no final newline.\n    - `(partial_row, True)`: the row was longer than `max_row_bytes`.\n      `partial_row` holds the characters read before the limit, so it is\n      cut off mid-row and may have an unclosed quote. The rest of the row\n      is discarded up to the next newline, or the end of input. That\n      search ignores quotes, so a newline inside a quoted field ends the\n      skip early, and the remainder of that record is read as the next\n      row.\n    - `(None, False)`: the stream was already at the end of input.\n\n    An opening quote that is never closed makes the row run to the end of\n    input, or to the size limit.\n\"\"\"\n```",
+  "ttft_ms": 1410,
+  "type": "result",
+  "duration_ms": 11390,
+  "uuid": "cabe84f5-3a28-4e6b-9b0f-f17d9bbf3c1a",
+  "ttft_stream_ms": 1006,
+  "time_to_request_ms": 54,
+  "first_content_frame_ms": 1007,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1193,
+      "cacheReadInputTokens": 16028,
+      "cacheCreationInputTokens": 9326,
+      "webSearchRequests": 0,
+      "costUSD": 0.0508448,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 415,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

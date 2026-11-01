@@ -1,0 +1,105 @@
+{
+  "duration_api_ms": 46515,
+  "stop_reason": "end_turn",
+  "session_id": "5c87c08d-e8f6-48c7-a177-5812ece5830f",
+  "total_cost_usd": 0.24915900000000002,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 15341,
+    "cache_read_input_tokens": 34395,
+    "output_tokens": 2363,
+    "output_tokens_details": {
+      "thinking_tokens": 1109
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 15341,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3617,
+      "cacheReadInputTokens": 34395,
+      "cacheCreationInputTokens": 24777,
+      "webSearchRequests": 0,
+      "costUSD": 0.24915900000000002,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1714,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 1,
+    "requested": {
+      "background": 0,
+      "foreground": 1,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 1,
+    "spawned_by_subagents": 0,
+    "completed": 1,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {
+      "general-purpose": 1
+    }
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 5,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Left to themselves, AI agents often write as if every word cost them something. They drop the small words, put a colon where a verb should be, and nest one clause inside another, and the reader pays with a second pass. jstyle is a Claude Code plugin with one skill, `/jstyle:write`, that works against that habit. Before the agent writes any prose, the skill has it list its facts with their sources in its working notes, and mark the conclusions it drew itself as its own. While it writes, the agent watches for patterns that make a reader stop and reparse, such as stacked negations or garden-path sentences, where an early word suggests a reading that the rest of the sentence overturns. Before it hands over an email, a README, or release notes, it asks a subagent with none of its context to read the text cold and say where it got lost. You don't have to remember to call the skill, because the agent loads it on its own whenever it drafts text for someone outside the conversation. In the first benchmark, the maintainer compared Opus 5.5 with and without the skill, without knowing which output was which, and preferred the one with the skill in 8 of 10 writing tasks. That's one judge so far, and a session with the skill costs about 1.8 times as much and takes about twice as long. The full outputs are in `bench/runs/` in the [ihorh/jstyle](https://github.com/ihorh/jstyle) repository, so you can judge them yourself. To try it, run `/plugin install jstyle --marketplace ihorh/jstyle` in Claude Code 2.1.275 or later.",
+  "ttft_ms": 5260,
+  "type": "result",
+  "duration_ms": 46873,
+  "uuid": "25132406-7d32-4f72-9591-77fa0e72b971",
+  "ttft_stream_ms": 4983,
+  "time_to_request_ms": 252,
+  "first_content_frame_ms": 4984,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3617,
+      "cacheReadInputTokens": 34395,
+      "cacheCreationInputTokens": 24777,
+      "webSearchRequests": 0,
+      "costUSD": 0.24915900000000002,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1714,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

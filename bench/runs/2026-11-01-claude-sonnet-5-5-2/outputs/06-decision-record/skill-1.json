@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 28308,
+  "stop_reason": "end_turn",
+  "session_id": "125821a9-c960-43d2-9e5b-b9976a4aede1",
+  "total_cost_usd": 0.10661509999999999,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 15409,
+    "cache_read_input_tokens": 49631,
+    "output_tokens": 4000,
+    "output_tokens_details": {
+      "thinking_tokens": 833
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 15409,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 4000,
+      "cacheReadInputTokens": 49631,
+      "cacheCreationInputTokens": 15409,
+      "webSearchRequests": 0,
+      "costUSD": 0.10661509999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 833,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 11,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "I couldn't write the file because the Write tool is disabled in this session. The content for `docs/decisions/0001-quoted-newlines.md` is below.\n\n# 0001: Keep newlines inside quoted fields, and bound the damage from a stray quote\n\nStatus: accepted, merged 2026-10-02 (issue #42), ships in 0.4.0.\n\n## Context\n\nUp to 0.3, `read_row()` in `src/splitlane/split.py` ended a row at the first `\\n` and ignored quotes. This was deliberate. If the reader tracks quotes, one unmatched `\"` makes it believe the rest of the file is a single field, so a bad byte can swallow the whole input. The original choice was \"never swallow the file\" over \"handle quoted newlines\".\n\nThe cost showed up in issue #42. CSV exports with a free-text column (a CRM `notes` field) contain line breaks inside quoted fields, which RFC 4180 allows. splitlane cut those records in two, and the downstream importer rejected the whole chunk. Two internal teams (billing and support analytics) were blocked on it, and neither had ever seen a malformed quote in their data.\n\nThe first implementation, plain quote tracking, was tested on a 400k-row file with one stray `\"` in row 12. It wrote a chunk with a header and one enormous row, which is the failure the 0.1 design was meant to prevent. So quote tracking alone was rejected.\n\n## Decision\n\n`read_row()` tracks quotes, so a newline inside quotes stays in the row. The tracking is bounded by `--max-row-bytes` (default 65536):\n\n- When a row grows past the limit, the reader stops and returns the row cut at that point.\n- It then skips ahead to the next newline, whether or not that newline is inside quotes, and reading resumes from there.\n- The cut row is reported as truncated. `read_row()` returns `True` as the second element of its result, and the CLI prints the number of truncated rows at the end of a run.\n\nA legitimate multi-line field is far below the limit. A stray quote now damages a bounded amount of input instead of the rest of the file.\n\n## Alternatives considered\n\n- **Keep splitting at every newline (the 0.1 behavior).** Safe against stray quotes, but it breaks valid RFC 4180 files, which is what the reporters have.\n- **Track quotes with no bound.** Correct for valid files, but one stray quote swallows the rest of the input. This was tested and rejected.\n- **Treat a quoted field longer than N lines as broken.** Rejected because a notes field can legitimately span many lines. Size is a better signal than line count.\n\n## Consequences\n\n- Valid multi-line fields now stay in one row. Truncation is not silent: anyone who feeds splitlane output to a strict importer should check the truncated-row count the CLI prints. The #42 reporters agreed to check for it in their scripts.\n- A truncated row is shortened, so its data is lost. A legitimate field larger than `--max-row-bytes` is cut the same way, and the fix for that is a larger limit.\n- Do not raise the `--max-row-bytes` default to make a test pass. The default is what keeps a stray quote cheap.\n- Known gap, raised by tomasz after the merge and not fixed: the skip after truncation stops at the next newline even if that newline is inside a real quoted field, so the reader can resume in the middle of a valid multi-line field. It is probably rare, and it was judged not to block the release.\n- Our inference from reading the code, not tested: after a stray quote, the reader keeps absorbing following rows until the row passes the limit. A stray quote can therefore cost up to roughly `--max-row-bytes` of following rows, which may be several rows, not exactly one.",
+  "ttft_ms": 1759,
+  "type": "result",
+  "duration_ms": 28405,
+  "uuid": "cace9485-daec-4ee8-97d8-575b3d0560de",
+  "ttft_stream_ms": 1018,
+  "time_to_request_ms": 51,
+  "first_content_frame_ms": 1019,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 4000,
+      "cacheReadInputTokens": 49631,
+      "cacheCreationInputTokens": 15409,
+      "webSearchRequests": 0,
+      "costUSD": 0.10661509999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 833,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}
