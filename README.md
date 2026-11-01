@@ -162,8 +162,8 @@ without uninstalling:
 > Start a new session after each change. A skill that already loaded stays in
 > the conversation, so an open session can't show writing without it.
 
-In the terminal and in VS Code, a change also reaches the open session without
-a restart. In the terminal, when reloading the plugins would invalidate the
+In the terminal and in VS Code, the plugin list also updates in the open
+session without a restart. In the terminal, when reloading the plugins would invalidate the
 prompt cache, Claude Code warns you and leaves the change pending, and
 `/reload-plugins --force` applies it anyway. [Install and manage
 plugins](https://code.claude.com/docs/en/discover-plugins) lists the other ways
