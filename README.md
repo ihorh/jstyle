@@ -30,8 +30,8 @@ the skill and with it.
 
 ## Install
 
-In a Claude Code terminal session, version 2.1.275 or later, run this and
-choose a scope:
+In a Claude Code terminal session, version 2.1.275 or later, run this,
+confirm adding the marketplace, and choose a scope:
 
 ```
 /plugin install jstyle --marketplace ihorh/jstyle
@@ -46,10 +46,11 @@ docs covers the other ways to install, scopes, and uninstalling.
 
 Adding the marketplace clones the whole repository, benchmark included, though
 only the plugin folder is copied into a session. For a smaller clone, add the
-marketplace from your shell first, then install `jstyle@jstyle`:
+marketplace from your shell first, then install the plugin from it:
 
 ```
 claude plugin marketplace add ihorh/jstyle --sparse .claude-plugin plugins
+claude plugin install jstyle@jstyle
 ```
 
 ## Using It
@@ -106,13 +107,15 @@ without uninstalling:
 - **In the desktop app,** click **+**, then **Plugins**, then **Manage
   plugins**.
 
-In the terminal and in VS Code, a change applies to the open session without
-a restart. In a terminal session,
-when reloading the plugins would invalidate the prompt cache, Claude Code
-warns you and leaves the change pending. Run `/reload-plugins --force` to apply
-it anyway. A skill that already loaded stays in the conversation, so start a
-new session for a clean comparison. The docs page above lists the other ways
-to do this, including from your shell.
+Start a new session after each change. A skill that already loaded stays in
+the conversation, so an open session can't show writing without it.
+
+In the terminal and in VS Code, a change also reaches the open session without
+a restart. In the terminal, when reloading the plugins would invalidate the
+prompt cache, Claude Code warns you and leaves the change pending, and
+`/reload-plugins --force` applies it anyway. [Install and manage
+plugins](https://code.claude.com/docs/en/discover-plugins) lists the other ways
+to turn a plugin off and on, including from your shell.
 
 ## Other Languages and Models
 
@@ -134,7 +137,9 @@ The skill puts correct facts and a clear idea ahead of brevity. It works on
 four levels:
 
 - **Facts.** The agent lists its facts with their sources before writing any
-  prose, and marks the conclusions it drew itself as its own.
+  prose, and marks the conclusions it drew itself as its own. The list stays
+  in its working notes, and the text cites a source only where the reader
+  needs one.
 - **The idea.** When a sentence stays unclear after rewording, the agent works
   out the idea, or the context the reader is missing, before writing it again.
 - **Concise, never compressed.** It cuts sentences that carry nothing, and
@@ -153,7 +158,8 @@ like these conventions, put the file in your rules folder, such as
 
 ## Benchmark Reports
 
-The latest report for each standing comparison. The recipe behind them is in
+The table links the latest report for each standing comparison, one we rerun
+whenever a run it depends on changes. The recipe behind the reports is in
 [bench/reports/README.md](bench/reports/README.md).
 
 Each report shows excerpts and one reader's scores, so it reflects one
@@ -175,8 +181,8 @@ its own output under those rules: 784 chat replies and 63 documents from 50
 sessions. The habits Ihor suspected, such as dropping the word *that*,
 explained little. Two habits he hadn't suspected cost more. Phrases with no
 verb, often after a colon, turned up in 3 to 4 of every 100 replies. Clauses
-nested three deep turned up in about 2 of every 100 sentences. That finding
-is why the skill targets compression.
+nested three deep turned up in about 2 of every 100 sentences. These findings
+are why the skill targets compression.
 
 The skill also draws on writing and reading research:
 
