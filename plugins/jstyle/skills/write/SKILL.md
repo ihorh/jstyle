@@ -49,7 +49,7 @@ paperwork.
 5. **Be concise, never compressed.** Cut whole sentences that carry nothing,
    and keep every word that lets the rest read in one pass.
 
-## Facts and Sources
+## Collect Facts and Sources
 
 An invented sentence reads as smoothly as a checked one, so rereading a draft
 won't catch it. That is why the facts come first.
