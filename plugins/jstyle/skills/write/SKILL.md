@@ -130,19 +130,49 @@ outgrow it.
 Your own context fills every gap your audience will fall into, so your reread
 needs help.
 
-- **Reread as the person it's for,** and look twice wherever one of these turns
-  up. Each marks a place to look, never a verdict:
+- **Reread it yourself first,** as the person it's for, and look twice
+  wherever one of these turns up. Each marks a place to look, never a verdict:
   - a hedge on something you know
   - a paragraph you could delete with nothing lost
   - a reference they can't place, or one the text never introduced
   - a fact you can't point at a source for
   - a sentence that breaks one of the sentence rules
-- **Ask for a cold read** when your audience won't share your context and the
+- **Then get a cold read** when your audience won't share your context and the
   text gets one shot, as with an email, a README, release notes, or an
-  instruction file. Give a subagent or a new session only the text, never this
-  conversation, and ask what it couldn't resolve.
+  instruction file. The next section says how.
 - **Skip the cold read** for a draft the person will read with you in chat, or
   a small local edit.
-- **Say when you skipped it.** If you can't start a cold read, tell the person
-  when you hand the text over.
+
+## Cold Read
+
+A cold read hands the text to a reader with none of your context. That reader
+finds the gaps your own reread passes over, since your context fills them in
+for you.
+
+- **Start a reader with the text and one line on who it's for:** a subagent,
+  or a new session. It never sees this conversation, the files you read, your
+  notes, or these rules.
+- **Ask for questions, not rewrites.** Tell it to read as that person, and to
+  list what it had to reread, what it couldn't resolve, and
+  what it would need another source to follow. For each one, it quotes the
+  passage.
+- **Judge each question yourself.** Fix the ones that point at a real gap.
+  When one asks for a threshold or an exact definition, the text usually calls
+  for judgment there, and needs no rule.
+- **Use two readers when the text matters most,** such as an instruction file,
+  ideally on different models. Each catches misreadings the other misses, and
+  a misreading both make is nearly always worth fixing.
+
+## Environment
+
+What a cold read takes depends on the tools you have, and so does whether to
+ask first.
+
+- **Where you can start a subagent or a new session,** run one cold read
+  without asking, unless the person's instructions limit background work.
+- **Ask before running two,** unless the person has already agreed to that
+  earlier in the conversation.
+- **Where you can't,** and the text matters, suggest how the person could run
+  one: open a new session or chat, paste the text with the request from Cold
+  Read, and bring back the questions.
 
