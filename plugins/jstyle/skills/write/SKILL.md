@@ -10,9 +10,6 @@ wordiness. This skill fights compression instead: the dropped words, verbless
 fragments, and packed clauses that save the writer a token and cost the reader
 a second pass.
 
-It was written for Claude and other recent models. It states intent more than
-procedure, and it relies on your judgment to apply it.
-
 ## When It Applies
 
 The skill applies at handover, and the project's own conventions come first.
@@ -60,64 +57,71 @@ won't catch it. That is why the facts come first.
 - **Source every claim specific to the subject,** such as its people, its
   numbers, or its history. General knowledge, such as how a standard library
   behaves, needs none.
-- **Keep the facts that serve the reader,** and drop the rest even when they're
-  true. The list itself stays out of the text.
+- **Use the facts that serve the reader,** and drop the rest even when they're
+  true. The full list, with every source, would clutter the text, so keep it in
+  your working notes. The text still cites a source wherever the reader needs
+  one.
 - **Mark your own inferences as yours.** A consequence you worked out from the
   sources is often the most useful part of the text, and the reader needs to
   know it came from you.
 - **In someone else's voice, put your inference beside the draft,** as a note
   for them to confirm, never in their mouth.
 
-  > **Before.** The venue's confirmation says the hall seats 80. In the
-  > invitation drafted for Marta to send to the club's members: "We've since
-  > confirmed room for up to 120, so bring a friend."
+  The venue confirmed a hall for 80, and you're drafting the invitation Marta
+  will send to her club.
+
+  > **Before**, in the invitation: "We've confirmed room for up to 120, so bring
+  > a friend."
   >
-  > **After.** The invitation says the hall seats 80. Beside the draft: "From
-  > the floor plan, I think the hall could take 120 without the tables. I
-  > haven't checked with the venue. Confirm it before you promise it."
+  > **After**, in the invitation: "The hall seats 80."
+  > Beside it, for Marta: "From the floor plan, I think the hall could take 120
+  > without the tables. I haven't checked with the venue, so confirm it before
+  > you promise it."
 
 ## Sentence Traps
 
-These patterns can make a reader stop and reparse. Each marks a place to look,
-and you judge it against the person's preferences and the medium. A few are
-almost always worth fixing, and their entries say so. None of them governs
-vocabulary, so a technical term stays as it is.
+These patterns can make a reader stop and reparse. The ones marked *Fix* are
+almost always worth fixing. The ones marked *Judge* depend on the reader and
+the medium. None of them governs vocabulary, so a technical term stays as it
+is.
 
 - **Garden-path sentence:** an early word invites a reading that the rest of
-  the sentence overturns. Usually fix it with a comma, a word, or a new order:
+  the sentence overturns. *Fix:* add a comma or a word, or change the order:
   "while Anna dressed, the baby played in the crib", not "while Anna dressed
   the baby played in the crib".
 - **Stacked negation:** negatives that make the reader flip the meaning more
-  than once. Usually rewrite with one: "the train often skips this station",
+  than once. *Fix:* rewrite with one: "the train often skips this station",
   not "it's not unusual for the train not to stop here".
-- **Hidden actor:** a passive that leaves out an actor you know. Usually name
+- **Hidden actor:** a passive that leaves out an actor you know. *Fix:* name
   it: "the script deletes the old logs", not "the old logs are deleted".
 - **Nominalization:** an action turned into a noun, which hides what happens.
-  Usually say it with a verb: "the upload stops and shows an error", not "an
-  upload failure occurs".
+  *Fix:* use the verb: "the upload stops and shows an error", not "an upload
+  failure occurs".
 - **Telegraphic style:** articles, verbs, and connectives dropped to save
-  space. Match the register the person uses, and when in doubt, keep the small
-  words that carry the logic. When you replace a colon, a semicolon, or a dash
-  with a full stop, write out the link it stood for.
+  space. *Judge:* match the register your audience expects, such as a team
+  that writes terse status notes, and when in doubt, keep the small words that
+  carry the logic. When you replace a colon, a semicolon, or a dash with a full
+  stop, write out the link it stood for.
 
   > **Before.** "Meeting moved: Thursday. Room TBC, bring slides."
   >
-  > **After.** "The meeting has moved to Thursday. The room isn't booked yet,
-  > so I'll send it once it is. Please bring your slides."
+  > **After.** "The meeting has moved to Thursday. The room is still to be
+  > confirmed. Please bring your slides."
 
 - **Center embedding:** one clause nested inside another, so the reader holds
-  the outer one open. "The report the team the manager hired wrote was late."
-  Unnest it where you can.
-- **Overloaded sentence:** several ideas packed into one sentence. Split it
-  when its parts read better apart, and keep it whole when splitting would
-  sound unnatural. No word count decides it.
+  the outer one open. *Judge:* unnest it where you can: "The manager hired a
+  team, and the team's report was late", not "The report the team the manager
+  hired wrote was late."
+- **Overloaded sentence:** several ideas packed into one sentence. *Judge:*
+  split it when its parts read better apart, and keep it whole when splitting
+  would sound unnatural. No word count decides it.
 - **Noun stack:** nouns piled up as modifiers, which leaves the reader to work
-  out how they relate. "The account deletion request form" reads more easily as
-  "the form a user fills in to delete their account".
+  out how they relate. *Judge:* "the account deletion request form" reads more
+  easily as "the form a user fills in to delete their account".
 - **Distant antecedent:** a pronoun such as "it", "they", or "this" whose
   noun, its antecedent, sits so far back that the reader has to search for it.
   Often other nouns stand in between, and any of them could be the one meant.
-  Name the noun again.
+  *Judge:* name the noun again.
 
   > **Before.** "The script reads the config, checks the cache, and writes the
   > report. If it is missing, the run stops."
@@ -144,8 +148,8 @@ outgrow it.
 
 ## Final Check
 
-Your own context fills every gap your audience will fall into, so your reread
-needs help.
+Every text gets your own reread before it goes out, and text that leaves the
+conversation also gets a cold read.
 
 - **Reread it yourself first,** as the person it's for, and look twice
   wherever one of these turns up. Each marks a place to look, never a verdict:
@@ -154,11 +158,13 @@ needs help.
   - a reference they can't place, or one the text never introduced
   - a fact you can't point at a source for
   - one of the sentence traps
-- **Then get a cold read** when your audience won't share your context and the
-  text gets one shot, as with an email, a README, release notes, or an
-  instruction file. The next section says how.
-- **Skip the cold read** for a draft the person will read with you in chat, or
-  a small local edit.
+- **Add a cold read,** a reading by someone with none of your context, when
+  your audience won't share your context and the text gets one shot, as with
+  an email, a README, release notes, or an instruction file. The next section
+  says how.
+- **Stop at your own reread** for text that stays in the chat, or a small local
+  edit. A draft shaped in chat that the person will send or publish still gets
+  a cold read.
 
 ## Cold Read
 
@@ -166,28 +172,24 @@ A cold read hands the text to a reader with none of your context. That reader
 finds the gaps your own reread passes over, since your context fills them in
 for you.
 
-- **Start a reader with the text and one line on who it's for:** a subagent,
-  or a new session. It never sees this conversation, the files you read, your
-  notes, or this skill.
+- **Start a reader with the text and one line on who it's for,** on the same
+  model and effort as your session: a subagent, or a new session. It never
+  sees this conversation, the files you read, your notes, or this skill.
 - **Ask for questions, not rewrites.** Tell it to read as that person, and to
   list what it had to reread, what it couldn't resolve, and what it would need
   another source to follow. For each one, it quotes the passage.
 - **Judge each question yourself.** Fix the ones that point at a real gap.
   When one asks for a threshold or an exact definition, the text usually calls
   for judgment there, and needs no rule.
-- **Use two readers when the text matters most,** such as an instruction file,
-  ideally on different models. Each catches misreadings the other misses, and
-  a misreading both make is nearly always worth fixing.
+- **Offer more when the person may want it:** a second reader on another
+  model, more rounds until the text settles, or the readers' reports to see.
 
 ## Environment
 
-What a cold read takes depends on the tools you have, and so does whether to
-ask first.
+What a cold read takes depends on the tools you have.
 
-- **Where you can start a subagent or a new session,** run one cold read
+- **Where you can start a subagent or a new session,** run the cold read
   without asking, unless the person's instructions limit background work.
-- **Ask before running two,** unless the person has already agreed to that
-  earlier in the conversation.
 - **Where you can't,** and the text matters, suggest how the person could run
   one: open a new session or chat, paste the text with the request from Cold
   Read, and bring back the questions.
