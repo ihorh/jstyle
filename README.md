@@ -32,7 +32,7 @@ creative writing.
 ## Before and After
 
 Two prompts, each run once on Opus 5.5 without the skill and once with it.
-These are first attempts, cut to the passage where they differ most.
+These are first attempts, cut to the passages where they differ most.
 [bench/examples/RESULTS.md](bench/examples/RESULTS.md) has them in full, with
 the prompts and the notes the agent wrote from.
 
@@ -59,14 +59,26 @@ With the skill:
 
 Without the skill:
 
-> In the first blind benchmark, the maintainer preferred Opus 5.5's writing
+> AI agents often write as if every word costs them. They drop small words
+> like *that*, leave phrases without a verb, and nest clauses three deep, and
+> the reader has to read the sentence twice to make up for the token the agent
+> saved. jstyle is a Claude Code plugin with one skill, `/jstyle:write`, that
+> works against this habit.
+>
+> […] In the first blind benchmark, the maintainer preferred Opus 5.5's writing
 > with the skill in 8 of 10 tasks. The project is early. It has been tested
 > only in English with Claude models, and a session with it costs about 1.8
 > times as much and takes about twice as long.
 
 With the skill:
 
-> In the first benchmark, the maintainer compared Opus 5.5 with and without
+> Left to themselves, AI agents often write as if every word cost them
+> something. They drop the small words, put a colon where a verb should be,
+> and nest one clause inside another, and the reader pays with a second pass.
+> jstyle is a Claude Code plugin with one skill, `/jstyle:write`, that works
+> against that habit.
+>
+> […] In the first benchmark, the maintainer compared Opus 5.5 with and without
 > the skill, without knowing which output was which, and preferred the one
 > with the skill in 8 of 10 writing tasks. That's one judge so far, and a
 > session with the skill costs about 1.8 times as much and takes about twice
