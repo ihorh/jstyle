@@ -290,8 +290,31 @@ rule about output file names.
 > - Never change output file names.
 > - Exception: a maintainer explicitly asks for it, as with the 0.4.0 rename. In that case, also update the README and the changelog.
 
-## Key and Scores
+## Key
+
+<details>
+<summary>Which side is A and which is B, per task</summary>
+
+The order comes from `random.Random("2026-11-01-claude-opus-5-5 vs 2026-11-01-claude-sonnet-5-5")`,
+drawn once per task. Opus always shows sample 1. Sonnet shows the sample named.
+
+| Task | A | B |
+|---|---|---|
+| 01 README | Sonnet, sample 2 | Opus |
+| 02 Docstring | Sonnet, sample 1 | Opus |
+| 03 Email | Opus | Sonnet, sample 3 |
+| 04 Pitch | Opus | Sonnet, sample 2 |
+| 05 Failure reply | Opus | Sonnet, sample 2 |
+| 06 Decision record | Sonnet, sample 3 | Opus |
+| 07 Release notes | Sonnet, sample 1 | Opus |
+| 08 README edit | Opus | Sonnet, sample 3 |
+| 09 Catch-up | Opus | Sonnet, sample 3 |
+| 10 Agent rules | Opus | Sonnet, sample 1 |
+
+</details>
+
+## Scores
 
 *Withheld until the first reader has made their guesses. This section will
-then give, per task, which side is A, the sample shown, the writer's pick with
-a one-line reason, the stats, and a short conclusion.*
+then give the writer's pick per task with a one-line reason, the stats, and a
+short conclusion.*

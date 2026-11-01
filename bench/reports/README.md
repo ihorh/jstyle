@@ -60,7 +60,8 @@ for task in tasks:
     print(task, "A=first" if r.random() < 0.5 else "A=second")
 ```
 
-The key appears only in the last section.
+The key goes in a collapsed `<details>` block after the tasks, so a reader
+sees it only when they choose to.
 
 ## Layout
 
@@ -79,8 +80,11 @@ One line: the task, its reader, the passage.
 
 … one section per task …
 
-## Key and Scores
-Table: task, which side is A, sample shown, the writer's pick, one-line reason.
+## Key
+The A/B table inside <details>, so GitHub shows it collapsed until clicked.
+
+## Scores
+Table: task, the writer's pick, one-line reason.
 Stats: mean output tokens and seconds per task, from `make stats`.
 Conclusion: a short paragraph.
 ```
