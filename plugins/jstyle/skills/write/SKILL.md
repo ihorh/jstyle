@@ -9,8 +9,9 @@ description: Load before drafting text for a reader outside this conversation, s
 
 The skill applies at handover, and the project's own conventions come first.
 
-- **Handover** is the moment the text reaches its reader. A draft you hand to
-  someone to send or publish counts, because for you it is the finished text.
+- **Handover** is the moment a text is finished for you. It comes when the
+  text goes out, when you hand a draft to someone to send or publish, or when
+  the person accepts the text, or a part of it, and the conversation moves on.
 - **Text that stays in the conversation is exempt,** such as thinking on
   paper, exploration, or a draft you and the person are still shaping.
 - **The project decides structure.** Its conventions set which sections exist,
