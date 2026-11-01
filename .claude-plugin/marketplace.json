@@ -1,0 +1,15 @@
+{
+  "name": "jstyle",
+  "description": "An opinionated writing style for agents that write for people.",
+  "owner": {
+    "name": "ihorh"
+  },
+  "plugins": [
+    {
+      "name": "jstyle",
+      "description": "An opinionated house style for agents writing for people: clear ideas and full sentences over compression.",
+      "source": "./plugins/jstyle",
+      "category": "productivity"
+    }
+  ]
+}

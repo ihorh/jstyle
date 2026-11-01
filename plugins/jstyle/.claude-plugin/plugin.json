@@ -1,5 +1,12 @@
 {
   "name": "jstyle",
   "displayName": "jstyle: an opinionated writing style",
-  "description": "An opinionated house style for agents writing for people: clear ideas and full sentences over compression."
+  "description": "An opinionated house style for agents writing for people: clear ideas and full sentences over compression.",
+  "version": "0.1.0",
+  "author": {
+    "name": "ihorh"
+  },
+  "homepage": "https://github.com/ihorh/jstyle",
+  "repository": "https://github.com/ihorh/jstyle",
+  "license": "MIT"
 }
