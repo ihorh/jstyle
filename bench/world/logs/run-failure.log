@@ -1,0 +1,16 @@
+$ splitlane exports/customers-2026-10.csv --rows 20000 --out chunks
+splitlane: processing exports/customers-2026-10.csv
+splitlane: cannot decode exports/customers-2026-10.csv as utf-8: 'utf-8' codec can't decode byte 0xe9 in position 4183: invalid continuation byte
+$ echo $?
+3
+$ ls chunks
+part-0001.csv
+$ wc -l chunks/part-0001.csv
+     183 chunks/part-0001.csv
+$ file exports/customers-2026-10.csv
+exports/customers-2026-10.csv: ISO-8859 text, with CRLF line terminators
+$ head -c 300 exports/customers-2026-10.csv
+id,name,city,signup_date
+1001,Ana Ribeiro,Porto,2026-01-04
+1002,Lukas Brandt,Bonn,2026-01-04
+1003,Mia Jensen,Aarhus,2026-01-05

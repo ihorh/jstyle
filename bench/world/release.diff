@@ -1,0 +1,36 @@
+diff --git a/src/splitlane/split.py b/src/splitlane/split.py
+--- a/src/splitlane/split.py
++++ b/src/splitlane/split.py
+@@ -41,7 +41,7 @@ def split_file(path, rows_per_chunk, out_dir, max_row_bytes=DEFAULT_MAX_ROW_BYTES,
+                 if out is not None:
+                     out.close()
+                 chunk_index += 1
+-                name = os.path.join(out_dir, f"chunk_{chunk_index}.csv")
++                name = os.path.join(out_dir, f"part-{chunk_index:04d}.csv")
+                 out = open(name, "w", encoding="utf-8", newline="")
+                 out.write(header + "\n")
+                 written.append(name)
+diff --git a/src/splitlane/cli.py b/src/splitlane/cli.py
+--- a/src/splitlane/cli.py
++++ b/src/splitlane/cli.py
+@@ -20,10 +20,23 @@ def main(argv=None):
++    if args.rows < 1:
++        print("splitlane: --rows must be at least 1", file=sys.stderr)
++        return EXIT_USAGE
++
+     print(f"splitlane: processing {args.input}", file=sys.stderr)
+-    written, truncated = split_file(args.input, args.rows, args.out,
+-                                    args.max_row_bytes, args.encoding)
++    try:
++        written, truncated = split_file(args.input, args.rows, args.out,
++                                        args.max_row_bytes, args.encoding)
++    except UnicodeDecodeError as e:
++        print(f"splitlane: cannot decode {args.input} as {args.encoding}: {e}",
++              file=sys.stderr)
++        return EXIT_ENCODING
++
+     print(f"splitlane: wrote {len(written)} chunk(s) to {args.out}/", file=sys.stderr)
++    if truncated:
++        print(f"splitlane: warning: {truncated} row(s) longer than "
++              f"{args.max_row_bytes} bytes were truncated", file=sys.stderr)
+     return EXIT_OK
