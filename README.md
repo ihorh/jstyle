@@ -158,8 +158,9 @@ without uninstalling:
 - **In the desktop app,** click **+**, then **Plugins**, then **Manage
   plugins**.
 
-Start a new session after each change. A skill that already loaded stays in
-the conversation, so an open session can't show writing without it.
+> [!IMPORTANT]
+> Start a new session after each change. A skill that already loaded stays in
+> the conversation, so an open session can't show writing without it.
 
 In the terminal and in VS Code, a change also reaches the open session without
 a restart. In the terminal, when reloading the plugins would invalidate the
