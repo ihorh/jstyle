@@ -142,6 +142,11 @@ the skill tells it to run one without asking, unless your instructions limit
 background work. If that's a concern, add a line to your instructions file,
 such as "Ask before starting a subagent."
 
+> [!TIP]
+> Agents are careful with tokens, so they may skip the cold read, or check
+> only the sentence they changed. When a text matters, ask in the chat: "Run
+> a cold read on this," or "Reread the whole section after that change."
+
 ## Turn It Off and On
 
 To compare writing with and without the skill, turn it off and on again
