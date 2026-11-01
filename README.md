@@ -213,6 +213,8 @@ benchmark, and this README.
 
 Copyright © 2026 Ihor H.
 
-The code, the plugin and its skill, the rule file, and the benchmark's tasks
-and world are under the [MIT License](LICENSE). The documentation is under
-[CC BY 4.0](LICENSE-DOCS): the README files, `docs/`, and `bench/reports/`.
+- **CC BY 4.0** ([LICENSE-DOCS](LICENSE-DOCS)) covers the documentation:
+  every file named `README.md`, wherever it sits, and everything in `docs/`
+  and `bench/reports/`.
+- **MIT** ([LICENSE](LICENSE)) covers everything else, including the code, the
+  plugin and its skill, the rule file, and the benchmark's tasks and world.
