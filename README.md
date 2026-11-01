@@ -1,8 +1,14 @@
 # jstyle
 
-> [!WARNING]
-> Work in progress. The skill is drafted, and the benchmark hasn't measured it
-> yet.
+> [!NOTE]
+> - **One skill,** `/jstyle:write`, in a Claude Code plugin. The agent loads
+>   it on its own when it drafts text for a reader outside the conversation.
+> - **Judged blind.** In the first benchmark, the maintainer preferred Opus 5.5
+>   with the skill in 8 of 10 writing tasks, without knowing which side was
+>   which. See the [report log](bench/reports/LOG.md).
+> - **Costs more.** A session with the skill cost about 1.8 times as much and
+>   took about twice as long.
+> - **Early.** Tested in English, with Claude models, by one judge so far.
 
 An opinionated prose style for AI agents that write for people.
 
@@ -172,8 +178,9 @@ whenever a run it depends on changes.
 - [bench/reports/README.md](bench/reports/README.md) is the recipe behind the
   reports.
 
-Each report shows excerpts and one reader's scores, so it reflects one
-person's taste. The full outputs are in the repository under `bench/runs/`,
+Each report shows excerpts and the picks of at most two readers: the
+maintainer's, made blind, and the report writer's. So it reflects a narrow
+taste. The full outputs are in the repository under `bench/runs/`,
 with the task prompts and the project files the models worked from. If you
 want a second opinion, compare the runs yourself, or ask your own agent to.
 
