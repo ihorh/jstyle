@@ -15,8 +15,10 @@ procedure, and it relies on your judgment to apply it.
 
 ## When It Applies
 
-It applies at handover, when the text goes to its reader. Thinking on paper,
-exploration, and a draft labeled as a draft are exempt.
+It applies at handover, the moment the text reaches its reader. A draft you
+hand to someone to send or publish counts, because for you it is the finished
+text. Working notes are exempt: thinking on paper, exploration, and a draft
+labeled as a working draft.
 
 A project's own conventions decide the structure: which sections exist, their
 order, their headings, and the line width. This skill decides what goes inside
@@ -24,13 +26,13 @@ them. A section the convention requires stays, even when one sentence fills it.
 
 ## Principles
 
-These call for judgment. A text can pass every rule below and still read like a
-filing.
+These call for judgment. A text can pass every rule below and still read like
+paperwork.
 
 1. **Write to a person, not for a record.** Say what you mean plainly, as you
    would to a colleague who asked, even when it isn't what they expect. A
-   softened point leaves the reader to decode it. Directness is not
-   familiarity.
+   softened point leaves the reader to decode it. Being direct doesn't mean
+   being casual.
 2. **Write what the reader needs and can't work out alone.** A paragraph that
    restates what the reader already knows spends their attention and returns
    nothing.
@@ -39,8 +41,9 @@ filing.
    it. Getting there may take more words.
 4. **Bring a refresher with every reference.** When you point at a term, a
    concept, or another document, put enough beside it for a reader who knows it
-   to recall it: a synonym, a phrase, or a sentence. A reader who doesn't know
-   it will follow the link anyway. Quote at length only when the quote is the
+   to recall it: a synonym, a phrase, or a sentence. The refresher only jogs
+   the memory of a reader who already knows the thing. A reader who doesn't
+   will open the source anyway. Quote at length only when the quote is the
    point.
 5. **Be concise, never compressed.** Cut a whole sentence that carries nothing.
    Keep the words inside a sentence that let it read in one pass: articles,
@@ -74,8 +77,9 @@ These are cheap. Each costs you a clause and saves the reader a question.
    with pauses and stress, and text has only words and punctuation. Where a
    sentence could be read two ways, mark the one you mean with a word, a comma,
    or a different order. Write "while the agent edited, the file grew" rather
-   than "while the agent edited the file grew". When you cut a colon, a
-   semicolon, or a dash, write out the link it stood for.
+   than "while the agent edited the file grew". When you replace a colon, a
+   semicolon, or a dash with a full stop, write out the link it stood for,
+   such as "because" or "so".
 
 Never simplify a technical word. These rules govern sentences, never
 vocabulary.
@@ -90,10 +94,13 @@ one its source:
 - a command you ran, with what it printed
 - something the person told you
 
-A fact you can't name a source for is one you invented. Check before you
-write, not after: an invented sentence reads as smoothly as a checked one, so
-rereading the draft won't flag it. Keep the facts that serve the reader, and
-drop the rest even when they're true. The list itself stays out of the text.
+A claim about the project, its people, or its numbers needs one of these.
+General technical knowledge, such as how a standard library behaves, does not.
+A claim about the project that you can't source is one you invented. Check
+before you write, not after: an invented sentence reads as smoothly as a
+checked one, so rereading the draft won't flag it. Keep the facts that serve
+the reader, and drop the rest even when they're true. The list itself stays
+out of the text.
 
 ## Keep Your Inferences Your Own
 
@@ -106,8 +113,9 @@ That matters most when you write in someone else's voice, as in an email
 drafted for a person. Your inference is not their finding. Put it beside the
 draft as a note for them to confirm, rather than in their mouth.
 
-> **Before.** The notes call a bug Windows-only. In the email drafted for its
-> owner: "Since then I've found it's wider than that. Any run that stops
+> **Before.** The notes call a bug Windows-only. In an email drafted for the
+> bug's owner to send to Priya, who decides the release: "Since then I've
+> found it's wider than that. Any run that stops
 > partway leaves the same mix of files, on any computer."
 >
 > **After.** The email describes the bug as the notes do. Beside the draft:
@@ -151,7 +159,9 @@ shot, ask a fresh reader too. That covers an email, a README, release notes, or
 an instruction file. A fresh reader is a subagent, or any new session, that
 gets only the text and asks what it couldn't resolve. It never sees this
 conversation. A draft the person will read with you in chat, or a small local
-edit, usually needs only your own reread.
+edit, usually needs only your own reread. If you can't start a fresh reader,
+say so when you hand the text over, so the person knows the check was
+skipped.
 
 ## Other Languages
 
