@@ -165,7 +165,8 @@ like these conventions, put the file in your rules folder, such as
 ## Benchmark Reports
 
 The table links the latest report for each standing comparison, one we rerun
-whenever a run it depends on changes. The recipe behind the reports is in
+whenever a run it depends on changes. [bench/reports/LOG.md](bench/reports/LOG.md)
+sums up every report, newest first, and the recipe behind them is in
 [bench/reports/README.md](bench/reports/README.md).
 
 Each report shows excerpts and one reader's scores, so it reflects one

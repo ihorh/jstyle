@@ -96,3 +96,7 @@ code blocks, and long text in a cell becomes a narrow column.
 
 A report is named `<date>-<side 1>-vs-<side 2>.md`, and the repository README
 links the latest one for each standing comparison.
+
+Each new report also gets an entry at the top of [LOG.md](LOG.md): what was
+tested, the cost and time difference, the human's blind picks, the writer's
+picks, and a quirk or two. Keep each entry to a few lines.
