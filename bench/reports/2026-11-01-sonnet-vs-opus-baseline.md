@@ -73,7 +73,8 @@ the title through the first two items of the first list.
 <details>
 <summary>Reveal A and B</summary>
 
-A is Sonnet, sample 2. B is Opus, sample 1.
+- **A:** Sonnet, sample 2
+- **B:** Opus, sample 1
 
 </details>
 
@@ -115,7 +116,8 @@ Note:
 <details>
 <summary>Reveal A and B</summary>
 
-A is Sonnet, sample 1. B is Opus, sample 1.
+- **A:** Sonnet, sample 1
+- **B:** Opus, sample 1
 
 </details>
 
@@ -149,7 +151,8 @@ describes the problem.
 <details>
 <summary>Reveal A and B</summary>
 
-A is Opus, sample 1. B is Sonnet, sample 3.
+- **A:** Opus, sample 1
+- **B:** Sonnet, sample 3
 
 </details>
 
@@ -177,7 +180,8 @@ Passage: from the opening through the paragraph that states the proposal.
 <details>
 <summary>Reveal A and B</summary>
 
-A is Opus, sample 1. B is Sonnet, sample 2.
+- **A:** Opus, sample 1
+- **B:** Sonnet, sample 2
 
 </details>
 
@@ -205,7 +209,8 @@ wrong, and what the reply says about the partial chunk.
 <details>
 <summary>Reveal A and B</summary>
 
-A is Opus, sample 1. B is Sonnet, sample 2.
+- **A:** Opus, sample 1
+- **B:** Sonnet, sample 2
 
 </details>
 
@@ -246,7 +251,8 @@ Passage: the section that states the decision.
 <details>
 <summary>Reveal A and B</summary>
 
-A is Sonnet, sample 3. B is Opus, sample 1.
+- **A:** Sonnet, sample 3
+- **B:** Opus, sample 1
 
 </details>
 
@@ -272,7 +278,8 @@ about the renamed output files.
 <details>
 <summary>Reveal A and B</summary>
 
-A is Sonnet, sample 1. B is Opus, sample 1.
+- **A:** Sonnet, sample 1
+- **B:** Opus, sample 1
 
 </details>
 
@@ -303,7 +310,8 @@ Passage: the first two paragraphs or list items the edit adds about long rows.
 <details>
 <summary>Reveal A and B</summary>
 
-A is Opus, sample 1. B is Sonnet, sample 3.
+- **A:** Opus, sample 1
+- **B:** Sonnet, sample 3
 
 </details>
 
@@ -330,7 +338,8 @@ Passage: the description of that follow-up.
 <details>
 <summary>Reveal A and B</summary>
 
-A is Opus, sample 1. B is Sonnet, sample 3.
+- **A:** Opus, sample 1
+- **B:** Sonnet, sample 3
 
 </details>
 
@@ -358,7 +367,8 @@ rule about output file names.
 <details>
 <summary>Reveal A and B</summary>
 
-A is Opus, sample 1. B is Sonnet, sample 1.
+- **A:** Opus, sample 1
+- **B:** Sonnet, sample 1
 
 </details>
 
@@ -387,6 +397,45 @@ drawn once per task. Opus always shows sample 1. Sonnet shows the sample named.
 
 ## Scores
 
-*Withheld until the first reader has made their guesses. This section will
-then give the writer's pick per task with a one-line reason, the stats, and a
-short conclusion.*
+The report writer's picks, made after the excerpts were set. They are one
+reader's view, and the sample rule tilts every pair toward Sonnet.
+
+| Task | Pick | Reason |
+|---|---|---|
+| 01 README | Opus | States the chunk size and shows the RFC 4180 example inline. Sonnet's is close, and adds that the fix isn't released yet |
+| 02 Docstring | Opus | Both name the resync risk after a cut. Opus also says what follows: later records may split in the wrong places |
+| 03 Email | Sonnet | Opus has devi report a finding the notes never contain ("Since then I've found it's wider than that") to the person deciding |
+| 04 Pitch | Tie | Same case, same honesty about the untimed cost. Opus shows the new display, and Sonnet offers to do the work |
+| 05 Failure reply | Tie | Both correct and both tell the user to discard the partial chunk. Opus adds why it exists: no cleanup on failure |
+| 06 Decision record | Tie | Sonnet explains why the limit counts bytes, not lines. Opus explains why the bound keeps damage to one row |
+| 07 Release notes | Opus | Only Opus warns that old `chunk_*.csv` files stay beside the new ones, an upgrade trap it worked out from the code |
+| 08 README edit | Opus | Says what a cut row looks like: fewer columns than the header, or an unclosed quote |
+| 09 Catch-up | Tie | Both read the code and reach the same untested risk of damage to more than one row |
+| 10 Agent rules | Opus | Names the current file names, why scripts depend on them, and rules out cleanup as a reason, which is the incident behind the rule |
+
+Tally: Opus 5, Sonnet 1, tie 4.
+
+**Cost.** Mean output tokens, thinking included, and seconds per session,
+from `make stats`:
+
+| Task | Opus tokens | Sonnet tokens | Opus s | Sonnet s |
+|---|---|---|---|---|
+| 01 README | 4114 | 2670 | 41 | 20 |
+| 02 Docstring | 1346 | 1139 | 16 | 11 |
+| 03 Email | 3923 | 2371 | 44 | 20 |
+| 04 Pitch | 1175 | 647 | 16 | 6 |
+| 05 Failure reply | 2347 | 1267 | 27 | 12 |
+| 06 Decision record | 3105 | 3055 | 33 | 22 |
+| 07 Release notes | 3642 | 1585 | 37 | 13 |
+| 08 README edit | 2229 | 1275 | 25 | 10 |
+| 09 Catch-up | 1838 | 2072 | 23 | 16 |
+| 10 Agent rules | 2256 | 851 | 25 | 8 |
+
+**Conclusion.** Without the skill, both models write clear text drawn from the
+project's files, and these excerpts show little of the compression jstyle
+targets. Opus wins where it works out a consequence from the code that the
+notes never state (tasks 07, 08, and 10). Its one loss is a claim it put in
+someone else's mouth (task 03). Sonnet's best sample comes close to a typical
+Opus output in most tasks, with roughly half the output tokens and time. For
+the skill, the failure worth targeting first in this baseline is invented
+framing, not sentence-level compression.

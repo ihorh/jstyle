@@ -78,7 +78,7 @@ What to look for: the three fronts, one line each.
 One line: the task, its reader, the passage.
 **A**, then the excerpt as a blockquote.
 **B**, then the excerpt as a blockquote.
-A collapsed <details> reveal: "A is <side, sample>. B is <side, sample>."
+A collapsed <details> reveal, with A and B on separate lines.
 
 … one section per task …
 
