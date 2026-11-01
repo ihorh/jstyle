@@ -105,9 +105,10 @@ for English, and the skill lets each language's own grammar decide their
 details.
 
 If you use it in another language, or with another model or agent,
-we'd like to hear how it changed the prose: [open an
-issue](https://github.com/ihorh/jstyle/issues). A title and a few lines are
-enough, and you can leave labels and the other fields empty.
+we'd like to hear how it changed the prose. The [feedback
+form](https://github.com/ihorh/jstyle/issues/new?template=feedback.yml) opens
+a new issue with one required box, and a few lines in it are enough. Issues
+are public.
 
 ## What It Asks For
 

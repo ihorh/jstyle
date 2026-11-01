@@ -1,0 +1,32 @@
+name: Feedback
+description: Tell us how the skill changed the writing, in any language, model, or agent.
+title: "Feedback: "
+labels: ["feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for trying jstyle. Only the first box is required, and a few
+        lines are enough.
+  - type: textarea
+    id: what-changed
+    attributes:
+      label: What changed
+      description: What got better or worse in the prose, or what surprised you.
+    validations:
+      required: true
+  - type: input
+    id: language
+    attributes:
+      label: Language
+      placeholder: English, German, Ukrainian, …
+  - type: input
+    id: setup
+    attributes:
+      label: Model and agent
+      placeholder: Claude Opus 5.5 in Claude Code, GPT in Codex, …
+  - type: textarea
+    id: example
+    attributes:
+      label: Example or description
+      description: A passage with and without the skill, or a few words about the difference you noticed.
