@@ -5,11 +5,6 @@ description: Load before drafting text for a reader outside this conversation, s
 
 # Write
 
-This skill shapes text an agent writes for a person. Most writing advice fights
-wordiness. This skill fights compression instead: the dropped words, verbless
-fragments, and packed clauses that save the writer a token and cost the reader
-a second pass.
-
 ## When It Applies
 
 The skill applies at handover, and the project's own conventions come first.
@@ -62,10 +57,9 @@ won't catch it. That is why the facts come first.
   your working notes. The text still cites a source wherever the reader needs
   one.
 - **Mark your own inferences as yours.** A consequence you worked out from the
-  sources is often the most useful part of the text, and the reader needs to
-  know it came from you.
-- **In someone else's voice, put your inference beside the draft,** as a note
-  for them to confirm, never in their mouth.
+  sources is often the most useful part of the text, so say it, and say it's
+  yours. In someone else's voice, put it beside the draft as a note for them
+  to confirm.
 
   The venue confirmed a hall for 80, and you're drafting the invitation Marta
   will send to her club.

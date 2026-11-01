@@ -3,6 +3,10 @@
 An opinionated writing style for agents that write for people. Work in
 progress: the benchmark comes first, and the skill follows it.
 
+Most writing advice fights wordiness. This skill fights compression instead:
+the dropped words, verbless fragments, and packed clauses that save the writer
+a token and cost the reader a second pass.
+
 ## Which Models It Assumes
 
 The skill was written for Claude and other recent models. It states intent
