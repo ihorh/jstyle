@@ -101,20 +101,9 @@ claude plugin install jstyle@jstyle
 
 ## Using It
 
-Call it before you ask for a draft:
-
-```
-/jstyle:write
-```
-
-You can also just ask. In Claude Code the agent loads the skill on its own
-when it drafts text for someone outside the conversation, such as an email or
-a README, and leaves it off for ordinary chat replies. It also loads when you
-ask for edits, or for a review that proposes new wording. It stays off for a
-review that only gives feedback, such as a proofread or a verdict on whether a
-text is ready to send. Other harnesses that support skills will likely route
-it the same way, but we haven't tested them.
-[docs/trigger-test.md](docs/trigger-test.md) has the test behind this.
+Ask for the text as usual. The agent loads the skill when it writes for
+someone outside the conversation, such as an email or a README, and leaves it
+off for chat replies. To load it yourself, run `/jstyle:write`.
 
 Where skills aren't supported, such as a chat app, you can:
 
