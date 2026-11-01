@@ -127,24 +127,22 @@ outgrow it.
 
 ## Final Check
 
-Your own context fills every gap the reader will fall into, so your reread
+Your own context fills every gap your audience will fall into, so your reread
 needs help.
 
-- **Reread as the reader,** and look twice wherever one of these turns up. Each
-  marks a place to look, never a verdict:
+- **Reread as the person it's for,** and look twice wherever one of these turns
+  up. Each marks a place to look, never a verdict:
   - a hedge on something you know
   - a paragraph you could delete with nothing lost
-  - a reference the reader can't place, or one the text never introduced
+  - a reference they can't place, or one the text never introduced
   - a fact you can't point at a source for
-  - a word that sends the reader back to reparse the sentence
-  - several clauses in one sentence, worst when nested
-  - more than one negation in one sentence
-- **Ask a fresh reader** when the reader won't share your context and the text
-  gets one shot, as with an email, a README, release notes, or an instruction
-  file. A fresh reader is a subagent or a new session that gets only the text,
-  never this conversation, and reports what it couldn't resolve.
-- **Skip the fresh reader** for a draft the person will read with you in chat,
-  or a small local edit.
-- **Say when you skipped it.** If you can't start a fresh reader, tell the
-  person when you hand the text over.
+  - a sentence that breaks one of the sentence rules
+- **Ask for a cold read** when your audience won't share your context and the
+  text gets one shot, as with an email, a README, release notes, or an
+  instruction file. Give a subagent or a new session only the text, never this
+  conversation, and ask what it couldn't resolve.
+- **Skip the cold read** for a draft the person will read with you in chat, or
+  a small local edit.
+- **Say when you skipped it.** If you can't start a cold read, tell the person
+  when you hand the text over.
 
