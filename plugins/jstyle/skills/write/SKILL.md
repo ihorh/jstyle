@@ -153,9 +153,8 @@ for you.
   or a new session. It never sees this conversation, the files you read, your
   notes, or these rules.
 - **Ask for questions, not rewrites.** Tell it to read as that person, and to
-  list what it had to reread, what it couldn't resolve, and
-  what it would need another source to follow. For each one, it quotes the
-  passage.
+  list what it had to reread, what it couldn't resolve, and what it would need
+  another source to follow. For each one, it quotes the passage.
 - **Judge each question yourself.** Fix the ones that point at a real gap.
   When one asks for a threshold or an exact definition, the text usually calls
   for judgment there, and needs no rule.
