@@ -3,8 +3,8 @@
 > [!NOTE]
 > - **Judged blind.** The maintainer preferred drafts written with the skill
 >   in 8 of 10 writing tasks with Opus 5.5, and in 6 of 10 with Sonnet 5.5.
-> - **More care per draft.** The agent spends extra tokens sourcing its facts
->   and getting a second opinion from a subagent.
+> - **More care per draft.** The agent may spend extra tokens sourcing its
+>   facts and getting a second opinion from a subagent.
 > - **Early.** Tested in English, with Claude models, by one judge so far.
 
 An opinionated prose style for your AI agent, so more of what you write
@@ -162,12 +162,8 @@ without uninstalling:
 > Start a new session after each change. A skill that already loaded stays in
 > the conversation, so an open session can't show writing without it.
 
-In the terminal and in VS Code, the plugin list also updates in the open
-session without a restart. In the terminal, when reloading the plugins would invalidate the
-prompt cache, Claude Code warns you and leaves the change pending, and
-`/reload-plugins --force` applies it anyway. [Install and manage
-plugins](https://code.claude.com/docs/en/discover-plugins) lists the other ways
-to turn a plugin off and on, including from your shell.
+[Install and manage plugins](https://code.claude.com/docs/en/discover-plugins)
+lists the other ways to turn a plugin off and on, including from your shell.
 
 ## Other Languages and Models
 
@@ -238,10 +234,10 @@ want a second opinion, compare the runs yourself, or ask your own agent to.
 | Sonnet 5.5 without the skill vs with it | [2026-11-01](bench/reports/2026-11-01-sonnet-without-vs-with-skill.md) |
 
 The benchmark's sessions are cold: each one started fresh and wrote a
-single text. There, a session with the skill cost about 1.8 times as much
-as one without it. In a normal working session we expect the difference to
-be much smaller. The skill's own text loads once, and in a long session it
-soon becomes a small share. The rest goes to the drafting itself, and
+single text. There, at API list price, a session with the skill cost about
+1.8 times as much as one without it. In a normal working session we expect
+the difference to be much smaller. The skill's own text loads once, and in a
+long session it soon becomes a small share. The rest goes to the drafting itself, and
 sometimes to a cold read: a subagent that reads the draft fresh, the way
 your reader will. The agent may skip it. In the benchmark, Opus ran one in
 12 of 30 sessions, and Sonnet in 1.
