@@ -1,8 +1,8 @@
 # Run the benchmark tasks in fresh `claude -p` sessions and record the outputs.
 #
-#   make -j4 MODEL=opus                     baseline, 3 samples per task
-#   make -j4 MODEL=opus CONDITION=both      with and without the skill
-#   make -j4 MODEL=opus RUN=runs/<folder>   resume a run: only missing outputs
+#   make -j4 MODEL=claude-opus-5-5                  baseline, 3 samples per task
+#   make -j4 MODEL=claude-opus-5-5 CONDITION=both   with and without the skill
+#   make -j4 MODEL=claude-opus-5-5 RUN=runs/<dir>   resume: only missing outputs
 #   make stats RUN=runs/<folder>            tokens, time, and turns per task
 #
 # Each output file is a target, so a rerun skips the ones already written. Add
@@ -18,8 +18,9 @@ PLUGIN    := $(abspath ../plugins/jstyle)
 
 # `make stats RUN=...` needs neither a model nor clean inputs.
 ifneq ($(MAKECMDGOALS),stats)
-ifeq ($(MODEL),)
-$(error MODEL is required, for example: make -j4 MODEL=opus)
+# A full model ID, never an alias: an alias like `opus` moves when a model ships.
+ifeq ($(filter claude-%,$(MODEL)),)
+$(error MODEL must be a full model ID, for example: make -j4 MODEL=claude-opus-5-5)
 endif
 endif
 
