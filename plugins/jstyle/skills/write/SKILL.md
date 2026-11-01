@@ -16,8 +16,8 @@ The skill applies at handover, and the project's own conventions come first.
 
 - **Handover** is the moment the text reaches its reader. A draft you hand to
   someone to send or publish counts, because for you it is the finished text.
-- **Working notes are exempt:** thinking on paper, exploration, and a draft
-  labeled as a working draft.
+- **Text that stays in the conversation is exempt,** such as thinking on
+  paper, exploration, or a draft you and the person are still shaping.
 - **The project decides structure.** Its conventions set which sections exist,
   their order, their headings, and the line width. This skill writes what goes
   inside them. A section the convention requires stays, even when one sentence
@@ -82,8 +82,8 @@ won't catch it. That is why the facts come first.
 
 These patterns can make a reader stop and reparse. The ones marked *Fix* are
 almost always worth fixing. The ones marked *Judge* depend on the reader and
-the medium. None of them governs vocabulary, so a technical term stays as it
-is.
+the medium. None of them governs vocabulary, so a technical term or a name stays
+as it is.
 
 - **Garden-path sentence:** an early word invites a reading that the rest of
   the sentence overturns. *Fix:* add a comma or a word, or change the order:
@@ -106,22 +106,22 @@ is.
   > **Before.** "Meeting moved: Thursday. Room TBC, bring slides."
   >
   > **After.** "The meeting has moved to Thursday. The room is still to be
-  > confirmed. Please bring your slides."
+  > confirmed. Bring your slides."
 
 - **Center embedding:** one clause nested inside another, so the reader holds
   the outer one open. *Judge:* unnest it where you can: "The manager hired a
-  team, and the team's report was late", not "The report the team the manager
-  hired wrote was late."
+  team. The team wrote the report, which was late", not "The report the team
+  the manager hired wrote was late."
 - **Overloaded sentence:** several ideas packed into one sentence. *Judge:*
   split it when its parts read better apart, and keep it whole when splitting
   would sound unnatural. No word count decides it.
 - **Noun stack:** nouns piled up as modifiers, which leaves the reader to work
   out how they relate. *Judge:* "the account deletion request form" reads more
   easily as "the form a user fills in to delete their account".
-- **Distant antecedent:** a pronoun such as "it", "they", or "this" whose
-  noun, its antecedent, sits so far back that the reader has to search for it.
-  Often other nouns stand in between, and any of them could be the one meant.
-  *Judge:* name the noun again.
+- **Distant antecedent:** a pronoun such as "it", "they", or "this" that the
+  reader can't tie at a glance to its antecedent, the noun it stands for. The
+  noun sits far back, or other nouns stand in between and any of them could be
+  the one meant. *Judge:* name the noun again.
 
   > **Before.** "The script reads the config, checks the cache, and writes the
   > report. If it is missing, the run stops."
@@ -140,23 +140,24 @@ outgrow it.
 - **Read one level up.** An added sentence can repeat, contradict, or bury
   something the paragraph already said. If the paragraph's point has shifted,
   rewrite the paragraph, then check the section the same way.
+- **Ask before the climb outgrows a paragraph.** When a small edit starts to
+  pull in more than a paragraph of rewriting, stop, say what you'd change, and
+  confirm with the person before going on.
 - **Stop climbing** at the first level whose point still holds.
 - **Fix the old sentence** when a new fact makes it wrong, rather than adding a
   correction after it.
-- **Ask before a large rewrite.** When a small edit would mean rewriting more
-  than a paragraph, say what you'd change and confirm with the person first.
 
 ## Final Check
 
-Every text gets your own reread before it goes out, and text that leaves the
-conversation also gets a cold read.
+Every text gets your own reread before it goes out. Some also get a cold
+read.
 
 - **Reread it yourself first,** as the person it's for, and look twice
   wherever one of these turns up. Each marks a place to look, never a verdict:
   - a hedge on something you know
   - a paragraph you could delete with nothing lost
   - a reference they can't place, or one the text never introduced
-  - a fact you can't point at a source for
+  - a fact missing from your fact list, or listed there without a source
   - one of the sentence traps
 - **Add a cold read,** a reading by someone with none of your context, when
   your audience won't share your context and the text gets one shot, as with
@@ -173,7 +174,7 @@ finds the gaps your own reread passes over, since your context fills them in
 for you.
 
 - **Start a reader with the text and one line on who it's for,** on the same
-  model and effort as your session: a subagent, or a new session. It never
+  model as your session: a subagent, or a new session. It never
   sees this conversation, the files you read, your notes, or this skill.
 - **Ask for questions, not rewrites.** Tell it to read as that person, and to
   list what it had to reread, what it couldn't resolve, and what it would need
@@ -190,7 +191,7 @@ What a cold read takes depends on the tools you have.
 
 - **Where you can start a subagent or a new session,** run the cold read
   without asking, unless the person's instructions limit background work.
-- **Where you can't,** and the text matters, suggest how the person could run
-  one: open a new session or chat, paste the text with the request from Cold
-  Read, and bring back the questions.
+- **Where you can't,** suggest how the person could run one: open a new
+  session or chat, paste the text with the request under "Ask for questions,
+  not rewrites" in Cold Read, and bring back the questions.
 
