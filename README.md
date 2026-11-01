@@ -30,60 +30,46 @@ the skill and with it.
 
 ## Install
 
-Install it once in any of these, and it works in the other two on the same
-computer: the terminal, the VS Code extension, and the desktop app's local
-sessions. Cloud sessions, such as claude.ai/code, don't load it.
+In a Claude Code terminal session, version 2.1.275 or later, run this and
+choose a scope:
 
-- **In a terminal session** (Claude Code 2.1.275 or later), run this, then
-  choose a scope:
+```
+/plugin install jstyle --marketplace ihorh/jstyle
+```
 
-  ```
-  /plugin install jstyle --marketplace ihorh/jstyle
-  ```
+`/plugins` opens the same plugin manager in the VS Code extension, and the
+desktop app has an **Add plugins** button under **+** next to the prompt box.
+A plugin you install in one of the three is available in the others on the
+same computer. [Install and manage
+plugins](https://code.claude.com/docs/en/discover-plugins) in the Claude Code
+docs covers the other ways to install, scopes, and uninstalling.
 
-- **From your shell** (Claude Code 2.1.292 or later), run this. The plugin
-  loads in your next session, or after `/reload-plugins` in an open one:
-
-  ```
-  claude plugin install jstyle --marketplace ihorh/jstyle
-  ```
-
-- **In VS Code,** type `/plugins` in the Claude Code panel, add `ihorh/jstyle`
-  on the **Marketplaces** tab, then install `jstyle` from the **Plugins** tab.
-- **In the desktop app,** open the **Code** tab, click **+** next to the
-  prompt box, choose **Add plugins**, and select `jstyle`. If it isn't listed,
-  add the marketplace from your shell first:
-  `claude plugin marketplace add ihorh/jstyle`.
-
-Adding the marketplace clones the whole repository, benchmark included. Only
-the plugin folder is copied into a session. For a smaller clone, add it this
-way before you install:
+Adding the marketplace clones the whole repository, benchmark included, though
+only the plugin folder is copied into a session. For a smaller clone, add the
+marketplace from your shell first, then install `jstyle@jstyle`:
 
 ```
 claude plugin marketplace add ihorh/jstyle --sparse .claude-plugin plugins
 ```
 
-## Turn It Off or Remove It
+## Turn It Off and On
 
 To compare writing with and without the skill, turn it off and on again
-without uninstalling. In a session, run `/plugin`, and on the **Installed**
-tab press **Space** on `jstyle`. From your shell:
+without uninstalling:
 
-```
-claude plugin disable jstyle@jstyle
-claude plugin enable jstyle@jstyle
-```
+- **In a terminal session,** run `/plugin`, and on the **Installed** tab press
+  **Space** on `jstyle`.
+- **In VS Code,** type `/plugins` and use the toggle next to `jstyle`.
+- **In the desktop app,** click **+**, then **Plugins**, then **Manage
+  plugins**.
 
-To remove it, run `/plugin uninstall jstyle@jstyle` in a session, or this from
-your shell. The second line also drops the marketplace:
-
-```
-claude plugin uninstall jstyle@jstyle
-claude plugin marketplace remove jstyle
-```
-
-[Install and manage plugins](https://code.claude.com/docs/en/discover-plugins)
-in the Claude Code docs covers scopes, updates, and the rest.
+In the terminal and in VS Code, a change applies to the open session without
+a restart. In a terminal session,
+when reloading the plugins would invalidate the prompt cache, Claude Code
+warns you and leaves the change pending. Run `/reload-plugins --force` to apply
+it anyway. A skill that already loaded stays in the conversation, so start a
+new session for a clean comparison. The docs page above lists the other ways
+to do this, including from your shell.
 
 ## Using It
 
