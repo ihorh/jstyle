@@ -1,13 +1,13 @@
 {
   "name": "jstyle",
-  "description": "An opinionated writing style for agents that write for people.",
+  "description": "An opinionated prose style for your AI agent, so more of what you write gets read.",
   "owner": {
     "name": "ihorh"
   },
   "plugins": [
     {
       "name": "jstyle",
-      "description": "An opinionated house style for agents writing for people: clear ideas and full sentences over compression.",
+      "description": "An opinionated prose style for agents that write for people: text that leads with what the reader came for and reads in one pass.",
       "source": "./plugins/jstyle",
       "category": "productivity"
     }

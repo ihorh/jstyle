@@ -10,24 +10,31 @@
 >   took about twice as long.
 > - **Early.** Tested in English, with Claude models, by one judge so far.
 
-An opinionated prose style for AI agents that write for people.
+An opinionated prose style for your AI agent, so more of what you write
+gets read.
 
-It ships as a Claude Code plugin with one skill, `/jstyle:write`, and a
-benchmark that compares writing with and without it.
+Agents write well now, so what goes wrong is small. A text opens with
+background instead of what the reader came for. A sentence has to be read
+twice. A paragraph's point arrives late. Each slip is minor, but together
+they make prose that is good enough and slightly off. You feel it before you
+can say why.
 
-Writing advice is often about cutting words. This skill works against compression
-instead: the dropped words, verbless fragments, and packed clauses that save
-the writer a token and cost the reader a second pass. It works for clear
-ideas that keep the details a reader needs, in text that sticks to the facts
-and reads in one pass.
+So do your readers. They take in text a few words at a time, and the first
+few decide whether they stay. The skill aims to make those words count.
+Your reader stays with you instead of asking their agent for a summary, and
+more of what you write gets read.
 
-The skill suits everyday writing: manuals and documentation with a human touch,
-code comments and docstrings, friendly and professional conversations, many
-kinds of blog posts, and perhaps marketing copy.
+The skill is for text a **person** will read: documentation and manuals, code
+comments and docstrings, emails and conversations, many kinds of blog
+posts, and perhaps marketing copy.
 
-It isn't meant for text that follows its own rules, such as legal documents,
-government papers, or machinery specifications. It's also unlikely to suit
-creative writing.
+It isn't for text that answers to a rulebook before a reader, such as legal
+documents, government papers, or machinery specifications. It's also
+unlikely to suit creative writing.
+
+jstyle is a Claude Code plugin with one skill, `/jstyle:write`. The
+repository also holds the benchmark behind it, which compares writing with
+and without the skill.
 
 ## Before and After
 
