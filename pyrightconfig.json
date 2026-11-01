@@ -1,3 +1,6 @@
 {
+  // bench/world is a fictional project the benchmark models read, not code
+  // that runs. Its imports and types aren't meant to check, and the files
+  // stay fixed, so pyright skips the folder instead of flagging it.
   "ignore": ["bench/world"]
 }
