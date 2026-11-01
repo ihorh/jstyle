@@ -60,8 +60,9 @@ for task in tasks:
     print(task, "A=first" if r.random() < 0.5 else "A=second")
 ```
 
-The key goes in a collapsed `<details>` block after the tasks, so a reader
-sees it only when they choose to.
+Each task ends with a collapsed `<details>` block that reveals its A and B, so
+the reader judges the pair, then checks at once. A Key section after the tasks
+collects all ten in one collapsed table.
 
 ## Layout
 
@@ -77,6 +78,7 @@ What to look for: the three fronts, one line each.
 One line: the task, its reader, the passage.
 **A**, then the excerpt as a blockquote.
 **B**, then the excerpt as a blockquote.
+A collapsed <details> reveal: "A is <side, sample>. B is <side, sample>."
 
 … one section per task …
 

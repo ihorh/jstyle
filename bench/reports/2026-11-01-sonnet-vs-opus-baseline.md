@@ -11,8 +11,9 @@
 | Sample shown | Opus, the privileged side: sample 1. Sonnet: the best of its 3, picked by the report's writer |
 
 Each task shows the same passage from both sides, labeled A and B in a seeded
-random order. Which side is which sits, collapsed, in the Key section after
-the tasks. The recipe is in
+random order. Each task ends with a collapsed reveal, so you can judge the
+pair first and check right after. The Key section at the end collects all ten.
+The recipe is in
 [README.md](README.md).
 
 **What to look for:**
@@ -69,6 +70,13 @@ the title through the first two items of the first list.
 >   8,Bo,ok
 >   ```
 
+<details>
+<summary>Reveal A and B</summary>
+
+A is Sonnet, sample 2. B is Opus, sample 1.
+
+</details>
+
 ## 02 Docstring
 
 The docstring of `read_row()`, for a caller who won't read its body. Passage:
@@ -104,6 +112,13 @@ Note:
   places.
 ```
 
+<details>
+<summary>Reveal A and B</summary>
+
+A is Sonnet, sample 1. B is Opus, sample 1.
+
+</details>
+
 ## 03 Email
 
 devi's email to Priya, who owns the release decision and isn't technical.
@@ -131,6 +146,13 @@ describes the problem.
 > **The problem (#57, Windows only)**
 > If a file from an earlier run is still open in Excel, splitlane crashes when it tries to replace that file. The files it wrote before the crash stay on disk, and the error doesn't say which ones. The user is left with a mix of new and old files and no clear way to tell which is which.
 
+<details>
+<summary>Reveal A and B</summary>
+
+A is Opus, sample 1. B is Sonnet, sample 3.
+
+</details>
+
 ## 04 Pitch
 
 tomasz's comment on devi's merge request, pitching a change to her own branch.
@@ -152,6 +174,13 @@ Passage: from the opening through the paragraph that states the proposal.
 >
 > **Proposal:** drop the pre-count and report "rows processed" and chunks written instead of a percentage. That gives one pass over the input. `split_file()` already reads row by row, so the change should be confined to the CLI code in this branch. I'm happy to do that part.
 
+<details>
+<summary>Reveal A and B</summary>
+
+A is Opus, sample 1. B is Sonnet, sample 2.
+
+</details>
+
 ## 05 Failure Reply
 
 The maintainer's reply to a user who pasted a failed run. Passage: what went
@@ -172,6 +201,13 @@ wrong, and what the reply says about the partial chunk.
 > `splitlane` reads input as UTF-8 unless you tell it otherwise. Your export is not UTF-8. `file` reports it as ISO-8859 (Latin-1 style). Byte `0xe9` is `é` in that encoding, and it isn't valid UTF-8. The decode failed at byte 4183, so `splitlane` stopped and exited with status 3. That is the exit code for "input cannot be decoded".
 >
 > The run did not fail cleanly. It wrote `chunks/part-0001.csv` before it hit the bad byte, and that file holds only 183 lines. You asked for 20000 rows per chunk, so it is incomplete.
+
+<details>
+<summary>Reveal A and B</summary>
+
+A is Opus, sample 1. B is Sonnet, sample 2.
+
+</details>
 
 ## 06 Decision Record
 
@@ -207,6 +243,13 @@ Passage: the section that states the decision.
 >
 > A legitimate multi-line field stays far below the limit. A stray quote hits the limit, so it damages one row and doesn't swallow the rest of the file.
 
+<details>
+<summary>Reveal A and B</summary>
+
+A is Sonnet, sample 3. B is Opus, sample 1.
+
+</details>
+
 ## 07 Release Notes
 
 The 0.4.0 release notes, for users upgrading from 0.3.1. Passage: the entry
@@ -225,6 +268,13 @@ about the renamed output files.
 > - Update any script, glob, or downstream job that looks for `chunk_*.csv`.
 > - splitlane does not delete old files. If you reuse an output directory from 0.3.1, the old `chunk_*.csv` files will still be there next to the new `part-*.csv` files. Clear the directory first, or use a new one.
 > - The number has four digits. A run with more than 9,999 chunks continues with `part-10000.csv`, which sorts out of order in a plain text sort.
+
+<details>
+<summary>Reveal A and B</summary>
+
+A is Sonnet, sample 1. B is Opus, sample 1.
+
+</details>
 
 ## 08 README Edit
 
@@ -250,6 +300,13 @@ Passage: the first two paragraphs or list items the edit adds about long rows.
 >
 > To keep one stray `"` from turning the rest of the file into a single field, splitlane limits how long a row can get. A row that grows past `--max-row-bytes` (counted in UTF-8 bytes) is cut at that limit. The rest of it is skipped up to the next line break, and reading continues from there. The shortened row is still written to the output, so the chunk keeps its row count, but its data is incomplete.
 
+<details>
+<summary>Reveal A and B</summary>
+
+A is Opus, sample 1. B is Sonnet, sample 3.
+
+</details>
+
 ## 09 Catch-Up
 
 A message to Sam, who joins the project and takes over tomasz's follow-up.
@@ -269,6 +326,13 @@ Passage: the description of that follow-up.
 > My reading of the code, which I haven't run: the next `read_row()` call starts with `in_quotes = False`. The closing quote of that half-read field would then flip it to "inside quotes". The next row's newline could then be swallowed until another quote shows up, or until the limit is hit again. So one bad quote could damage more than one row. It would still be bounded, not a swallowed file.
 >
 > tomasz called it probably rare and not blocking. Nobody has measured how often it happens, and nobody has reproduced it or written a test for it. No fix has been proposed or agreed.
+
+<details>
+<summary>Reveal A and B</summary>
+
+A is Opus, sample 1. B is Sonnet, sample 3.
+
+</details>
 
 ## 10 Agent Rules
 
@@ -290,6 +354,13 @@ rule about output file names.
 >
 > - Never change output file names.
 > - Exception: a maintainer explicitly asks for it, as with the 0.4.0 rename. In that case, also update the README and the changelog.
+
+<details>
+<summary>Reveal A and B</summary>
+
+A is Opus, sample 1. B is Sonnet, sample 1.
+
+</details>
 
 ## Key
 
