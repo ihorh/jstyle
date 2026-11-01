@@ -244,10 +244,9 @@ sentence traps in the skill: telegraphic style and center embedding.
 
 The skill also draws on writing and reading research:
 
-- **Garden-path sentences** (Bever, 1970). Readers slow down on a sentence
-  such as *I'll confirm your files match*, where a missing *that* invites the
-  wrong first reading (Ferreira and Henderson, 1990; Trueswell, Tanenhaus, and
-  Kello, 1993).
+- **Garden-path sentences** (Bever, 1970). An early word invites a reading
+  that the rest of the sentence overturns, as in *the horse raced past the
+  barn fell*, so the reader has to parse it again.
 - **The curse of knowledge** (Pinker, *The Sense of Style*, 2014). A writer's
   own context fills the gaps in their text, which is why the skill asks for a
   cold read.
