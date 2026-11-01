@@ -35,11 +35,9 @@ holds a benchmark and other supporting material.
 
 ## Before and After
 
-One task from the [first blind
-benchmark](bench/reports/2026-11-01-opus-without-vs-with-skill.md): an update
-to a CSV tool's README, so users learn how it handles very long rows before
-they run into them. Both versions come from Opus 5.5. The one without the
-skill is the best of its three tries, and the one with the skill is its first.
+One task from the first **blind benchmark**: Opus 5.5 updates a CSV tool's
+README, so users learn how it handles very long rows before they run into
+them.
 
 Without the skill:
 
@@ -65,8 +63,10 @@ With the skill:
 
 The maintainer picked the version with the skill without knowing which was
 which, because the other "lost my attention after mentioning RFC 4180." The
-version with the skill opens with what happens to a long row, which is what
-the reader came for.
+version without the skill is the best of its three tries, and the one with
+the skill is its first. The
+[report](bench/reports/2026-11-01-opus-without-vs-with-skill.md) has the rest
+of the story: nine more tasks, and the reason behind every pick.
 
 ## Install
 
