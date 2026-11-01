@@ -11,7 +11,8 @@
 | Sample shown | Opus, the privileged side: sample 1. Sonnet: the best of its 3, picked by the report's writer |
 
 Each task shows the same passage from both sides, labeled A and B in a seeded
-random order. Which side is which comes in the last section. The recipe is in
+random order. Which side is which sits, collapsed, in the Key section after
+the tasks. The recipe is in
 [README.md](README.md).
 
 **What to look for:**
