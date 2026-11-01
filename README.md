@@ -62,8 +62,11 @@ Call it before you ask for a draft:
 
 You can also just ask. In Claude Code the agent loads the skill on its own
 when it drafts text for someone outside the conversation, such as an email or
-a README, and leaves it off for ordinary chat replies. Other harnesses that
-support skills will likely route it the same way, but we haven't tested them.
+a README, and leaves it off for ordinary chat replies. It also loads when you
+ask for edits, or for a review that proposes new wording. It stays off for a
+review that only gives feedback, such as a proofread or a verdict on whether a
+text is ready to send. Other harnesses that support skills will likely route
+it the same way, but we haven't tested them.
 [docs/trigger-test.md](docs/trigger-test.md) has the test behind this.
 
 Where skills aren't supported, such as a chat app, you can:
@@ -76,6 +79,21 @@ Where skills aren't supported, such as a chat app, you can:
 
 The skill was written for Claude and other recent models.
 [docs/models.md](docs/models.md) says what that means for its contents.
+
+### Cold Reads
+
+Some text gets one chance with a reader who doesn't share the writer's
+context, such as an email, a README, or release notes. For that text, the
+skill asks the agent for a cold read before it hands the text over. A subagent
+or a new session on the same model gets only the text and one line on who it's
+for, and lists what it had to reread or couldn't follow. A writer can't find
+these gaps alone, because their own context fills them in. Chat replies and
+small edits skip this step.
+
+A cold read costs extra tokens and time. Where the agent can start a subagent,
+the skill tells it to run one without asking, unless your instructions limit
+background work. If that's a concern, add a line to your instructions file,
+such as "Ask before starting a subagent."
 
 ## Turn It Off and On
 

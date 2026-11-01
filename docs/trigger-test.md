@@ -22,9 +22,18 @@ session called the `Skill` tool with `jstyle:write`.
 | Reply to issue 42 for me, I'll paste it on GitHub | draft | loaded | skipped |
 | What does split.py do when a row is longer than the chunk size? | chat | off | off |
 | Is the streaming proposal a good idea? | chat | off | off |
+| Review README.md and tell me what to fix in its wording | review with new wording | loaded | loaded |
+| Improve the docstrings in split.py | edit | loaded | loaded |
+| Proofread agent-rules-draft.md before I commit it | feedback only | off | off |
+| Is streaming-proposal.md clear enough to send to the team as it is? | feedback only | off | off |
 
 The skill loaded for 9 of the 10 drafting runs and stayed off for all 4 chat
 runs. The one skip still produced a reasonable reply.
+
+The last four prompts are reviews of existing text. The skill loaded when the
+agent was going to write new text, an edit or suggested wording, and stayed
+off when the reply only gave feedback. Both feedback-only replies were still
+useful reviews.
 
 ## Limits
 
