@@ -1,13 +1,10 @@
 # jstyle
 
 > [!NOTE]
-> - **One skill,** `/jstyle:write`, in a Claude Code plugin. The agent loads
->   it on its own when it drafts text for a reader outside the conversation.
-> - **Judged blind.** In the first benchmark, the maintainer preferred Opus 5.5
->   with the skill in 8 of 10 writing tasks, without knowing which side was
->   which. See the [report log](bench/reports/LOG.md).
-> - **Costs more.** A session with the skill cost about 1.8 times as much and
->   took about twice as long.
+> - **Judged blind.** The maintainer preferred drafts written with the skill
+>   in 8 of 10 writing tasks with Opus 5.5, and in 6 of 10 with Sonnet 5.5.
+> - **More care per draft.** The agent spends extra tokens sourcing its facts
+>   and getting a second opinion from a subagent.
 > - **Early.** Tested in English, with Claude models, by one judge so far.
 
 An opinionated prose style for your AI agent, so more of what you write
@@ -226,6 +223,15 @@ want a second opinion, compare the runs yourself, or ask your own agent to.
 | Sonnet 5.5 vs Opus 5.5, both without the skill | [2026-11-01](bench/reports/2026-11-01-sonnet-vs-opus-baseline.md) |
 | Opus 5.5 without the skill vs with it | [2026-11-01](bench/reports/2026-11-01-opus-without-vs-with-skill.md) |
 | Sonnet 5.5 without the skill vs with it | [2026-11-01](bench/reports/2026-11-01-sonnet-without-vs-with-skill.md) |
+
+The benchmark's sessions are cold: each one started fresh and wrote a
+single text. There, a session with the skill cost about 1.8 times as much
+as one without it. In a normal working session we expect the difference to
+be much smaller. The skill's own text loads once, and in a long session it
+soon becomes a small share. The rest goes to the drafting itself, and
+sometimes to a cold read: a subagent that reads the draft fresh, the way
+your reader will. The agent may skip it. In the benchmark, Opus ran one in
+12 of 30 sessions, and Sonnet in 1.
 
 ## Background
 
