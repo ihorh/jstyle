@@ -4,11 +4,12 @@
 # Usage: lib/session.sh TASK CONDITION OUT
 # Reads MODEL, EFFORT, and PLUGIN from the environment.
 #
-# The session starts in a temporary copy of world/, with read-only tools and no
-# user or project settings, so no personal rules, memory, plugins, or MCP
-# servers reach it. The `skill` condition adds the plugin with --plugin-dir,
-# and the Skill tool, without which a session can't load the skill. The
-# baseline goes without it, so Claude Code's own skills stay out of reach.
+# The session starts in a temporary copy of world/, with read-only tools, the
+# Agent tool for subagents such as the skill's cold read, and no user or
+# project settings, so no personal rules, memory, plugins, or MCP servers reach
+# it. The `skill` condition adds the plugin with --plugin-dir, and the Skill
+# tool, without which a session can't load the skill. The baseline goes
+# without it, so Claude Code's own skills stay out of reach.
 #
 # OUT gets the text, and OUT with .json in place of .md gets the session's raw
 # JSON: usage, timing, turns, and the resolved model. Both appear only when the
@@ -18,7 +19,7 @@ set -uo pipefail
 task=$1 cond=$2 out=$3
 bench="$(CDPATH='' cd -- "$(dirname "$0")/.." && pwd)"
 
-tools="Read,Glob,Grep"
+tools="Read,Glob,Grep,Agent"
 [[ "$cond" == skill ]] && tools+=",Skill"
 
 args=(-p --model "$MODEL" --setting-sources local --strict-mcp-config
