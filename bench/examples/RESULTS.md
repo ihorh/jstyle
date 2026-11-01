@@ -1,7 +1,6 @@
 # Example Results
 
-The full, unedited outputs behind the Before and After section of the main
-README. Each prompt ran once on Opus 5.5 (`claude-opus-5-5`) without the skill
+The full, unedited outputs of the two example prompts. Each prompt ran once on Opus 5.5 (`claude-opus-5-5`) without the skill
 and once with it, through `bench/run.sh` with the same tools on both sides.
 These are first attempts, shown as they came out.
 

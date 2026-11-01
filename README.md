@@ -31,60 +31,38 @@ creative writing.
 
 ## Before and After
 
-Two prompts, each run once on Opus 5.5 without the skill and once with it.
-These are first attempts, cut to the passages where they differ most.
-[bench/examples/RESULTS.md](bench/examples/RESULTS.md) has them in full, with
-the prompts and the notes the agent wrote from.
-
-**A water shutoff notice** from a residents' committee to its tenants.
-
-Without the skill:
-
-> On **Wednesday 18 November**, the water will be turned off for the whole
-> building **from 9:00**. This includes **hot water**. Heating is on a separate
-> circuit and will stay on.
->
-> **Why:** Brightwater Plumbing is replacing the main water valve in the
-> basement. The old valve leaked in October and flooded the basement storage,
-> and our insurer wants it replaced before the policy is renewed in December.
-
-With the skill:
-
-> On Wednesday 18 November, Brightwater Plumbing will replace the main water
-> valve in the basement. The water will go off for the whole building at 9 am.
-> Hot water will go off too, because the boiler has to be switched off while
-> the valve is out. The heating is on a separate circuit and will stay on.
-
-**A pitch for this skill,** one paragraph written from this README.
+One task from the [first blind
+benchmark](bench/reports/2026-11-01-opus-without-vs-with-skill.md): an update
+to a CSV tool's README, so users learn how it handles very long rows before
+they run into them. Both versions come from Opus 5.5. The one without the
+skill is the best of its three tries, and the one with the skill is its first.
 
 Without the skill:
 
-> AI agents often write as if every word costs them. They drop small words
-> like *that*, leave phrases without a verb, and nest clauses three deep, and
-> the reader has to read the sentence twice to make up for the token the agent
-> saved. jstyle is a Claude Code plugin with one skill, `/jstyle:write`, that
-> works against this habit.
+> A quoted field can contain newlines, as RFC 4180 allows. The field stays in
+> one row. Each row is limited to `--max-row-bytes`, measured in UTF-8 bytes
+> and not counting the newline at the end. The limit stops one stray `"` from
+> turning the rest of the file into a single field.
 >
-> […] In the first blind benchmark, the maintainer preferred Opus 5.5's writing
-> with the skill in 8 of 10 tasks. The project is early. It has been tested
-> only in English with Claude models, and a session with it costs about 1.8
-> times as much and takes about twice as long.
+> When a row goes over the limit, splitlane:
+>
+> 1. Keeps the first `--max-row-bytes` bytes of the row and writes them to the
+>    chunk as a normal row. The rest of the row is dropped, so the written row
+>    can have missing columns or an unclosed quote.
 
 With the skill:
 
-> Left to themselves, AI agents often write as if every word cost them
-> something. They drop the small words, put a colon where a verb should be,
-> and nest one clause inside another, and the reader pays with a second pass.
-> jstyle is a Claude Code plugin with one skill, `/jstyle:write`, that works
-> against that habit.
->
-> […] In the first benchmark, the maintainer compared Opus 5.5 with and without
-> the skill, without knowing which output was which, and preferred the one
-> with the skill in 8 of 10 writing tasks. That's one judge so far, and a
-> session with the skill costs about 1.8 times as much and takes about twice
-> as long.
+> splitlane cuts a row that is longer than `--max-row-bytes` and still writes it.
+> It does not skip the row. The chunk gets the first `--max-row-bytes` bytes of
+> the row, and splitlane drops the rest of the row up to the next line break. The
+> cut usually falls in the middle of a field. The row that gets written can then
+> have too few columns or an unclosed quote. An importer may reject it, or accept
+> the shortened row without noticing.
 
-Neither version of either text invented a fact.
+The maintainer picked the version with the skill without knowing which was
+which, because the other "lost my attention after mentioning RFC 4180." The
+version with the skill opens with what happens to a long row, which is what
+the reader came for.
 
 ## Install
 
