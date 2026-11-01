@@ -6,7 +6,9 @@
 #
 # The session starts in a temporary copy of world/, with read-only tools and no
 # user or project settings, so no personal rules, memory, plugins, or MCP
-# servers reach it. The `skill` condition adds the plugin with --plugin-dir.
+# servers reach it. The `skill` condition adds the plugin with --plugin-dir,
+# and the Skill tool, without which a session can't load the skill. The
+# baseline goes without it, so Claude Code's own skills stay out of reach.
 #
 # OUT gets the text, and OUT with .json in place of .md gets the session's raw
 # JSON: usage, timing, turns, and the resolved model. Both appear only when the
@@ -16,8 +18,11 @@ set -uo pipefail
 task=$1 cond=$2 out=$3
 bench="$(CDPATH='' cd -- "$(dirname "$0")/.." && pwd)"
 
+tools="Read,Glob,Grep"
+[[ "$cond" == skill ]] && tools+=",Skill"
+
 args=(-p --model "$MODEL" --setting-sources local --strict-mcp-config
-      --tools "Read,Glob,Grep" --no-session-persistence --output-format json)
+      --tools "$tools" --no-session-persistence --output-format json)
 [[ -n "${EFFORT:-}" ]] && args+=(--effort "$EFFORT")
 [[ "$cond" == skill ]] && args+=(--plugin-dir "$PLUGIN")
 
