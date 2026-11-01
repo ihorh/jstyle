@@ -102,9 +102,12 @@ We have tested the skill only in English, and only with Claude models in
 Claude Code. Its principles and its handling of facts don't depend on English,
 so it is likely to help in other languages too. The sentence traps are written
 for English, and the skill lets each language's own grammar decide their
-details. If you use it in another language, or with another model or agent,
+details.
+
+If you use it in another language, or with another model or agent,
 we'd like to hear how it changed the prose: [open an
-issue](https://github.com/ihorh/jstyle/issues).
+issue](https://github.com/ihorh/jstyle/issues). A title and a few lines are
+enough, and you can leave labels and the other fields empty.
 
 ## What It Asks For
 
@@ -151,10 +154,10 @@ The skill grew out of personal writing rules that Ihor H. has used in his
 Claude Code sessions for over three months. In October 2026, Claude measured
 its own output under those rules: 784 chat replies and 63 documents from 50
 sessions. The habits Ihor suspected, such as dropping the word *that*,
-explained little. Two habits he hadn't suspected cost more: phrases with no
-verb, often after a colon, in 3 to 4 of every 100 replies, and clauses nested
-three deep, in about 2 of every 100 sentences. That finding is why the skill
-targets compression.
+explained little. Two habits he hadn't suspected cost more. Phrases with no
+verb, often after a colon, turned up in 3 to 4 of every 100 replies. Clauses
+nested three deep turned up in about 2 of every 100 sentences. That finding
+is why the skill targets compression.
 
 The skill also draws on writing and reading research:
 
