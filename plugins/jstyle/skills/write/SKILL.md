@@ -49,7 +49,7 @@ paperwork.
 5. **Be concise, never compressed.** Cut whole sentences that carry nothing,
    and keep every word that lets the rest read in one pass.
 
-## Facts
+## Facts and Sources
 
 An invented sentence reads as smoothly as a checked one, so rereading a draft
 won't catch it. That is why the facts come first.
@@ -57,13 +57,14 @@ won't catch it. That is why the facts come first.
 - **List the facts before any prose,** each with its source: a file and line,
   a URL, a command you ran with what it printed, or something the person told
   you.
-- **Source every claim about the project,** its people, or its numbers. General
-  technical knowledge, such as how a standard library behaves, needs none.
+- **Source every claim specific to the subject,** such as its people, its
+  numbers, or its history. General knowledge, such as how a standard library
+  behaves, needs none.
 - **Keep the facts that serve the reader,** and drop the rest even when they're
   true. The list itself stays out of the text.
 - **Mark your own inferences as yours.** A consequence you worked out from the
-  code is often the most useful part of the text, and the reader needs to know
-  it came from you.
+  sources is often the most useful part of the text, and the reader needs to
+  know it came from you.
 - **In someone else's voice, put your inference beside the draft,** as a note
   for them to confirm, never in their mouth.
 
@@ -75,32 +76,32 @@ won't catch it. That is why the facts come first.
   > the floor plan, I think the hall could take 120 without the tables. I
   > haven't checked with the venue. Confirm it before you promise it."
 
-## Sentences
+## Sentence Rules
 
 These rules are cheap: each costs you a clause and saves the reader a question.
 They govern sentences, never vocabulary, so a technical term stays as it is.
 
-1. **Prefer the active voice when you know the actor.** Write "the encoder
-   writes the bytes" rather than "the bytes are written".
-2. **Say what happens.** Write "`copy()` truncates the string and returns
-   `true`" rather than "truncation is not an error".
+1. **Prefer the active voice when you know the actor.** Write "the script
+   deletes the old logs" rather than "the old logs are deleted".
+2. **Say what happens.** Write "the upload stops and shows an error" rather
+   than "the upload is not completed".
 3. **Keep one negation per sentence.** Two negations in a short phrase make the
-   reader flip the meaning twice. "Nothing else needs a non-default standard"
-   becomes "only this unit needs a non-default standard".
-4. **Finish the thought.** When an operation can truncate, say how the reader
-   tells that it did.
+   reader flip the meaning twice. "It's not unusual for the train not to stop
+   here" becomes "the train often skips this station".
+4. **Finish the thought.** When a refund can take up to two weeks, say how the
+   customer checks where it is.
 5. **Make a sentence's grammar visible.** Where a sentence could be read two
    ways, mark the one you mean with a word, a comma, or a different order.
-   Write "while the agent edited, the file grew" rather than "while the agent
-   edited the file grew".
+   Write "while Anna dressed, the baby played in the crib" rather than "while
+   Anna dressed the baby played in the crib".
 6. **Keep the small words that carry the logic:** articles, verbs, and
    connectives such as "that", "because", and "so". When you replace a colon, a
    semicolon, or a dash with a full stop, write out the link it stood for.
 
-   > **Before.** "Truncation: silent, flag only; caller must check."
+   > **Before.** "Meeting moved: Thursday. Room TBC, bring slides."
    >
-   > **After.** "When a row is too long, the function cuts it and returns a
-   > flag. Nothing else reports the cut, so the caller has to check the flag."
+   > **After.** "The meeting has moved to Thursday. The room isn't booked yet,
+   > so I'll send it once it is. Please bring your slides."
 
 7. **Let the idea set the length.** Split a long sentence when its parts read
    better apart, and keep it whole when splitting would sound unnatural. No
@@ -124,7 +125,7 @@ outgrow it.
 - **Ask before a large rewrite.** When a small edit would mean rewriting more
   than a paragraph, say what you'd change and confirm with the person first.
 
-## Before Handing Over
+## Final Check
 
 Your own context fills every gap the reader will fall into, so your reread
 needs help.
