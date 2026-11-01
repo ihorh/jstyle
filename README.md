@@ -185,19 +185,26 @@ are public.
 
 ## What It Asks For
 
-The skill puts correct facts and a clear idea ahead of brevity. It works on
-four levels:
+The skill puts sourced facts and a clear idea ahead of brevity. It starts
+from the facts, then works from the idea down to the words.
 
 - **Facts.** The agent lists its facts with their sources before writing any
   prose, and marks the conclusions it drew itself as its own. The list stays
-  in its working notes, and the text cites a source only where the reader
-  needs one.
+  in its working notes, and the finished text cites a source only where the
+  reader needs one.
 - **The idea.** When a sentence stays unclear after rewording, the agent works
-  out the idea, or the context the reader is missing, before writing it again.
-- **Concise, never compressed.** It cuts sentences that carry nothing, and
-  keeps the small words that let the rest read in one pass.
-- **Sentence traps.** It watches for patterns known to make a reader stop and
+  out what it means to say, or what context the reader is missing, before
+  writing it again.
+- **Paragraphs.** After an edit, the agent rereads the paragraph around it, and
+  the section too when the paragraph's point has shifted. A [cold
+  read](#cold-reads) finds what the agent's own reread passes over.
+- **Sentences.** It watches for patterns known to make a reader stop and
   reparse, such as garden-path sentences, stacked negations, and hidden actors.
+- **Words.** It is concise, never compressed: it cuts sentences that carry
+  nothing, and keeps the small words that let the rest read in one pass.
+
+Looking back at the blind picks, the maintainer finds that most of the
+difference came at the paragraph level.
 
 ## Punctuation and Case
 
@@ -247,8 +254,8 @@ its own output under those rules: 784 chat replies and 63 documents from 50
 sessions. The habits Ihor suspected, such as dropping the word *that*,
 explained little. Two habits he hadn't suspected cost more. Phrases with no
 verb, often after a colon, turned up in 3 to 4 of every 100 replies. Clauses
-nested three deep turned up in about 2 of every 100 sentences. These findings
-are why the skill targets compression.
+nested three deep turned up in about 2 of every 100 sentences. Both became
+sentence traps in the skill: telegraphic style and center embedding.
 
 The skill also draws on writing and reading research:
 
