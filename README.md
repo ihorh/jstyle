@@ -32,9 +32,9 @@ It isn't for text that answers to a rulebook before a reader, such as legal
 documents, government papers, or machinery specifications. It's also
 unlikely to suit creative writing.
 
-jstyle is a Claude Code plugin with one skill, `/jstyle:write`. The
-repository also holds the benchmark behind it, which compares writing with
-and without the skill.
+jstyle is a Claude Code plugin with one skill, `/jstyle:write`, which your
+agent loads automatically when it writes for someone else. The repository also
+holds a benchmark and other supporting material.
 
 ## Before and After
 
