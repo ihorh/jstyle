@@ -87,7 +87,7 @@ The A/B table inside <details>, so GitHub shows it collapsed until clicked.
 
 ## Scores
 Table: task, the writer's pick, one-line reason.
-Stats: mean output tokens and seconds per task, from `make stats`.
+Stats: mean output tokens and seconds per task, from `lib/stats.sh`.
 Conclusion: a short paragraph.
 ```
 
