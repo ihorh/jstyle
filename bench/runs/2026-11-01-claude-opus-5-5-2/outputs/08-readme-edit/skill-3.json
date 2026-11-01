@@ -1,0 +1,105 @@
+{
+  "duration_api_ms": 61067,
+  "stop_reason": "end_turn",
+  "session_id": "e7d28fd3-e66a-4605-850e-fd2f289738c4",
+  "total_cost_usd": 0.2828136,
+  "usage": {
+    "input_tokens": 10,
+    "cache_creation_input_tokens": 17794,
+    "cache_read_input_tokens": 68680,
+    "output_tokens": 4049,
+    "output_tokens_details": {
+      "thinking_tokens": 1652
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 17794,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 12,
+      "outputTokens": 5346,
+      "cacheReadInputTokens": 74593,
+      "cacheCreationInputTokens": 21509,
+      "webSearchRequests": 0,
+      "costUSD": 0.2828136,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2225,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 1,
+    "requested": {
+      "background": 0,
+      "foreground": 1,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 1,
+    "spawned_by_subagents": 0,
+    "completed": 1,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {
+      "general-purpose": 1
+    }
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 13,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# splitlane\n\nSplit a large CSV file into smaller files with the same header.\n\n## Install\n\nFrom a checkout:\n\n```bash\npip install .\n```\n\n## Usage\n\n```bash\nsplitlane data/export.csv --rows 50000 --out chunks\n```\n\nThis writes `chunks/part-0001.csv`, `chunks/part-0002.csv`, and so on. Each\nchunk starts with the input's header row.\n\nOptions:\n\n- `--rows N`: rows per chunk, not counting the header. Default 100000.\n- `--out DIR`: output directory, created if missing. Default `out`.\n- `--max-row-bytes N`: longest row kept whole. Default 65536. See\n  [Long rows](#long-rows).\n- `--encoding NAME`: input encoding. Default `utf-8`.\n\n## Long rows\n\nA row longer than `--max-row-bytes` doesn't stop the run. splitlane cuts the\nrow at that limit and writes the shortened row to the chunk as it is, with no\nclosing quote added. Everything after the cut is dropped, up to the next line\nbreak in the file. splitlane measures a row in UTF-8 bytes, whatever\n`--encoding` is, and doesn't count the line ending. The header row is cut the\nsame way if it's too long, but the warning below doesn't count it.\n\nAt the end of the run, splitlane prints to standard error how many rows it cut:\n\n```\nsplitlane: warning: 3 row(s) longer than 65536 bytes were truncated\n```\n\nThe exit status is still 0, so a script that needs every row intact should\nlook for this warning. If your rows really are longer than the limit, raise it,\nfor example with `--max-row-bytes 1048576`.\n\nThe limit exists because of quoting. A row can span several lines, because a\nline break inside a quoted field stays in the row. That means a stray `\"` with\nno closing quote would otherwise turn the rest of the file into one field.\nWith the limit, the lines after a stray quote are merged into one row only\nuntil that row reaches the limit. splitlane then cuts the row and carries on\nfrom the next line.\n\nThe text dropped after a cut only runs to the next line break, even when that\nline break is inside quotes. So if the row that was too long has a quoted\nfield with line breaks in it, the rest of that field after the line break is\nwritten out as one or more extra rows. These extra rows count toward `--rows`,\nand the warning doesn't include them.",
+  "ttft_ms": 3251,
+  "type": "result",
+  "duration_ms": 61269,
+  "uuid": "42acd838-4624-49bf-9b09-864b200b6432",
+  "ttft_stream_ms": 2874,
+  "time_to_request_ms": 39,
+  "first_content_frame_ms": 2875,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 12,
+      "outputTokens": 5346,
+      "cacheReadInputTokens": 74593,
+      "cacheCreationInputTokens": 21509,
+      "webSearchRequests": 0,
+      "costUSD": 0.2828136,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2225,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 24711,
+  "stop_reason": "end_turn",
+  "session_id": "904dce92-7298-408a-9f75-8eb7106c5cf5",
+  "total_cost_usd": 0.11962239999999999,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 9403,
+    "cache_read_input_tokens": 40632,
+    "output_tokens": 1812,
+    "output_tokens_details": {
+      "thinking_tokens": 359
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 9403,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1812,
+      "cacheReadInputTokens": 40632,
+      "cacheCreationInputTokens": 9403,
+      "webSearchRequests": 0,
+      "costUSD": 0.11962239999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 359,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 8,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Hi Sam, welcome. Here's where #42 stands and what tomasz's follow-up is about.\n\n**The original bug.** Maya reported it. Billing and support analytics get CRM exports with a `notes` column, and some notes contain line breaks inside properly quoted fields. splitlane cut the row at every `\\n`, so one record came out as two broken rows and their importer rejected the whole chunk.\n\n**Why it wasn't simply fixed.** In 0.1, devi made `read_row()` ignore quotes on purpose. If the reader tracks quotes, one stray `\"` can make it treat the rest of the file as a single field. devi tested a first fix and saw exactly that: one bad quote in row 12 of a 400k-row file produced a chunk with a header and one enormous row.\n\n**What was merged (ships in 0.4.0).**\n- `read_row()` now tracks quotes, so a newline inside quotes stays in the field.\n- The existing `--max-row-bytes` limit (default 64 KiB) caps how far a row can grow. A real note stays well under it. A stray quote hits it, the row is cut there and marked truncated, and the reader skips to the next newline to recover. Instead of losing the rest of the file, you lose one row.\n- The cut isn't silent. The CLI prints how many rows were truncated at the end of a run, and `read_row()` returns a flag for library callers. Maya's team will check for that message in their scripts.\n\n**Your follow-up.** tomasz raised it after the merge and called it \"probably rare, not blocking.\" After a truncation, the skip goes to the next newline *even if that newline is inside quotes* (`src/splitlane/split.py:24-28`). If a real multi-line field comes soon after the bad quote, the reader can restart in the middle of it. One more thing from reading the code, which I haven't tested: the reader restarts with `in_quotes = False`. If it lands mid-field, that field's closing quote will look like an opening quote, so the error could carry into the next row or cause another truncation instead of staying at one damaged row. Checking that would be a good first step. I didn't find any tests in the repo, so a test file with a stray quote followed by a real multi-line note is probably the place to start.\n\n**Release context.** 0.4.0 hasn't shipped yet. It's held up by #57, a Windows-only crash when a chunk file is open in Excel. Priya is deciding whether to ship now with a known-issue note or wait for that fix. Billing and support analytics run on Linux and are waiting on the #42 fix, so don't let this follow-up hold up the release. It can go in 0.4.x.\n\nPeople: maya is the reporter, devi wrote the fix and knows `read_row()` best, and tomasz raised the follow-up.",
+  "ttft_ms": 2278,
+  "type": "result",
+  "duration_ms": 24806,
+  "uuid": "76db6527-c9dd-49d6-8c4e-9e0e7df213ea",
+  "ttft_stream_ms": 1999,
+  "time_to_request_ms": 38,
+  "first_content_frame_ms": 2000,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1812,
+      "cacheReadInputTokens": 40632,
+      "cacheCreationInputTokens": 9403,
+      "webSearchRequests": 0,
+      "costUSD": 0.11962239999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 359,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

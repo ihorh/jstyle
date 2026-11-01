@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 18474,
+  "stop_reason": "end_turn",
+  "session_id": "e4e80fd6-9a3c-4646-b83b-d3c3fd7259a9",
+  "total_cost_usd": 0.08331440000000001,
+  "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 5969,
+    "cache_read_input_tokens": 15932,
+    "output_tokens": 1618,
+    "output_tokens_details": {
+      "thinking_tokens": 851
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 5969,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1618,
+      "cacheReadInputTokens": 15932,
+      "cacheCreationInputTokens": 5969,
+      "webSearchRequests": 0,
+      "costUSD": 0.08331440000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 851,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 2,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "```python\n\"\"\"Read one CSV record from a text stream, honoring quoted newlines.\n\nReads characters from ``stream`` until it reaches a newline outside\ndouble quotes, or the end of input. A newline inside a quoted field\nbelongs to the record and does not end it. The returned text is the raw\nrecord. Fields are not split, quotes and ``\"\"`` escapes are left in place,\nand the terminating newline is not included. Any ``\"\\\\r\"`` before the\nnewline is kept. For a CRLF file opened with ``newline=\"\"``, each row\ntherefore ends in ``\"\\\\r\"``.\n\nArgs:\n    stream: A text-mode file-like object whose ``read(1)`` returns one\n        ``str`` character and ``\"\"`` at end of input. Open files with\n        ``newline=\"\"`` so newlines inside quoted fields come through\n        unchanged. Reading starts at the stream's current position. When\n        the call returns, the stream is just past the consumed newline,\n        or at end of input.\n    max_row_bytes: Largest record size allowed, measured as the UTF-8\n        byte length of the record text. The newline is not counted. This\n        is always UTF-8, whatever encoding the stream was opened with.\n\nReturns:\n    A ``(row, truncated)`` tuple:\n\n    * ``(None, False)``: the stream was already at end of input. This is\n      the only end-of-input signal. A blank line gives ``(\"\", False)``,\n      not ``None``.\n    * ``(row, False)``: a complete record.\n    * ``(row, True)``: the record went over ``max_row_bytes``. ``row`` is\n      the longest prefix that fits the limit. It may stop in the middle\n      of a field and leave a quote unclosed. The rest of the record is\n      read and thrown away up to the next newline, **even if that newline\n      is inside a quoted field**. If the oversized record has quoted\n      newlines past the cut, the text after them is returned by later\n      calls as separate, invalid rows.\n\nIf a quote is never closed, everything up to end of input is read as\none record. That record is still subject to ``max_row_bytes``.\n\"\"\"\n```",
+  "ttft_ms": 1942,
+  "type": "result",
+  "duration_ms": 18551,
+  "uuid": "3f0318c2-0623-43fa-80c6-86a716417699",
+  "ttft_stream_ms": 1548,
+  "time_to_request_ms": 40,
+  "first_content_frame_ms": 1548,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1618,
+      "cacheReadInputTokens": 15932,
+      "cacheCreationInputTokens": 5969,
+      "webSearchRequests": 0,
+      "costUSD": 0.08331440000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 851,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

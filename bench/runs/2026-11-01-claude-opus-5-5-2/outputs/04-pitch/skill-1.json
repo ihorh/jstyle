@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 17266,
+  "stop_reason": "end_turn",
+  "session_id": "c398a7af-c729-423c-b566-5d76bf026dce",
+  "total_cost_usd": 0.1292636,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 11811,
+    "cache_read_input_tokens": 30558,
+    "output_tokens": 1432,
+    "output_tokens_details": {
+      "thinking_tokens": 576
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 11811,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1432,
+      "cacheReadInputTokens": 30558,
+      "cacheCreationInputTokens": 11811,
+      "webSearchRequests": 0,
+      "costUSD": 0.1292636,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 576,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 8,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "I couldn't see devi's `progress-bar` branch from this checkout, so the comment describes it using only what tomasz's notes say about it. The notes also say tomasz never timed the counting pass. The comment says that too, and offers to time it rather than claiming it's slow.\n\n---\n\nHi devi, I'd like to suggest a change before this merges.\n\nTo show a percentage, the branch counts every row first and then splits, so splitlane reads the whole input twice. On our biggest exports the counting pass alone takes a noticeable while. I haven't timed it yet, but I can if you'd like numbers first.\n\nMy suggestion is to drop the pre-count and show rows processed and chunks written instead of a percentage. That way splitlane reads the input once. `split_file()` already reads row by row, so as far as I can tell the change is all in the branch's CLI code.\n\nThe cost is that we lose the percentage and any ETA. I know you've heard from users who want the bar, so I don't want to just take it away. There's a middle ground: estimate the percentage from bytes read divided by file size. It doesn't need a pre-count either. It's only an estimate, though. Rows vary in length, so on files with long notes fields the bar will run unevenly. Whether that's good enough depends on what users rely on the bar for. You know that better than I do.\n\nWhat do you think: rows processed only, the byte-based estimate, or something else?",
+  "ttft_ms": 2973,
+  "type": "result",
+  "duration_ms": 17343,
+  "uuid": "ff7abf84-72cb-4d41-8850-2964d45350c5",
+  "ttft_stream_ms": 1375,
+  "time_to_request_ms": 34,
+  "first_content_frame_ms": 1376,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1432,
+      "cacheReadInputTokens": 30558,
+      "cacheCreationInputTokens": 11811,
+      "webSearchRequests": 0,
+      "costUSD": 0.1292636,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 576,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 35774,
+  "stop_reason": "end_turn",
+  "session_id": "837f9378-706a-4433-81c7-486230ddd0d3",
+  "total_cost_usd": 0.1852298,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 13924,
+    "cache_read_input_tokens": 47529,
+    "output_tokens": 3215,
+    "output_tokens_details": {
+      "thinking_tokens": 1074
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 13924,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3215,
+      "cacheReadInputTokens": 47529,
+      "cacheCreationInputTokens": 13924,
+      "webSearchRequests": 0,
+      "costUSD": 0.1852298,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1074,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 11,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# 0001: Keep quoted newlines inside the row, and cap each row at `--max-row-bytes`\n\n- **Status:** Accepted. Merged 2026-10-02 and scheduled for 0.4.0.\n- **Issue:** #42, \"Rows with newlines inside quotes get split in two\"\n- **Participants:** devi, tomasz, maya\n\n## Context\n\nBefore 0.4.0, `read_row()` in `src/splitlane/split.py` ended a row at the first `\\n` and ignored quotes completely. RFC 4180 lets a quoted field contain line breaks, so a valid CSV like this one was split wrongly:\n\n```\nid,name,notes\n7,Ana,\"called twice\nasked for refund\"\n8,Bo,ok\n```\n\nThis file has two data rows, but splitlane wrote three. The extra row had the wrong number of columns, and the importer downstream rejected the whole chunk. Two teams, billing and support analytics, were blocked. Both get CRM exports that have a free-text `notes` column.\n\nThe 0.1 behavior was intentional. Once a reader tracks quotes, one stray `\"` makes it read everything after that quote as a single field. devi chose \"never swallow the file\" over \"handle quoted newlines.\" No one in the thread had numbers on how often each case happens. The teams that were blocked had never seen a malformed quote, but they had real multi-line fields.\n\nQuote tracking on its own was not enough. devi built it and tested it on a 400k-row file with one stray `\"` in row 12. The output was a single chunk that held the header and one enormous row, which is the failure 0.1 was designed to prevent.\n\n## Decision\n\n`read_row()` tracks quotes, and a newline inside quotes stays in the field. Each row is also capped by the existing `--max-row-bytes` limit, which defaults to 65536 bytes:\n\n1. When a row grows past the limit, the reader stops adding to it, marks it as truncated, and skips ahead to the next newline. It then starts the next row there.\n2. The truncated row is still written to the output, cut off at the limit.\n3. Truncation is never silent. `read_row()` returns a `(row, truncated)` pair, and `split_file()` returns the number of truncated rows. The CLI prints this warning to stderr at the end of a run:\n   `splitlane: warning: N row(s) longer than M bytes were truncated`.\n   The billing and support analytics teams said they will check for this warning in their scripts.\n\n## Alternatives considered\n\n- **Keep the 0.1 behavior.** This was rejected because it breaks valid RFC 4180 files, and those files are common in real exports.\n- **Unbounded quote tracking.** This matches what spreadsheets do. It was rejected because one stray quote swallows the rest of the file, as the test in row 12 showed.\n- **Treat a quoted field as broken once it spans more than N lines.** This was rejected because a legitimate notes field can have many lines, so no line count separates good input from bad. A byte limit works better because a real note stays far below 64 KiB, while a runaway quote reaches the limit quickly.\n\n## Consequences\n\n- Valid multi-line fields now survive splitting.\n- In the worst case, a stray quote damages a bounded amount of data, where before it could swallow the rest of the file.\n- A legitimate row longer than `--max-row-bytes` is now truncated, though it would have been split before. Users who have very long rows should raise the limit.\n- The damage from a stray quote is larger than \"one row.\" The thread described it as one damaged row, but my reading of `read_row()` is that every row after the stray quote, up to the byte limit, gets absorbed into the truncated row. Those rows are lost from the output, and the warning counts them all as one truncated row. With the default limit and rows of about 100 bytes, that is several hundred rows.\n- `--max-row-bytes` now controls correctness as well as memory. Changing its default changes which rows get truncated.\n\n## Open issues\n\n- **The reader can resync inside a quoted field.** After truncation, the reader skips to the next newline, even when that newline is inside quotes. In a bad case it can restart in the middle of a real multi-line field, and the rows that follow are misread. tomasz raised this on 2026-10-03, and it was judged rare and not blocking.\n- **Truncated rows can carry an open quote into the output.** This was not discussed in #42. A truncated row from a stray quote still contains that unclosed `\"` when it is written to a chunk. A downstream parser that follows RFC 4180 may then read the rest of that chunk as one field.",
+  "ttft_ms": 2433,
+  "type": "result",
+  "duration_ms": 35885,
+  "uuid": "0749d559-3a54-4668-9bcb-f3b80f07dd73",
+  "ttft_stream_ms": 1337,
+  "time_to_request_ms": 38,
+  "first_content_frame_ms": 1337,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3215,
+      "cacheReadInputTokens": 47529,
+      "cacheCreationInputTokens": 13924,
+      "webSearchRequests": 0,
+      "costUSD": 0.1852298,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1074,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

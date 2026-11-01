@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 37943,
+  "stop_reason": "end_turn",
+  "session_id": "db80de44-d987-42cc-b2e1-80e4ef27fdbd",
+  "total_cost_usd": 0.2099014,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 15774,
+    "cache_read_input_tokens": 49187,
+    "output_tokens": 3692,
+    "output_tokens_details": {
+      "thinking_tokens": 1381
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 15774,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3692,
+      "cacheReadInputTokens": 49187,
+      "cacheCreationInputTokens": 15774,
+      "webSearchRequests": 0,
+      "costUSD": 0.2099014,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1381,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 14,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# 0001: Keep newlines inside quoted fields, and cap row length with `--max-row-bytes`\n\n- Status: accepted. Merged 2026-10-02 and ships in 0.4.0.\n- Issue: #42, \"Rows with newlines inside quotes get split in two\"\n- Code: `read_row()` in `src/splitlane/split.py`\n\n## Context\n\nUp to 0.3.x, `read_row()` ended a row at the first newline, even when the\nnewline was inside a quoted field. devi chose this on purpose in 0.1. A reader\nthat tracks quotes can be thrown off by one malformed quote. It then takes\neverything after that quote, possibly the rest of the file, as a single field.\nThe 0.1 reader chose \"never swallow the file\" over \"handle quoted newlines\".\n\nThat choice broke valid input. RFC 4180 allows a quoted field to contain line\nbreaks, and CRM exports with a free-text `notes` column often include them. For\nthis input:\n\n```\nid,name,notes\n7,Ana,\"called twice\nasked for refund\"\n8,Bo,ok\n```\n\nsplitlane wrote three data rows instead of two. The second of those rows had\nthe wrong number of columns, so the downstream importer rejected the whole\nchunk. Two teams were blocked by this: billing and support analytics. Neither\nteam had seen a malformed quote in their exports.\n\nThe first fix tracked quotes with no limit, and it showed that the 0.1 concern\nwas real. In a test file of 400,000 rows with one stray `\"` in row 12, the\nreader took everything after row 12 as one field. It wrote a chunk that held\nthe header and one enormous row.\n\n## Decision\n\n`read_row()` tracks quotes, so a newline inside a quoted field stays in the\nfield. This matches RFC 4180 and the way spreadsheets read CSV.\n\nTo stop a stray quote from swallowing the file, the existing `--max-row-bytes`\nlimit also bounds quoted fields. The default is 65536 bytes. When a row grows\npast the limit, `read_row()`:\n\n1. stops and returns what it has read so far as the row,\n2. skips the input up to the next newline, or to the end of the input,\n3. marks the row as truncated.\n\nA real multi-line note stays far below the limit. A stray quote reaches it,\ndamages one row, and the reader picks up again at the next line.\n\nTruncation is never silent. `read_row()` returns a `(row, truncated)` pair, and\n`split_file()` returns the number of truncated rows. When that number is not\nzero, the CLI prints this warning to stderr at the end of the run:\n\n```\nsplitlane: warning: N row(s) longer than M bytes were truncated\n```\n\nThe billing and support analytics teams check for this message in their\nscripts. Their importer won't notice a shortened row on its own. If you change\nthe wording, you break their check, so treat the message as part of the\ninterface.\n\n### Rejected: limit a quoted field by line count\n\ntomasz suggested treating a quoted field as broken once it ran past some number\nof lines. We rejected this because a legitimate notes field can have many\nlines. A byte limit separates the two cases better, and the option already\nexisted.\n\n## Consequences\n\n- Quoted fields that contain newlines now come through intact.\n- One malformed quote damages at most one row, plus whatever the skip in step 2\n  discards. It no longer damages the rest of the file.\n- A legitimate row longer than `--max-row-bytes` gets truncated too, because\n  the reader can't tell it from a stray quote. Users with very long fields need\n  to raise the limit.\n- Known limitation, raised by tomasz and left for later: the skip in step 2\n  stops at the next newline even when that newline is inside quotes. In a bad\n  case, the reader resumes in the middle of a real multi-line field.\n\nTwo more effects follow from the code. The issue thread did not discuss them:\n\n- After the skip, `read_row()` starts the next row as unquoted. If it resumed\n  inside a quoted field, that field's closing `\"` opens a new quoted run. The\n  rows after it can then be merged until the limit is reached again. So the\n  damage can spread past one row.\n- A truncated row usually ends inside an open quote, and splitlane writes it to\n  the chunk as is. A CSV parser that reads that chunk may treat the rows after\n  it as part of the open field. The warning tells the user that something is\n  wrong, but the chunk itself is not valid CSV.",
+  "ttft_ms": 2343,
+  "type": "result",
+  "duration_ms": 38076,
+  "uuid": "1e1b92f8-3edb-4f16-baea-36f8f54272b9",
+  "ttft_stream_ms": 1280,
+  "time_to_request_ms": 33,
+  "first_content_frame_ms": 1281,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3692,
+      "cacheReadInputTokens": 49187,
+      "cacheCreationInputTokens": 15774,
+      "webSearchRequests": 0,
+      "costUSD": 0.2099014,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1381,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

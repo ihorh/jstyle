@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 49515,
+  "stop_reason": "end_turn",
+  "session_id": "8fcbde7e-3345-4cf3-b6b3-c2e608001949",
+  "total_cost_usd": 0.23455900000000002,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 15642,
+    "cache_read_input_tokens": 29995,
+    "output_tokens": 5170,
+    "output_tokens_details": {
+      "thinking_tokens": 2769
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 15642,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 5170,
+      "cacheReadInputTokens": 29995,
+      "cacheCreationInputTokens": 15642,
+      "webSearchRequests": 0,
+      "costUSD": 0.23455900000000002,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2769,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 14,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# splitlane 0.4.0\n\nsplitlane now keeps a quoted field that contains a line break in a single row (#42). Exports with multi-line fields, such as CRM notes, now split correctly. This release also renames the output files, so check any script that reads them before you upgrade.\n\n## Before you upgrade\n\n**The output files have new names.** 0.3.1 wrote `chunk_1.csv`, `chunk_2.csv`, and so on. 0.4.0 writes `part-0001.csv`, `part-0002.csv`, and so on. Update any script, glob, or pipeline step that looks for `chunk_*.csv`.\n\nThe zero padding makes the files sort in order by name, up to `part-9999.csv`. A run that writes more than 9,999 chunks produces five-digit names, and those don't sort correctly by name next to the four-digit ones.\n\n**Clear out old output directories.** 0.4.0 doesn't delete or overwrite `chunk_*.csv` files. If you write into a directory that 0.3.1 used, the old chunks stay next to the new ones. Empty the directory first, or pass a new `--out`.\n\n## Fixes\n\n- **Line breaks inside quoted fields.** A quoted field that contains a line break now stays in one row, as RFC 4180 specifies. In 0.3.1, splitlane ended the row at the line break. That turned one record into two broken rows with the wrong number of columns (#42).\n\n  ```\n  id,name,notes\n  7,Ana,\"called twice\n  asked for refund\"\n  8,Bo,ok\n  ```\n\n  0.4.0 reads two data rows from this input. 0.3.1 read three.\n\n- **`--rows 0` no longer hangs.** A `--rows` value below 1 now stops the run with exit status 2 and this message:\n\n  ```\n  splitlane: --rows must be at least 1\n  ```\n\n  In 0.3.1, `--rows 0` looped forever.\n\n## Changes\n\n- **Unclosed quotes are contained.** splitlane now tracks quotes, so a stray `\"` that is never closed makes it read on past the end of the line. 0.4.0 caps the damage with `--max-row-bytes`, which defaults to 65536. When a row grows past that limit, splitlane keeps the first 65536 bytes, skips ahead to the next line break, and counts the row as truncated. Every row that the stray quote ran into ends up inside that one truncated row, so those rows are lost as separate records. The rest of the file splits normally.\n\n- **Truncated rows are reported.** In 0.3.1, splitlane truncated rows longer than `--max-row-bytes` without telling you. Now, if any rows were truncated, the run ends with a warning on stderr:\n\n  ```\n  splitlane: warning: 3 row(s) longer than 65536 bytes were truncated\n  ```\n\n  The exit status is still 0 when this happens. If your pipeline must not accept truncated rows, check stderr for this line.\n\n- **Encoding errors have their own exit status.** If splitlane can't decode the input with `--encoding`, it now exits with status 3 and a one-line message, instead of a Python traceback:\n\n  ```\n  splitlane: cannot decode exports/customers.csv as utf-8: 'utf-8' codec can't decode byte 0xe9 in position 4183: invalid continuation byte\n  ```\n\n  Chunks written before the error stay in the output directory, and the last one is cut off partway. Delete them, then run again with the right encoding, for example `--encoding latin-1` for an ISO-8859 export.\n\n### Exit statuses\n\n| Status | Meaning |\n|---|---|\n| 0 | Success, including runs that truncated rows (see the warning on stderr) |\n| 2 | Invalid arguments, including `--rows` below 1 |\n| 3 | The input couldn't be decoded with `--encoding` |\n\n## Known issues\n\n- **Windows: chunks open in Excel (#57).** If a chunk from an earlier run is open in Excel, splitlane crashes with `PermissionError` when it tries to overwrite that chunk. The chunks before it have already been overwritten, and the error doesn't say which chunk failed. The output directory is left with a mix of new and old chunks. Until this is fixed, close the chunks in Excel before you run splitlane, or write each run to a new `--out` directory.\n\n- **Recovery after a truncated row can land inside a quoted field.** After it truncates a row, splitlane skips ahead to the next line break, even if that line break is inside a quoted field. In that case, the rows right after the truncated row can be split incorrectly. This needs an unclosed quote near a legitimate multi-line field, so we expect it to be rare.",
+  "ttft_ms": 2254,
+  "type": "result",
+  "duration_ms": 49630,
+  "uuid": "f36c6b3c-7e19-4d6b-860d-5703e232b79f",
+  "ttft_stream_ms": 1166,
+  "time_to_request_ms": 37,
+  "first_content_frame_ms": 1167,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 5170,
+      "cacheReadInputTokens": 29995,
+      "cacheCreationInputTokens": 15642,
+      "webSearchRequests": 0,
+      "costUSD": 0.23455900000000002,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2769,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 33689,
+  "stop_reason": "end_turn",
+  "session_id": "3303959c-a0e7-4b29-aece-606dd4cdc462",
+  "total_cost_usd": 0.17028880000000002,
+  "usage": {
+    "input_tokens": 10,
+    "cache_creation_input_tokens": 12975,
+    "cache_read_input_tokens": 62444,
+    "output_tokens": 2698,
+    "output_tokens_details": {
+      "thinking_tokens": 1141
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 12975,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 2698,
+      "cacheReadInputTokens": 62444,
+      "cacheCreationInputTokens": 12975,
+      "webSearchRequests": 0,
+      "costUSD": 0.17028880000000002,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1141,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 11,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# AGENTS.md\n\nThese rules apply to every change you make in splitlane, the CLI that splits a large CSV file into smaller files that each keep the header. Users run splitlane inside their own pipelines, so file names, option defaults and stdout are all part of its interface. Two earlier changes by agents broke things for users:\n\n- A \"cleanup\" PR renamed the chunk files, and a user's pipeline broke.\n- An agent changed the `--max-row-bytes` default from 65536 to 1048576 to get a failing test to pass.\n\nIf a task seems to need a change these rules forbid, stop and ask a maintainer. Don't look for a way around the rule.\n\n## Output file names\n\nDon't change the names of the files splitlane writes. Today the chunks are `part-0001.csv`, `part-0002.csv` and so on, inside the `--out` directory (see `split_file()` in `src/splitlane/split.py`).\n\nOnly a maintainer can ask for a rename, as they did for the 0.4.0 naming scheme. If you do a rename, update the file names in `README.md` and add a line to `CHANGELOG.md` in the same change.\n\n## CLI option defaults\n\nDon't change the default value of any CLI option. The defaults are set in `src/splitlane/cli.py` and `DEFAULT_MAX_ROW_BYTES` in `src/splitlane/split.py`, and `README.md` lists them too.\n\n- `--rows` is the one exception, and only when a maintainer agrees.\n- A real bug fix may change a default. A failing test doesn't show that a default is wrong, though. Fix the code or the test, or ask.\n\n## Dependencies\n\nDon't add third-party dependencies. You can always use the Python standard library. `pytest` is allowed for tests only. Never import it from `src/` or list it as a runtime dependency.\n\n## Changelog\n\nAdd a line to the `## Unreleased` section of `CHANGELOG.md` for every change a user could notice. Follow the style of the lines already there, for example \"Fix: …\" for bug fixes.\n\nYou don't need a changelog line for:\n\n- an internal refactor that doesn't change behavior. If the refactor does change behavior, add a line.\n- a change that only touches tests.\n\n## stdout and stderr\n\nNever print to stdout. All of splitlane's messages go to stderr, including progress, warnings and errors, as in `cli.py`: `print(..., file=sys.stderr)`.\n\nThe one planned exception is `--version`, which will print to stdout once it's added. It doesn't exist yet.\n\n## `read_row()` performance\n\nDon't make `read_row()` in `src/splitlane/split.py` any slower. It runs once for every row of the input, and it reads the stream one character at a time. Avoid adding work to its inner loop, such as extra function calls, encoding or allocations per character.",
+  "ttft_ms": 3742,
+  "type": "result",
+  "duration_ms": 33802,
+  "uuid": "1624f5cd-864c-4574-9497-f544899d44d9",
+  "ttft_stream_ms": 2231,
+  "time_to_request_ms": 39,
+  "first_content_frame_ms": 2231,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 2698,
+      "cacheReadInputTokens": 62444,
+      "cacheCreationInputTokens": 12975,
+      "webSearchRequests": 0,
+      "costUSD": 0.17028880000000002,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1141,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

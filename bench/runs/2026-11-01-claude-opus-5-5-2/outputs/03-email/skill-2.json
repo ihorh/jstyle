@@ -1,0 +1,105 @@
+{
+  "duration_api_ms": 53917,
+  "stop_reason": "end_turn",
+  "session_id": "2a354962-d3fb-4ab2-91dd-6383f42f3856",
+  "total_cost_usd": 0.2718024,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 17335,
+    "cache_read_input_tokens": 49374,
+    "output_tokens": 4191,
+    "output_tokens_details": {
+      "thinking_tokens": 1977
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 17335,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 5190,
+      "cacheReadInputTokens": 55287,
+      "cacheCreationInputTokens": 20980,
+      "webSearchRequests": 0,
+      "costUSD": 0.2718024,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2392,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 1,
+    "requested": {
+      "background": 0,
+      "foreground": 1,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 1,
+    "spawned_by_subagents": 0,
+    "completed": 1,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {
+      "general-purpose": 1
+    }
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 13,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Subject: splitlane 0.4.0: should we release now or wait for a Windows fix?\n\nHi Priya,\n\nThe next version of splitlane, 0.4.0, is ready apart from one problem. I need you to decide whether we release it now or wait for a fix.\n\nWhat's ready: everything planned for 0.4.0 is finished and tested on Linux and macOS. It includes the fix that billing and support analytics are waiting for. Some notes in their customer exports contain line breaks, and splitlane was splitting each of those customers into two broken rows, so their import tools rejected the files. Both teams run splitlane on Linux, so the problem below doesn't affect them.\n\nThe problem only affects Windows. splitlane takes a large CSV file (a spreadsheet saved as plain text) and splits it into smaller files. Here is when it goes wrong. Someone runs splitlane, opens one of the smaller files in Excel, and then runs splitlane again while that file is still open. splitlane then stops with an error partway through. By that point it has already replaced some of the old files with new ones, and the error doesn't say which files it replaced. The person is left with a folder of new and old files mixed together, with no easy way to tell them apart, and could pass out-of-date data on without noticing.\n\nI know how to fix it properly. The fix changes every place where splitlane saves a file, though, and I haven't estimated how long it will take. We also don't know how many of our users are on Windows, because splitlane doesn't collect any usage data.\n\nThe two options:\n\n1. Release 0.4.0 now, with a note that warns Windows users about the problem and tells them to close the files in Excel before running splitlane again. Billing and support analytics get their fix right away. Windows users who miss the note could still run into the problem.\n2. Hold 0.4.0 until the Windows problem is fixed. We don't release anything with a known problem, but billing and support analytics keep waiting, and I can't yet tell you for how long.\n\nWhich would you prefer? I'm happy to talk it through if that helps.\n\nThanks,\ndevi",
+  "ttft_ms": 2325,
+  "type": "result",
+  "duration_ms": 54064,
+  "uuid": "719a01c0-cf9f-4a67-b885-34e917454fec",
+  "ttft_stream_ms": 1943,
+  "time_to_request_ms": 35,
+  "first_content_frame_ms": 1944,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 5190,
+      "cacheReadInputTokens": 55287,
+      "cacheCreationInputTokens": 20980,
+      "webSearchRequests": 0,
+      "costUSD": 0.2718024,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2392,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

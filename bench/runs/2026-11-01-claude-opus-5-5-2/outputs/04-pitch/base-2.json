@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 19835,
+  "stop_reason": "end_turn",
+  "session_id": "aef4dda6-3ba6-45bc-9b70-70a91cc85a9e",
+  "total_cost_usd": 0.10734999999999999,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 8645,
+    "cache_read_input_tokens": 39990,
+    "output_tokens": 1508,
+    "output_tokens_details": {
+      "thinking_tokens": 401
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 8645,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1508,
+      "cacheReadInputTokens": 39990,
+      "cacheCreationInputTokens": 8645,
+      "webSearchRequests": 0,
+      "costUSD": 0.10734999999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 401,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 7,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Before this merges, I'd like to suggest a change to how the progress display gets its total.\n\nAs I understand it, the branch counts every row up front so it can show a percentage. That means splitlane reads the whole input twice. Because of the #42 quoting fix, the count can't just count newlines. Notes fields can contain them, so the first pass has to parse rows the same way `split_file()` does. On our biggest exports that first pass takes a noticeable amount of time before any chunk is written. I haven't timed it, so I can't give you a number. I'm happy to measure it on a large export if that would help.\n\n**What I'm suggesting:** drop the pre-count and show live counters instead of a percentage, something like `1,240,000 rows processed, 13 chunks written`. Then we read the input only once. `split_file()` already reads row by row, so I think the whole change is in the branch's CLI code. Nothing in `split.py` has to change apart from passing progress out to the CLI.\n\n**What we lose:** the percentage and the ETA. I know you've heard from users who want the bar, and I'm not trying to dismiss that. It's a real cost.\n\n**A possible middle ground:** estimate the percentage from bytes read divided by file size. It needs no pre-count, so we keep one pass and still show something like a bar. The open question is whether it's accurate enough. Row lengths vary, so a file with long notes in some sections would make the bar speed up and slow down. It would still always move forward and finish at 100%, so it might be good enough. You've talked to the users who asked for the bar, so you're better placed than I am to judge that.\n\nHere's what I'd suggest, but I'm open to changing it:\n1. Use the counters by default.\n2. Use the bytes-based percentage if we decide the estimate is good enough.\n3. Keep the exact pre-count only if users really need the exact number, maybe behind a flag.\n\nCan we settle this before the branch merges? I'm happy to pair on it or write the CLI change myself if that helps.",
+  "ttft_ms": 1964,
+  "type": "result",
+  "duration_ms": 19936,
+  "uuid": "5fbb39fd-a791-4d43-91ec-007f70719727",
+  "ttft_stream_ms": 1741,
+  "time_to_request_ms": 34,
+  "first_content_frame_ms": 1742,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1508,
+      "cacheReadInputTokens": 39990,
+      "cacheCreationInputTokens": 8645,
+      "webSearchRequests": 0,
+      "costUSD": 0.10734999999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 401,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

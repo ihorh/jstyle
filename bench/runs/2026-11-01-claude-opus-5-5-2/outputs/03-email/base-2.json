@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 22767,
+  "stop_reason": "end_turn",
+  "session_id": "43fc9bca-95bb-42c7-b228-30880fe2c7e9",
+  "total_cost_usd": 0.1300126,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 10478,
+    "cache_read_input_tokens": 26523,
+    "output_tokens": 2043,
+    "output_tokens_details": {
+      "thinking_tokens": 751
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 10478,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 2043,
+      "cacheReadInputTokens": 26523,
+      "cacheCreationInputTokens": 10478,
+      "webSearchRequests": 0,
+      "costUSD": 0.1300126,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 751,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 10,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "**Subject:** splitlane 0.4.0: ship now or wait? I need your call\n\nHi Priya,\n\nRelease 0.4.0 is ready except for one problem. I need you to decide whether we ship it now or wait for a fix.\n\n**Why it matters:** The billing and support analytics teams have been blocked since September. Their customer exports include notes that run over several lines, and the current version splits those notes into broken rows that their systems reject. 0.4.0 fixes that. Both teams run on Linux, where 0.4.0 is fully tested.\n\n**The problem:** On Windows, if someone has an old output file open in Excel when they run splitlane again, the tool stops partway through. Some files are new and some are still from the old run. The error message doesn't say which ones, so the person can't easily tell.\n\n**How to avoid it:** Close Excel first, or send each run's output to a new, empty folder.\n\n**Your options:**\n\n1. **Ship now** and include a note warning Windows users about this, with the workaround. The two blocked teams get their fix right away.\n2. **Wait** until the Windows problem is fixed. Fixing it properly means changing how splitlane saves every file. I haven't estimated how long that will take, so I can't promise a date. The two teams stay blocked until it's done.\n\nWe have no data on how many of our users are on Windows, so I can't tell you how many people the problem would affect.\n\n**Also in 0.4.0:** The output files get new names. \"chunk_1.csv\" becomes \"part-0001.csv\". Any scripts that look for the old names will need a one-time update, so we'll need to announce this clearly whichever option you choose.\n\n**My recommendation:** Option 1. The fix for the two teams is a real, current need. The Windows problem only happens in a specific situation and has a simple workaround. I'd start on the Windows fix right after release.\n\nIt's your call. If you can let me know this week, I'll either publish the release or tell the two teams it's delayed.\n\nThanks,\ndevi",
+  "ttft_ms": 1784,
+  "type": "result",
+  "duration_ms": 22827,
+  "uuid": "a69f6ddd-5fb9-4edf-9432-7b76ff329cbb",
+  "ttft_stream_ms": 1569,
+  "time_to_request_ms": 35,
+  "first_content_frame_ms": 1569,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 2043,
+      "cacheReadInputTokens": 26523,
+      "cacheCreationInputTokens": 10478,
+      "webSearchRequests": 0,
+      "costUSD": 0.1300126,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 751,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

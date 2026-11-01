@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 29684,
+  "stop_reason": "end_turn",
+  "session_id": "6b633f17-305f-4190-82d5-6bbc737af35c",
+  "total_cost_usd": 0.1368818,
+  "usage": {
+    "input_tokens": 10,
+    "cache_creation_input_tokens": 9433,
+    "cache_read_input_tokens": 51989,
+    "output_tokens": 2549,
+    "output_tokens_details": {
+      "thinking_tokens": 826
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 9433,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 2549,
+      "cacheReadInputTokens": 51989,
+      "cacheCreationInputTokens": 9433,
+      "webSearchRequests": 0,
+      "costUSD": 0.1368818,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 826,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 9,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# AGENTS.md\n\nsplitlane splits a large CSV file into smaller files. Each smaller file keeps the input's header row. Users run it inside their own pipelines, so its output names, CLI defaults and output streams act as a public interface. These rules exist because agents broke that interface twice. One agent renamed the chunk files in a \"cleanup\" PR, which broke a user's pipeline. Another changed the `--max-row-bytes` default to make a failing test pass.\n\n## Layout\n\n- `src/splitlane/cli.py`: argument parsing, messages and exit codes (0 ok, 2 usage error, 3 decode error).\n- `src/splitlane/split.py`: `read_row()` and `split_file()`.\n- `CHANGELOG.md`: new entries go under `## Unreleased`.\n- `README.md`: documents the output names and every CLI option with its default.\n\n## Rules\n\n### Output file names\n\nChunks are written as `<out>/part-0001.csv`, `<out>/part-0002.csv`, and so on (`part-{n:04d}.csv`). Don't change this scheme or the output directory layout unless a maintainer explicitly asks. If a maintainer does ask, update `README.md` and add a `CHANGELOG.md` entry in the same change.\n\n### CLI defaults\n\nDon't change the default of any CLI option:\n\n| Option | Default |\n|---|---|\n| `--rows` | `100000` |\n| `--out` | `out` |\n| `--max-row-bytes` | `65536` (`DEFAULT_MAX_ROW_BYTES` in `split.py`) |\n| `--encoding` | `utf-8` |\n\n- A failing test is never a reason to change a default. Fix the code or the test instead.\n- If you think a default is itself a bug, stop and ask a maintainer. Don't change it yourself.\n- Only `--rows` may change, and only after a maintainer agrees. When it changes, update `README.md` and `CHANGELOG.md` too.\n\n### Dependencies\n\n- Code under `src/` may use only the Python standard library.\n- `pytest` is allowed only in tests.\n- Don't add any other dependency.\n\n### Changelog\n\nAdd a line under `## Unreleased` in `CHANGELOG.md` for any change to behavior that users can see. Write bug fixes as `Fix: ...` and mention the issue number if there is one, e.g. `(#42)`.\n\nYou can skip the entry when the change is:\n\n- an internal refactor that doesn't change behavior, or\n- a change to tests only.\n\nIf a refactor changes behavior in any way, it needs an entry.\n\n### stdout and stderr\n\n- Never write to stdout. Users pipe splitlane's output, so all messages go to stderr: `print(..., file=sys.stderr)`.\n- Start every message with `splitlane: `, like the existing ones.\n- The one planned exception is `--version`, which doesn't exist yet. When it's added, it may print to stdout.\n\n### `read_row()` performance\n\n`read_row()` in `split.py` runs once for every character of input, so it's the hot path. Don't make it slower. That means:\n\n- no extra passes over the input,\n- no extra per-character work that you can avoid,\n- no reading the stream more than once.\n\nIf you can't avoid a change that might slow it down, say so in your summary and explain why.\n\n## When a rule gets in your way\n\nStop and ask a maintainer. Don't work around the rule, and don't decide on your own that an exception applies.",
+  "ttft_ms": 3517,
+  "type": "result",
+  "duration_ms": 29818,
+  "uuid": "10cbcfe5-fe36-46e8-934f-2ed3f9081094",
+  "ttft_stream_ms": 3037,
+  "time_to_request_ms": 36,
+  "first_content_frame_ms": 3037,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 2549,
+      "cacheReadInputTokens": 51989,
+      "cacheCreationInputTokens": 9433,
+      "webSearchRequests": 0,
+      "costUSD": 0.1368818,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 826,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

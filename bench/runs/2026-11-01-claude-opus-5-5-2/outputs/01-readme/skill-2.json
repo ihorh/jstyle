@@ -1,0 +1,105 @@
+{
+  "duration_api_ms": 82251,
+  "stop_reason": "end_turn",
+  "session_id": "c2ad51d8-3b6f-4461-aefc-f376000df3bb",
+  "total_cost_usd": 0.4030188,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 20276,
+    "cache_read_input_tokens": 51129,
+    "output_tokens": 7037,
+    "output_tokens_details": {
+      "thinking_tokens": 2235
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 20276,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 8849,
+      "cacheReadInputTokens": 51129,
+      "cacheCreationInputTokens": 30989,
+      "webSearchRequests": 0,
+      "costUSD": 0.4030188,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 3078,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 1,
+    "requested": {
+      "background": 0,
+      "foreground": 1,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 1,
+    "spawned_by_subagents": 0,
+    "completed": 1,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {
+      "general-purpose": 1
+    }
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 15,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# splitlane\n\nsplitlane splits a large CSV file into smaller files with a fixed number of\nrows each, and copies the header row into every one. It reads the input one row\nat a time, so memory doesn't limit the file size. It needs nothing outside the\nPython standard library.\n\nThe `main` branch holds 0.4.0, which isn't released yet. That version renames\nthe output files and changes how quoted fields are read. See\n[Upgrading from 0.3](#upgrading-from-03).\n\n## Install\n\nFrom a checkout:\n\n```bash\npip install .\n```\n\n## Usage\n\n```bash\nsplitlane data/export.csv --rows 50000 --out chunks\n```\n\nThis writes `chunks/part-0001.csv`, `chunks/part-0002.csv`, and so on. Each\nchunk starts with the input's header row and holds up to 50000 data rows after\nit.\n\nOptions:\n\n- `--rows N`: data rows per chunk, not counting the header. Default 100000.\n- `--out DIR`: output directory, created if missing. Default `out`.\n- `--max-row-bytes N`: rows longer than this are cut at this length. Default\n  65536. See [Long rows and stray quotes](#long-rows-and-stray-quotes).\n- `--encoding NAME`: the input's encoding. Any name Python accepts works, such\n  as `cp1252` or `latin-1`. Default `utf-8`. splitlane always writes chunks in\n  UTF-8, whatever the input's encoding.\n\nsplitlane prints progress and warnings to stderr and nothing to stdout. It\nexits with one of these statuses:\n\n| Status | Meaning |\n| ------ | ------- |\n| 0 | The input was split. Check stderr for a truncation warning. |\n| 1 | An unexpected error, such as a chunk that can't be written. Python prints a traceback. |\n| 2 | Bad arguments, such as `--rows 0`. |\n| 3 | The input couldn't be decoded with `--encoding`. |\n\nIf a file exported from Excel or an older system fails with status 3, it is\nprobably in Windows-1252 rather than UTF-8. Run splitlane again with\n`--encoding cp1252`.\n\n## Quoted fields\n\nA field in double quotes can contain line breaks, as RFC 4180 allows, and\nsplitlane keeps such a field in one row. This input has two data rows, not\nthree:\n\n```\nid,name,notes\n7,Ana,\"called twice\nasked for refund\"\n8,Bo,ok\n```\n\nApart from tracking quotes, splitlane doesn't parse or check fields. It doesn't\ncount columns, and it writes each row out as it read it, including the input's\nline endings.\n\n## Long rows and stray quotes\n\nA single unmatched `\"` would make every line after it look like part of one\nquoted field. So that a stray quote can't swallow the rest of the file,\nsplitlane caps the length of each row at `--max-row-bytes`, measured as UTF-8.\nWhen a row grows past the cap, splitlane keeps the part up to the cap, discards\nthe rest of that line, and continues from the next line break.\n\nA truncated row is not lost silently. At the end of the run splitlane prints:\n\n```\nsplitlane: warning: 3 row(s) longer than 65536 bytes were truncated\n```\n\nThe exit status is still 0. If your pipeline can't accept shortened rows, check\nstderr for this warning. If your data has legitimate rows longer than 64 KiB,\nraise `--max-row-bytes`.\n\nThe recovery isn't perfect. splitlane resumes at the next line break even when\nthat line break is inside a real quoted field, so a few rows after a truncated\none can be split wrongly too. Each damaged row is still bounded by the cap.\n\n## Things to know before you rely on it\n\n- **Old chunks are not removed.** splitlane overwrites a chunk that has the\n  same name but leaves every other file in the output directory alone. If an\n  earlier run wrote more chunks than this one, the extra chunks stay. Use an\n  empty directory for each run.\n- **A failed run leaves partial output.** If splitlane stops with an error, the\n  chunks it wrote before the error stay on disk, and the last one is\n  incomplete.\n- **Windows: a chunk open in another program stops the run.** If a chunk file\n  from an earlier run is open in Excel, splitlane crashes with\n  `PermissionError` when it tries to overwrite that file. The chunks before it\n  have already been rewritten and the ones after it haven't, so the directory\n  holds a mix of old and new chunks. This is tracked in #57 and isn't fixed\n  yet.\n- **Past 9999 chunks, names stop sorting in order.** The number has four\n  digits of padding, so chunk 10000 is `part-10000.csv`.\n- **An input with only a header produces no chunks** and exits with status 0.\n\n## Use as a library\n\n```python\nfrom splitlane.split import split_file\n\nwritten, truncated = split_file(\"data/export.csv\", 50000, \"chunks\",\n                                max_row_bytes=65536, encoding=\"utf-8\")\n```\n\n`written` is the list of chunk paths in order, and `truncated` is the number of\nrows cut at `max_row_bytes`. `split_file()` prints nothing, so check\n`truncated` yourself. A decoding failure raises `UnicodeDecodeError` and leaves\npartial output, as the CLI does.\n\n## Upgrading from 0.3\n\n- Chunks are now named `part-0001.csv`, `part-0002.csv`, and so on, instead of\n  `chunk_1.csv`, `chunk_2.csv`. The zero padding makes them sort in order.\n  Update any script that looks for the old names.\n- A line break inside a quoted field no longer ends the row (#42).\n- `--rows 0` now exits with status 2 instead of looping.\n- The truncation warning and exit status 3 are new.\n\nSee [CHANGELOG.md](CHANGELOG.md) for the full list.",
+  "ttft_ms": 1615,
+  "type": "result",
+  "duration_ms": 82455,
+  "uuid": "0d2ded79-77bc-4997-a4ca-e85fb9ab2f99",
+  "ttft_stream_ms": 890,
+  "time_to_request_ms": 62,
+  "first_content_frame_ms": 890,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 8849,
+      "cacheReadInputTokens": 51129,
+      "cacheCreationInputTokens": 30989,
+      "webSearchRequests": 0,
+      "costUSD": 0.4030188,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 3078,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

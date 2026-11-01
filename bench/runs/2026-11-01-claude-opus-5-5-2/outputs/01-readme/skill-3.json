@@ -1,0 +1,105 @@
+{
+  "duration_api_ms": 109968,
+  "stop_reason": "end_turn",
+  "session_id": "31c3f2e2-90ea-4590-ad08-0b6f16b4069a",
+  "total_cost_usd": 0.44927039999999996,
+  "usage": {
+    "input_tokens": 10,
+    "cache_creation_input_tokens": 22280,
+    "cache_read_input_tokens": 73374,
+    "output_tokens": 8880,
+    "output_tokens_details": {
+      "thinking_tokens": 3515
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 22280,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 12,
+      "outputTokens": 11518,
+      "cacheReadInputTokens": 79287,
+      "cacheCreationInputTokens": 27233,
+      "webSearchRequests": 0,
+      "costUSD": 0.44927039999999996,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 4786,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 1,
+    "requested": {
+      "background": 0,
+      "foreground": 1,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 1,
+    "spawned_by_subagents": 0,
+    "completed": 1,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {
+      "general-purpose": 1
+    }
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 16,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# splitlane\n\nsplitlane splits a large CSV file into smaller files, called chunks, each with a fixed number of rows. Every chunk starts with a copy of the input's header row, so you can load each chunk on its own.\n\nsplitlane handles quoted fields the way RFC 4180 and spreadsheets do: a line break inside a quoted field stays part of that field. For example, if a CRM export has a `notes` column with line breaks in it, each customer still comes out as one row instead of two broken ones.\n\nsplitlane is a small Python command-line tool that uses only the standard library. It reads the input once, row by row, so a bigger file doesn't use more memory. It finds where each row ends but doesn't parse the fields. Each row is copied unchanged, with its original delimiter and line ending.\n\n## Status\n\nThe code on `main` is version 0.4.0, which hasn't been released yet. Before you rely on it, read [Known issues](#known-issues), especially if you're on Windows.\n\nThe repository has no packaging metadata yet, so `pip install` won't work. Run splitlane from a checkout instead. The repository also doesn't include a license file yet.\n\n## Running it\n\nFrom the root of a checkout:\n\n```bash\nPYTHONPATH=src python3 -m splitlane.cli data/export.csv --rows 50000 --out chunks\n```\n\nIn PowerShell:\n\n```powershell\n$env:PYTHONPATH = \"src\"; python -m splitlane.cli data/export.csv --rows 50000 --out chunks\n```\n\nThis writes `chunks/part-0001.csv`, `chunks/part-0002.csv`, and so on. Each chunk holds up to 50,000 data rows plus the header, and the last chunk holds whatever rows are left. If the input has no data rows, splitlane writes no chunks.\n\n| Option | Meaning | Default |\n| --- | --- | --- |\n| `--rows N` | Data rows per chunk, not counting the header. Must be at least 1. | `100000` |\n| `--out DIR` | Output directory. splitlane creates it if it's missing. | `out` |\n| `--max-row-bytes N` | The longest row splitlane keeps whole. See [Rows that are too long](#rows-that-are-too-long). | `65536` |\n| `--encoding NAME` | Encoding of the input file, such as `latin-1` or `cp1252`. | `utf-8` |\n\nChunks are always written as UTF-8, whatever the input encoding is. If the input starts with a byte-order mark, as Excel's \"CSV UTF-8\" exports do, the default `utf-8` copies the mark into the header of every chunk. To drop it, use `--encoding utf-8-sig`.\n\nChunk numbers are padded to four digits. After `part-9999.csv`, a run continues with `part-10000.csv`, and that name sorts before `part-9999.csv`. If you need the name order to match the row order, raise `--rows` so the run stays under 10,000 chunks.\n\n## Output directory\n\nsplitlane doesn't clear the output directory before a run. It overwrites chunks that have the same name and leaves every other file alone. If an earlier run wrote 12 chunks and the new one writes 8, chunks 9 to 12 from the earlier run are still there. Use an empty or new directory for each run.\n\n## Messages and exit codes\n\nsplitlane prints all its messages to stderr and nothing to stdout.\n\n| Exit status | Meaning |\n| --- | --- |\n| `0` | The run finished. Some rows may have been truncated. See [Rows that are too long](#rows-that-are-too-long). |\n| `1` | An unexpected error, such as a missing input file. Python prints a traceback. |\n| `2` | Bad arguments, such as `--rows 0`. |\n| `3` | The input couldn't be decoded with the given `--encoding`. |\n\nIf decoding fails, the chunks written before the bad byte stay in the output directory, and the last of them is incomplete. Don't use that output. Choose the right encoding and run again into an empty directory. For example, a file that the Unix `file` command reports as `ISO-8859 text` needs `--encoding latin-1`.\n\n## Rows that are too long\n\nA stray, unmatched `\"` can make a quote-aware reader treat the rest of the file as a single field. splitlane limits that damage with `--max-row-bytes`, which counts the row's size in UTF-8 bytes even when the input uses another encoding.\n\nWhen a row grows past the limit, splitlane cuts it off there. It discards the rest of the input up to the next line break and starts reading the next row after that break. The search for that line break ignores quotes. In rare cases, splitlane can therefore resume in the middle of a legitimate multi-line field, and the row after the cut one also comes out wrong.\n\nsplitlane still writes the cut row, so that row usually has the wrong number of columns. At the end of the run, splitlane reports how many rows it cut:\n\n```\nsplitlane: warning: 3 row(s) longer than 65536 bytes were truncated\n```\n\nThe exit status is still `0`. If the chunks feed another system, make your scripts check stderr for this line.\n\nIf your data has genuinely long rows, set `--max-row-bytes` higher than the longest one.\n\n## Known issues\n\n- **On Windows, a chunk that's open in another program stops the run partway** ([#57](../../issues/57)). Suppose a chunk from an earlier run is open, for example in Excel. When splitlane tries to overwrite it, splitlane crashes with `PermissionError`. The chunks before it have already been rewritten, and the error doesn't say which ones, so the directory ends up with a mix of new and old chunks. Close the files first, or write to a new directory.\n\n## Using it from Python\n\nThe splitting code is in `splitlane.split`:\n\n```python\nfrom splitlane.split import split_file\n\nwritten, truncated = split_file(\"data/export.csv\", 50000, \"chunks\",\n                                max_row_bytes=65536, encoding=\"utf-8\")\n```\n\n`written` is the list of chunk paths. `truncated` is the number of rows that were cut at `max_row_bytes`. If decoding fails, `split_file` raises `UnicodeDecodeError`. This module isn't a stable API yet, so pin a specific commit if you depend on it.\n\n## Changes from 0.3\n\n0.4.0 changes some behavior that your scripts may depend on:\n\n- Chunks are named `part-0001.csv` instead of `chunk_1.csv`. Update any scripts that look for the old names.\n- A line break inside a quoted field now stays in its field ([#42](../../issues/42)). In 0.3, such a line break split the record into two rows.\n- splitlane now counts and reports truncated rows. `--rows 0` exits with status 2, and a decoding error exits with status 3.\n\nThe full list is in [CHANGELOG.md](CHANGELOG.md).",
+  "ttft_ms": 1483,
+  "type": "result",
+  "duration_ms": 110236,
+  "uuid": "2e78cd71-0ad5-4f7e-9624-99852b57d38d",
+  "ttft_stream_ms": 736,
+  "time_to_request_ms": 91,
+  "first_content_frame_ms": 736,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 12,
+      "outputTokens": 11518,
+      "cacheReadInputTokens": 79287,
+      "cacheCreationInputTokens": 27233,
+      "webSearchRequests": 0,
+      "costUSD": 0.44927039999999996,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 4786,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

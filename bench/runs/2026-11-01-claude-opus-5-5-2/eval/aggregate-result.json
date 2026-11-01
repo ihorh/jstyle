@@ -1,0 +1,1671 @@
+{
+  "schemaVersion": 1,
+  "claudeVersion": "2.1.309",
+  "startedAt": "2026-11-01T13:13:12.245Z",
+  "durationSeconds": 551,
+  "costUsd": 10.6510696,
+  "partial": false,
+  "suite": {
+    "root": "<repo>",
+    "ablation": "with-without",
+    "modelOverride": "claude-opus-5-5",
+    "threshold": 1,
+    "concurrency": 4,
+    "plugins": [
+      {
+        "name": "jstyle",
+        "version": "0.1.0",
+        "path": "<repo>/plugins/jstyle"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "01-readme",
+      "dir": "bench/tasks/01-readme",
+      "source": "mixed",
+      "promptMarkdown": "You are working in the splitlane repository, the current directory. Write a new\n`README.md` for the project's public repository page. Its readers found the\nproject and are deciding whether to use it.\n\nOutput only the file's content.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 30,
+      "graders": [
+        {
+          "name": "skill-loaded",
+          "type": "tool_used",
+          "weight": 1,
+          "config": {
+            "tool": "Skill"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 14,
+            "costUsd": 0.2114934,
+            "judgeCostUsd": 0,
+            "durationSeconds": 38,
+            "startedAt": "2026-11-01T13:13:12.296Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-GR0a4a/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 15,
+            "costUsd": 0.4030188,
+            "judgeCostUsd": 0,
+            "durationSeconds": 83,
+            "startedAt": "2026-11-01T13:13:12.296Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-2v57TV/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 16,
+            "costUsd": 0.44927039999999996,
+            "judgeCostUsd": 0,
+            "durationSeconds": 111,
+            "startedAt": "2026-11-01T13:13:12.296Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-ZtRvAA/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ],
+        "without": [
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 12,
+            "costUsd": 0.1667596,
+            "judgeCostUsd": 0,
+            "durationSeconds": 31,
+            "startedAt": "2026-11-01T13:13:12.296Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-GdoDrQ/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 12,
+            "costUsd": 0.1964144,
+            "judgeCostUsd": 0,
+            "durationSeconds": 45,
+            "startedAt": "2026-11-01T13:13:43.316Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-6NvOd6/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 12,
+            "costUsd": 0.1734026,
+            "judgeCostUsd": 0,
+            "durationSeconds": 34,
+            "startedAt": "2026-11-01T13:13:50.756Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-9Z059J/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1,
+        "scoreWithout": 0,
+        "passRateWithout": 0,
+        "delta": 1
+      }
+    },
+    {
+      "name": "02-docstring",
+      "dir": "bench/tasks/02-docstring",
+      "source": "mixed",
+      "promptMarkdown": "You are working in the splitlane repository, the current directory. Write the\ndocstring for `read_row()` in `src/splitlane/split.py`. Its readers are\ndevelopers who call `read_row()` from their own code and won't read its body.\n\nOutput only the docstring.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 30,
+      "graders": [
+        {
+          "name": "skill-loaded",
+          "type": "tool_used",
+          "weight": 1,
+          "config": {
+            "tool": "Skill"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 4,
+            "costUsd": 0.11058880000000001,
+            "judgeCostUsd": 0,
+            "durationSeconds": 19,
+            "startedAt": "2026-11-01T13:14:24.385Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-tp3rP0/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 4,
+            "costUsd": 0.1121288,
+            "judgeCostUsd": 0,
+            "durationSeconds": 20,
+            "startedAt": "2026-11-01T13:14:27.891Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-J0OWHq/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 4,
+            "costUsd": 0.1041088,
+            "judgeCostUsd": 0,
+            "durationSeconds": 16,
+            "startedAt": "2026-11-01T13:14:35.537Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-jv9rmY/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ],
+        "without": [
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 2,
+            "costUsd": 0.0792944,
+            "judgeCostUsd": 0,
+            "durationSeconds": 17,
+            "startedAt": "2026-11-01T13:14:43.696Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-KZb7bE/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 2,
+            "costUsd": 0.075067,
+            "judgeCostUsd": 0,
+            "durationSeconds": 15,
+            "startedAt": "2026-11-01T13:14:47.408Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-Hg6pYb/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 2,
+            "costUsd": 0.08331440000000001,
+            "judgeCostUsd": 0,
+            "durationSeconds": 19,
+            "startedAt": "2026-11-01T13:14:51.178Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-rdmxM6/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1,
+        "scoreWithout": 0,
+        "passRateWithout": 0,
+        "delta": 1
+      }
+    },
+    {
+      "name": "03-email",
+      "dir": "bench/tasks/03-email",
+      "source": "mixed",
+      "promptMarkdown": "You are working in the splitlane repository, the current directory. Draft the\nemail devi sends Priya about the 0.4.0 release. Priya owns the decision, and\nshe isn't technical.\n\nOutput only the email.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 30,
+      "graders": [
+        {
+          "name": "skill-loaded",
+          "type": "tool_used",
+          "weight": 1,
+          "config": {
+            "tool": "Skill"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 14,
+            "costUsd": 0.22099619999999998,
+            "judgeCostUsd": 0,
+            "durationSeconds": 50,
+            "startedAt": "2026-11-01T13:15:01.031Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-fd5fQx/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 13,
+            "costUsd": 0.2718024,
+            "judgeCostUsd": 0,
+            "durationSeconds": 54,
+            "startedAt": "2026-11-01T13:15:01.955Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-77Rp1s/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 14,
+            "costUsd": 0.31167880000000003,
+            "judgeCostUsd": 0,
+            "durationSeconds": 71,
+            "startedAt": "2026-11-01T13:15:03.219Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-jrg5Ya/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ],
+        "without": [
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 12,
+            "costUsd": 0.16250199999999998,
+            "judgeCostUsd": 0,
+            "durationSeconds": 34,
+            "startedAt": "2026-11-01T13:15:10.079Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-Is7xBH/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 10,
+            "costUsd": 0.1300126,
+            "judgeCostUsd": 0,
+            "durationSeconds": 23,
+            "startedAt": "2026-11-01T13:15:43.984Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-cnZOvT/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 10,
+            "costUsd": 0.1335126,
+            "judgeCostUsd": 0,
+            "durationSeconds": 24,
+            "startedAt": "2026-11-01T13:15:51.130Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-NHiGsm/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1,
+        "scoreWithout": 0,
+        "passRateWithout": 0,
+        "delta": 1
+      }
+    },
+    {
+      "name": "04-pitch",
+      "dir": "bench/tasks/04-pitch",
+      "source": "mixed",
+      "promptMarkdown": "You are working in the splitlane repository, the current directory. Write the\ncomment tomasz posts on devi's `progress-bar` merge request, pitching the\nchange described in `notes/streaming-proposal.md`. devi wrote the branch.\n\nOutput only the comment.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 30,
+      "graders": [
+        {
+          "name": "skill-loaded",
+          "type": "tool_used",
+          "weight": 1,
+          "config": {
+            "tool": "Skill"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 8,
+            "costUsd": 0.1292636,
+            "judgeCostUsd": 0,
+            "durationSeconds": 18,
+            "startedAt": "2026-11-01T13:15:56.337Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-wG7tMI/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 7,
+            "costUsd": 0.1975694,
+            "judgeCostUsd": 0,
+            "durationSeconds": 37,
+            "startedAt": "2026-11-01T13:16:07.261Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-LbpzeQ/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 6,
+            "costUsd": 0.1241904,
+            "judgeCostUsd": 0,
+            "durationSeconds": 20,
+            "startedAt": "2026-11-01T13:16:13.971Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-STAiCE/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ],
+        "without": [
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 5,
+            "costUsd": 0.0865678,
+            "judgeCostUsd": 0,
+            "durationSeconds": 14,
+            "startedAt": "2026-11-01T13:16:14.114Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-4Pxuuh/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 7,
+            "costUsd": 0.10734999999999999,
+            "judgeCostUsd": 0,
+            "durationSeconds": 20,
+            "startedAt": "2026-11-01T13:16:15.108Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-a3WzYU/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 5,
+            "costUsd": 0.0835584,
+            "judgeCostUsd": 0,
+            "durationSeconds": 13,
+            "startedAt": "2026-11-01T13:16:28.379Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-GDVCjD/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1,
+        "scoreWithout": 0,
+        "passRateWithout": 0,
+        "delta": 1
+      }
+    },
+    {
+      "name": "05-failure-reply",
+      "dir": "bench/tasks/05-failure-reply",
+      "source": "mixed",
+      "promptMarkdown": "You are working in the splitlane repository, the current directory. A user\nopened an issue with the contents of `logs/run-failure.log` and the question\n\"What went wrong, and what do I do now?\" Write the maintainer's reply on the\nissue.\n\nOutput only the reply.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 30,
+      "graders": [
+        {
+          "name": "skill-loaded",
+          "type": "tool_used",
+          "weight": 1,
+          "config": {
+            "tool": "Skill"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 11,
+            "costUsd": 0.279344,
+            "judgeCostUsd": 0,
+            "durationSeconds": 63,
+            "startedAt": "2026-11-01T13:16:34.404Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-YHei2V/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 7,
+            "costUsd": 0.1112346,
+            "judgeCostUsd": 0,
+            "durationSeconds": 23,
+            "startedAt": "2026-11-01T13:16:35.328Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-kdRyUO/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 10,
+            "costUsd": 0.279717,
+            "judgeCostUsd": 0,
+            "durationSeconds": 61,
+            "startedAt": "2026-11-01T13:16:41.232Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-JjJlEf/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ],
+        "without": [
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 8,
+            "costUsd": 0.1155524,
+            "judgeCostUsd": 0,
+            "durationSeconds": 22,
+            "startedAt": "2026-11-01T13:16:44.680Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-aMugAE/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 9,
+            "costUsd": 0.1333316,
+            "judgeCostUsd": 0,
+            "durationSeconds": 26,
+            "startedAt": "2026-11-01T13:16:58.350Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-k4QiNi/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 9,
+            "costUsd": 0.1248378,
+            "judgeCostUsd": 0,
+            "durationSeconds": 24,
+            "startedAt": "2026-11-01T13:17:06.988Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-6QEfW8/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 0.6666666666666666,
+        "passRate": 0.6666666666666666,
+        "scoreWithout": 0,
+        "passRateWithout": 0,
+        "delta": 0.6666666666666666
+      }
+    },
+    {
+      "name": "06-decision-record",
+      "dir": "bench/tasks/06-decision-record",
+      "source": "mixed",
+      "promptMarkdown": "You are working in the splitlane repository, the current directory. Write\n`docs/decisions/0001-quoted-newlines.md`, the decision record for issue #42.\nIts readers are future contributors who won't read the issue thread.\n\nOutput only the file's content.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 30,
+      "graders": [
+        {
+          "name": "skill-loaded",
+          "type": "tool_used",
+          "weight": 1,
+          "config": {
+            "tool": "Skill"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 14,
+            "costUsd": 0.2099014,
+            "judgeCostUsd": 0,
+            "durationSeconds": 38,
+            "startedAt": "2026-11-01T13:17:24.296Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-4rpr8G/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 14,
+            "costUsd": 0.20074779999999998,
+            "judgeCostUsd": 0,
+            "durationSeconds": 36,
+            "startedAt": "2026-11-01T13:17:30.922Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-Eki5XY/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 11,
+            "costUsd": 0.1852298,
+            "judgeCostUsd": 0,
+            "durationSeconds": 36,
+            "startedAt": "2026-11-01T13:17:37.090Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-O8N4lF/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ],
+        "without": [
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 8,
+            "costUsd": 0.1351406,
+            "judgeCostUsd": 0,
+            "durationSeconds": 25,
+            "startedAt": "2026-11-01T13:17:42.186Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-2Nlulx/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 9,
+            "costUsd": 0.1542392,
+            "judgeCostUsd": 0,
+            "durationSeconds": 33,
+            "startedAt": "2026-11-01T13:18:02.698Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-WWIHEZ/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 9,
+            "costUsd": 0.136077,
+            "judgeCostUsd": 0,
+            "durationSeconds": 25,
+            "startedAt": "2026-11-01T13:18:06.593Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-kqaJCe/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1,
+        "scoreWithout": 0,
+        "passRateWithout": 0,
+        "delta": 1
+      }
+    },
+    {
+      "name": "07-release-notes",
+      "dir": "bench/tasks/07-release-notes",
+      "source": "mixed",
+      "promptMarkdown": "You are working in the splitlane repository, the current directory. Write the\n0.4.0 release notes for the project's releases page. Their readers are users\nupgrading from 0.3.1.\n\nOutput only the release notes.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 30,
+      "graders": [
+        {
+          "name": "skill-loaded",
+          "type": "tool_used",
+          "weight": 1,
+          "config": {
+            "tool": "Skill"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 14,
+            "costUsd": 0.23455900000000002,
+            "judgeCostUsd": 0,
+            "durationSeconds": 50,
+            "startedAt": "2026-11-01T13:18:07.332Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-eDzIa1/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 14,
+            "costUsd": 0.19695220000000002,
+            "judgeCostUsd": 0,
+            "durationSeconds": 34,
+            "startedAt": "2026-11-01T13:18:13.310Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-34plMT/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 15,
+            "costUsd": 0.3809234,
+            "judgeCostUsd": 0,
+            "durationSeconds": 85,
+            "startedAt": "2026-11-01T13:18:31.248Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-vAna8Q/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ],
+        "without": [
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 12,
+            "costUsd": 0.1663246,
+            "judgeCostUsd": 0,
+            "durationSeconds": 32,
+            "startedAt": "2026-11-01T13:18:35.403Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-NZOdX6/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 12,
+            "costUsd": 0.1736778,
+            "judgeCostUsd": 0,
+            "durationSeconds": 35,
+            "startedAt": "2026-11-01T13:18:46.833Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-u4hY38/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 12,
+            "costUsd": 0.1782066,
+            "judgeCostUsd": 0,
+            "durationSeconds": 40,
+            "startedAt": "2026-11-01T13:18:57.288Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-wnCV01/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1,
+        "scoreWithout": 0,
+        "passRateWithout": 0,
+        "delta": 1
+      }
+    },
+    {
+      "name": "08-readme-edit",
+      "dir": "bench/tasks/08-readme-edit",
+      "source": "mixed",
+      "promptMarkdown": "You are working in the splitlane repository, the current directory. Update\n`README.md` so that users learn how long rows are handled before they run into\nit. Change what the update needs, and leave the rest as it is.\n\nOutput only the full updated file.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 30,
+      "graders": [
+        {
+          "name": "skill-loaded",
+          "type": "tool_used",
+          "weight": 1,
+          "config": {
+            "tool": "Skill"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "costUsd": 0.184295,
+            "judgeCostUsd": 0,
+            "durationSeconds": 31,
+            "startedAt": "2026-11-01T13:19:07.279Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-3IWI7S/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 14,
+            "costUsd": 0.19960260000000002,
+            "judgeCostUsd": 0,
+            "durationSeconds": 36,
+            "startedAt": "2026-11-01T13:19:22.134Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-ai6agG/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 13,
+            "costUsd": 0.2828136,
+            "judgeCostUsd": 0,
+            "durationSeconds": 62,
+            "startedAt": "2026-11-01T13:19:37.079Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-fLHqZJ/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ],
+        "without": [
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 8,
+            "costUsd": 0.1264326,
+            "judgeCostUsd": 0,
+            "durationSeconds": 25,
+            "startedAt": "2026-11-01T13:19:38.410Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-FBD8u8/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 8,
+            "costUsd": 0.121398,
+            "judgeCostUsd": 0,
+            "durationSeconds": 21,
+            "startedAt": "2026-11-01T13:19:56.014Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-7Zqh3X/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 6,
+            "costUsd": 0.10708299999999998,
+            "judgeCostUsd": 0,
+            "durationSeconds": 23,
+            "startedAt": "2026-11-01T13:19:58.008Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-hCHrvS/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1,
+        "scoreWithout": 0,
+        "passRateWithout": 0,
+        "delta": 1
+      }
+    },
+    {
+      "name": "09-catch-up",
+      "dir": "bench/tasks/09-catch-up",
+      "source": "mixed",
+      "promptMarkdown": "You are working in the splitlane repository, the current directory. Sam has\njust joined the project and takes over tomasz's open follow-up on issue #42.\nWrite the message that catches Sam up. Sam hasn't read the thread.\n\nOutput only the message.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 30,
+      "graders": [
+        {
+          "name": "skill-loaded",
+          "type": "tool_used",
+          "weight": 1,
+          "config": {
+            "tool": "Skill"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "costUsd": 0.28868320000000003,
+            "judgeCostUsd": 0,
+            "durationSeconds": 63,
+            "startedAt": "2026-11-01T13:20:03.745Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-uBsD8v/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 10,
+            "costUsd": 0.1527154,
+            "judgeCostUsd": 0,
+            "durationSeconds": 27,
+            "startedAt": "2026-11-01T13:20:17.233Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-4pHouW/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 15,
+            "costUsd": 0.341387,
+            "judgeCostUsd": 0,
+            "durationSeconds": 80,
+            "startedAt": "2026-11-01T13:20:21.423Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-q3Xq1B/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ],
+        "without": [
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 7,
+            "costUsd": 0.11290599999999999,
+            "judgeCostUsd": 0,
+            "durationSeconds": 24,
+            "startedAt": "2026-11-01T13:20:38.693Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-XRxuxL/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 7,
+            "costUsd": 0.1098744,
+            "judgeCostUsd": 0,
+            "durationSeconds": 22,
+            "startedAt": "2026-11-01T13:20:44.270Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-BWpLLT/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 8,
+            "costUsd": 0.11962239999999999,
+            "judgeCostUsd": 0,
+            "durationSeconds": 25,
+            "startedAt": "2026-11-01T13:21:02.236Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-QYL9In/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1,
+        "scoreWithout": 0,
+        "passRateWithout": 0,
+        "delta": 1
+      }
+    },
+    {
+      "name": "10-agent-rules",
+      "dir": "bench/tasks/10-agent-rules",
+      "source": "mixed",
+      "promptMarkdown": "You are working in the splitlane repository, the current directory. Turn\n`docs/agent-rules-draft.md` into the `AGENTS.md` that coding agents load in\nevery session in this repository.\n\nOutput only the file's content.",
+      "runsPerCase": 3,
+      "timeoutSeconds": 900,
+      "maxTurns": 30,
+      "graders": [
+        {
+          "name": "skill-loaded",
+          "type": "tool_used",
+          "weight": 1,
+          "config": {
+            "tool": "Skill"
+          }
+        }
+      ],
+      "arms": {
+        "with": [
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 12,
+            "costUsd": 0.3054152,
+            "judgeCostUsd": 0,
+            "durationSeconds": 77,
+            "startedAt": "2026-11-01T13:21:06.271Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-ySlIdd/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 11,
+            "costUsd": 0.161658,
+            "judgeCostUsd": 0,
+            "durationSeconds": 29,
+            "startedAt": "2026-11-01T13:21:06.278Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-BV6POK/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 1,
+            "passed": true,
+            "turns": 11,
+            "costUsd": 0.17028880000000002,
+            "judgeCostUsd": 0,
+            "durationSeconds": 34,
+            "startedAt": "2026-11-01T13:21:27.347Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-xUO2am/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": true,
+                "weight": 1,
+                "explanation": "Skill called 1x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ],
+        "without": [
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 7,
+            "costUsd": 0.1073638,
+            "judgeCostUsd": 0,
+            "durationSeconds": 22,
+            "startedAt": "2026-11-01T13:21:35.452Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-xzEPPe/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 9,
+            "costUsd": 0.1368818,
+            "judgeCostUsd": 0,
+            "durationSeconds": 30,
+            "startedAt": "2026-11-01T13:21:41.226Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-JqxUIc/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          },
+          {
+            "score": 0,
+            "passed": false,
+            "turns": 7,
+            "costUsd": 0.1027864,
+            "judgeCostUsd": 0,
+            "durationSeconds": 17,
+            "startedAt": "2026-11-01T13:21:57.236Z",
+            "error": null,
+            "tracePath": "/private/tmp/e-wKf38W/out/trace.jsonl",
+            "skippedPaidGraders": false,
+            "graders": [
+              {
+                "name": "skill-loaded",
+                "passed": false,
+                "weight": 1,
+                "explanation": "Skill called 0x (expected 1..∞)",
+                "withOnly": false,
+                "scored": true
+              }
+            ]
+          }
+        ]
+      },
+      "aggregates": {
+        "score": 1,
+        "passRate": 1,
+        "scoreWithout": 0,
+        "passRateWithout": 0,
+        "delta": 1
+      }
+    }
+  ],
+  "aggregates": {
+    "casesTotal": 10,
+    "casesPassed": 9,
+    "overallScore": 0.9666666666666668,
+    "overallPassRate": 0.9666666666666668,
+    "meanDelta": 0.9666666666666668
+  }
+}

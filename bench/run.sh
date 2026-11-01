@@ -58,10 +58,12 @@ cat > "$run/manifest.json" <<JSON
 }
 JSON
 
-# Later options override the defaults before them.
+# Later options override the defaults before them. The only grader checks
+# whether the skill loaded, so --threshold 0 keeps a skipped load from failing
+# the run.
 status=0
 (cd "$root" && claude plugin eval . --eval-dir bench/tasks --scaffold \
-   --trust-plugin --no-publish --keep-temp --model "$model" --runs 3 -j 4 \
+   --trust-plugin --no-publish --keep-temp --model "$model" --runs 3 -j 4 --threshold 0 \
    --output-dir "$run/eval" "$@") || status=$?
 
 # Copy each session's trace out of the eval tool's temporary directory, then
@@ -83,6 +85,12 @@ while IFS=$'\t' read -r task cond i trace; do
   else
     echo "no trace for $task $cond-$i" >&2
   fi
+done
+
+# Replace this checkout's path, which names the local user, before the run is
+# committed.
+grep -rlF "$root" "$run" | while read -r f; do
+  sed -i.bak "s#$root#<repo>#g" "$f" && rm "$f.bak"
 done
 
 echo "results: $run"

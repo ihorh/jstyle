@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 39345,
+  "stop_reason": "end_turn",
+  "session_id": "c58e15db-f5cd-41b9-9226-2d15998eb62b",
+  "total_cost_usd": 0.1782066,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 12515,
+    "cache_read_input_tokens": 42473,
+    "output_tokens": 3478,
+    "output_tokens_details": {
+      "thinking_tokens": 1189
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 12515,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3478,
+      "cacheReadInputTokens": 42473,
+      "cacheCreationInputTokens": 12515,
+      "webSearchRequests": 0,
+      "costUSD": 0.1782066,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1189,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 12,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# splitlane 0.4.0\n\nThis release fixes how splitlane handles quoted fields that contain line breaks (#42). It also renames the output files, which **breaks scripts that look for the old names**. Read \"Before you upgrade\" first.\n\n## Before you upgrade\n\n### Output files have new names\n\nChunks used to be named `chunk_1.csv`, `chunk_2.csv`, and so on. They are now `part-0001.csv`, `part-0002.csv`, and so on.\n\n- Update any script, glob or pipeline step that matches `chunk_*.csv`.\n- The zero-padded numbers sort correctly by name, so `part-0010.csv` now comes after `part-0009.csv`.\n- splitlane does not delete old files. If you write into an `--out` directory left over from 0.3.1, the old `chunk_*.csv` files stay next to the new `part-*.csv` files. Start with an empty output directory, or clear out the old files.\n\n### Rows with line breaks inside quotes stay whole\n\nA quoted field that contains a line break, like a multi-line `notes` column, now stays in one row, as RFC 4180 specifies:\n\n```\nid,name,notes\n7,Ana,\"called twice\nasked for refund\"\n8,Bo,ok\n```\n\n0.3.1 read this as three data rows, two of them broken. 0.4.0 reads it as two. If your files contain such fields:\n\n- Row counts per chunk and the number of chunks can change.\n- Chunks now contain quoted line breaks. Make sure the tool that reads them handles quoted fields properly. Most CSV parsers and spreadsheets do.\n\n## What's new\n\n### Warning for truncated rows\n\nA row longer than `--max-row-bytes` (default 65536) is cut at that limit, and splitlane continues from the next line. At the end of the run, splitlane now tells you how many rows were cut:\n\n```\nsplitlane: warning: 3 row(s) longer than 65536 bytes were truncated\n```\n\n**The exit status is still 0 when rows are truncated.** If you can't afford to lose data, check stderr for this warning in your scripts.\n\nThis limit also protects you from malformed input. A stray, unmatched `\"` used to be able to turn the rest of the file into one field. Now the damage stops at `--max-row-bytes`. The lines after the stray quote, up to the limit, end up in a single truncated row, and they are counted in the warning.\n\nLibrary users: `read_row()` now returns a `(row, truncated)` pair, so you can detect truncated rows yourself.\n\n### Clear errors and exit codes\n\n- **`--rows 0`** (or any negative value) used to loop forever. It now exits with status **2** and the message `--rows must be at least 1`.\n- **Input that can't be decoded** now exits with status **3** and names the encoding that failed. For example, `cannot decode export.csv as utf-8: ...`. Try again with the right encoding, such as `--encoding latin-1` for ISO-8859 files.\n  - Any chunks written before the error stay in the output directory, and the last one may be incomplete. Delete them before you run again.\n\n## Known issues\n\n- **Windows: overwriting a chunk that's open in another program fails (#57).** If a chunk from an earlier run is open in Excel, for example, splitlane stops with a `PermissionError` when it tries to overwrite that file. The chunks before it have already been replaced, and the error doesn't say which ones, so the directory ends up with a mix of new and old chunks. Workaround: close the chunk files before you run splitlane, or write to a new, empty `--out` directory.\n- **Recovery after a truncated row can land inside a quoted field.** After cutting a row, splitlane continues at the next line break, even if that break is inside a quoted multi-line field. In rare cases, the rows right after a truncated row can be split wrongly. If the truncation warning appears, check the rows near the damaged one.\n\n## Full changelog\n\n- Fix: `--rows 0` now exits with status 2 and a message, instead of looping.\n- Fix: a quoted field containing a newline stays in one row (#42).\n- Fix: an unterminated quote no longer swallows the rest of the file. The row stops at `--max-row-bytes` and counts as truncated (#42).\n- Change: output files are named `part-0001.csv`, `part-0002.csv`, … instead of `chunk_1.csv`, `chunk_2.csv`, ….\n- Report the number of truncated rows at the end of a run.\n- Exit with status 3 when the input cannot be decoded.",
+  "ttft_ms": 2752,
+  "type": "result",
+  "duration_ms": 39472,
+  "uuid": "215a5c6c-15c5-4d79-83a7-986c04bd4709",
+  "ttft_stream_ms": 2530,
+  "time_to_request_ms": 39,
+  "first_content_frame_ms": 2531,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3478,
+      "cacheReadInputTokens": 42473,
+      "cacheCreationInputTokens": 12515,
+      "webSearchRequests": 0,
+      "costUSD": 0.1782066,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1189,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

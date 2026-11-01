@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 21262,
+  "stop_reason": "end_turn",
+  "session_id": "a4bd2442-1925-49ae-bdc8-6920868ae5b8",
+  "total_cost_usd": 0.1073638,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 8382,
+    "cache_read_input_tokens": 27119,
+    "output_tokens": 1743,
+    "output_tokens_details": {
+      "thinking_tokens": 484
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 8382,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1743,
+      "cacheReadInputTokens": 27119,
+      "cacheCreationInputTokens": 8382,
+      "webSearchRequests": 0,
+      "costUSD": 0.1073638,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 484,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 7,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# AGENTS.md\n\nsplitlane splits a large CSV file into smaller chunk files. Each chunk gets the same header row. The code is in `src/splitlane/`: `cli.py` handles argument parsing and messages, and `split.py` holds `read_row()` and `split_file()`.\n\nThese rules exist because agents have broken things here before. In one \"cleanup\" PR an agent renamed the chunk files, and a user's pipeline broke. Another agent changed the `--max-row-bytes` default from 65536 to 1048576 to make a failing test pass. If a task seems to require breaking one of these rules, stop and ask a maintainer.\n\n## Output file names\n\n- Don't change output file names. Chunks are written as `<out>/part-0001.csv`, `<out>/part-0002.csv`, and so on (`split_file()` in `split.py`). Users' pipelines depend on these names.\n- Rename only when a maintainer explicitly asks, as with the 0.4.0 rename. When you do, update `README.md` and `CHANGELOG.md` in the same change.\n\n## CLI option defaults\n\n- Don't change the default value of any CLI option. The current defaults are `--rows` 100000, `--out` `out`, `--max-row-bytes` 65536 and `--encoding` `utf-8`.\n- The only exception is `--rows`, and only after a maintainer agrees.\n- A failing test is not a reason to change a default. Fix the code or the test. If you think a default is itself a bug, ask a maintainer instead of changing it.\n\n## Dependencies\n\n- Don't add third-party dependencies.\n- The Python standard library is always fine.\n- `pytest` is allowed, but only for tests. Never import it from `src/`.\n\n## Changelog\n\n- Add a line under `## Unreleased` in `CHANGELOG.md` for every change that affects behavior, including bug fixes. Follow the style of the existing entries, e.g. `- Fix: ...`.\n- You don't need a line for test-only changes, or for internal refactors that leave behavior unchanged. If a refactor changes behavior, it needs a line.\n\n## Output streams\n\n- Send every message to stderr (`print(..., file=sys.stderr)`). Never print to stdout.\n- The one planned exception is `--version`, which should print to stdout once it's added. It doesn't exist yet.\n\n## `read_row()` performance\n\n- Don't make `read_row()` in `split.py` slower. It already reads one character at a time, so don't add extra reads or expensive per-character work to its loop.",
+  "ttft_ms": 2703,
+  "type": "result",
+  "duration_ms": 21361,
+  "uuid": "d0902c27-7ae4-4972-a14f-3ada1d5a9c6e",
+  "ttft_stream_ms": 1982,
+  "time_to_request_ms": 59,
+  "first_content_frame_ms": 1982,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1743,
+      "cacheReadInputTokens": 27119,
+      "cacheCreationInputTokens": 8382,
+      "webSearchRequests": 0,
+      "costUSD": 0.1073638,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 484,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

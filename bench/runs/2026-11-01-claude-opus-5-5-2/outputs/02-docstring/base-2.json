@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 14193,
+  "stop_reason": "end_turn",
+  "session_id": "abb70e37-86b1-43ee-83d4-95d5aac4dd9b",
+  "total_cost_usd": 0.075067,
+  "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 5973,
+    "cache_read_input_tokens": 15935,
+    "output_tokens": 1204,
+    "output_tokens_details": {
+      "thinking_tokens": 485
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 5973,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1204,
+      "cacheReadInputTokens": 15935,
+      "cacheCreationInputTokens": 5973,
+      "webSearchRequests": 0,
+      "costUSD": 0.075067,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 485,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 2,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "```python\n\"\"\"Read one CSV record from a text stream, without its line terminator.\n\nReads character by character up to the next newline that is not inside\ndouble quotes, so a quoted field can contain newlines. The terminating\n\"\\n\" is consumed but not included. A \"\\r\" before it is kept, so CRLF\ninput leaves a trailing \"\\r\" on each row. Open files with ``newline=\"\"``\nso that quoted newlines and \"\\r\" reach this function unchanged.\n\nArgs:\n    stream: A text-mode file-like object whose ``read(1)`` returns a str\n        and returns \"\" at end of input. The stream is left positioned at\n        the start of the next record.\n    max_row_bytes: The maximum row size in bytes, measured by encoding the\n        row as UTF-8 whatever the stream's encoding is. Defaults to\n        ``DEFAULT_MAX_ROW_BYTES`` (65536).\n\nReturns:\n    A ``(row, truncated)`` tuple:\n\n    - ``(None, False)`` at end of input, when there are no characters left\n      to read. A blank line returns ``(\"\", False)``, not ``None``.\n    - ``(row, False)`` for a complete record. The last record is returned\n      even if it has no trailing newline or has an unclosed quote.\n    - ``(prefix, True)`` if the record exceeds ``max_row_bytes``. ``prefix``\n      is the longest leading part that fits within the limit, so it can end\n      partway through a field and leave a quote unclosed. The rest of the\n      record is discarded up to and including the next \"\\n\", whether or not\n      that newline is inside quotes. If the record had a quoted newline after\n      the cut, the text after that newline is returned by later calls as if\n      it were separate records.\n\nQuote tracking counts every '\"' character, so an escaped quote (\"\")\nworks correctly. The function does not parse fields. Use\n``count_columns()`` or the ``csv`` module to split the returned row.\n\"\"\"\n```",
+  "ttft_ms": 1959,
+  "type": "result",
+  "duration_ms": 14255,
+  "uuid": "784bf937-da70-40a8-90cf-2ddc50bd4cc4",
+  "ttft_stream_ms": 1559,
+  "time_to_request_ms": 36,
+  "first_content_frame_ms": 1559,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1204,
+      "cacheReadInputTokens": 15935,
+      "cacheCreationInputTokens": 5973,
+      "webSearchRequests": 0,
+      "costUSD": 0.075067,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 485,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

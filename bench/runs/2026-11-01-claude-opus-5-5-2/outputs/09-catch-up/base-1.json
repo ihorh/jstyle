@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 22883,
+  "stop_reason": "end_turn",
+  "session_id": "cc8549c5-f032-4a8c-bfd4-d0f94e425b05",
+  "total_cost_usd": 0.11290599999999999,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 8880,
+    "cache_read_input_tokens": 40070,
+    "output_tokens": 1691,
+    "output_tokens_details": {
+      "thinking_tokens": 341
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 8880,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1691,
+      "cacheReadInputTokens": 40070,
+      "cacheCreationInputTokens": 8880,
+      "webSearchRequests": 0,
+      "costUSD": 0.11290599999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 341,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 7,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Hi Sam, here's where #42 stands and what the follow-up you're picking up from tomasz involves.\n\n**The original bug.** Maya reported that splitlane split CRM exports wrongly. When a quoted field contained a line break (like a multi-line `notes` column), `read_row()` ended the row at that line break. One record became two broken rows, and the importer downstream rejected the whole chunk. Two teams are blocked on this: billing and support analytics.\n\n**Why it was built that way.** In 0.1, devi chose to ignore quotes on purpose. If the reader tracks quotes, one stray `\"` can make it treat the rest of the file as a single field. When devi tried plain quote tracking on a branch, that's exactly what happened: one stray quote in row 12 of 400k rows turned everything after it into one enormous row.\n\n**What got merged (2026-10-02).** Quote tracking is in, but `--max-row-bytes` (default 64 KiB) limits how far it can go:\n- A newline inside quotes stays in the field.\n- If a row grows past the limit, it's cut at the limit and counted as truncated. The reader then skips ahead to the next newline and carries on.\n- The CLI prints the truncated-row count at the end of each run, and `read_row()` returns a flag for library callers. Maya's scripts check that CLI message, so that count is how her teams find out data was lost.\n\nThe fix is in the Unreleased (0.4.0) section of `CHANGELOG.md`, but 0.4.0 hasn't shipped yet. It's blocked on #57, a Windows-only bug, and Priya decides whether to ship now or wait (see `notes/release-status.md`). Your follow-up doesn't block the release.\n\n**Your follow-up.** After a truncation, the skip goes to the next newline *even if that newline is inside quotes* (`src/splitlane/split.py:24-29`). So if the truncation happens near a real multi-line field, the reader can pick up again in the middle of that field. tomasz thought this was probably rare and not blocking.\n\nFrom reading the code, I think a bad resync costs more than one row, though I haven't tested this:\n- The skip loop doesn't track quotes. After a mid-field resync, the reader's sense of what's inside quotes is reversed, so it can misread the rows that follow, or run into the byte limit again.\n- The rows produced after a resync aren't flagged. Only the cut row is counted. That means the truncated count, which Maya's teams depend on, can understate the damage.\n\nA good first step would be a test file with a stray quote just before a real multi-line note, to confirm or rule this out.\n\nBackground reading: `issues/42-quoting.md` has the full thread, and `notes/release-status.md` covers the release situation.",
+  "ttft_ms": 2163,
+  "type": "result",
+  "duration_ms": 22991,
+  "uuid": "3129702c-f8db-42ec-9f13-96d210b58937",
+  "ttft_stream_ms": 1915,
+  "time_to_request_ms": 43,
+  "first_content_frame_ms": 1917,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1691,
+      "cacheReadInputTokens": 40070,
+      "cacheCreationInputTokens": 8880,
+      "webSearchRequests": 0,
+      "costUSD": 0.11290599999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 341,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 28622,
+  "stop_reason": "end_turn",
+  "session_id": "2b9301a7-160a-4b63-8eaa-ea2844a008e8",
+  "total_cost_usd": 0.161658,
+  "usage": {
+    "input_tokens": 10,
+    "cache_creation_input_tokens": 12946,
+    "cache_read_input_tokens": 62550,
+    "output_tokens": 2277,
+    "output_tokens_details": {
+      "thinking_tokens": 850
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 12946,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 2277,
+      "cacheReadInputTokens": 62550,
+      "cacheCreationInputTokens": 12946,
+      "webSearchRequests": 0,
+      "costUSD": 0.161658,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 850,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 11,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# Rules for coding agents in splitlane\n\nThese rules exist because agents have broken things here before. One agent renamed the chunk files during a \"cleanup\" PR, and that broke a user's pipeline. Another changed the `--max-row-bytes` default from 65536 to 1048576 to make a failing test pass. Users rely on the CLI's names, defaults, and output streams, so treat all of them as public interface.\n\n## Output file names\n\nDon't change the names of the files splitlane writes. Right now these are `part-0001.csv`, `part-0002.csv`, and so on, inside the `--out` directory. They are set in `split_file()` in `src/splitlane/split.py`.\n\nA maintainer may ask you to rename them, as happened with the zero-padded scheme in 0.4.0. If so, update the example in `README.md` and add a line to `CHANGELOG.md` in the same change.\n\n## CLI option defaults\n\nDon't change the default value of any CLI option. The defaults are defined in `src/splitlane/cli.py` and listed in `README.md`. There are two exceptions:\n\n- You may change the `--rows` default, but only after a maintainer agrees to it.\n- A bug fix may change a default. A failing test doesn't make a default a bug. In that case, fix the code or the test.\n\nIf you do change a default, update `README.md` and the changelog.\n\n## Dependencies\n\nDon't add third-party dependencies. You can always use the Python standard library. You can use `pytest` in tests, but don't import it from the code under `src/`.\n\n## Changelog\n\nEvery change gets a line in the `Unreleased` section of `CHANGELOG.md`. Bug fixes start with `Fix:`. There are two exceptions:\n\n- An internal refactor that leaves behavior unchanged needs no line. A refactor that changes behavior does need one.\n- A change that touches only tests needs no line.\n\n## stdout and stderr\n\nDon't print anything to stdout. All messages go to stderr and start with `splitlane: `, as the messages in `src/splitlane/cli.py` already do.\n\nThe one planned exception is a `--version` option. It doesn't exist yet. When someone adds it, it will print the version to stdout.\n\n## Performance of `read_row()`\n\n`read_row()` in `src/splitlane/split.py` reads its input one character at a time. Don't make it any slower than it is now. Every row of every input goes through this function, so even a small cost per character adds up on large files.",
+  "ttft_ms": 3162,
+  "type": "result",
+  "duration_ms": 28776,
+  "uuid": "ea3afb97-7302-409d-a1d3-ed45a1329e6e",
+  "ttft_stream_ms": 1949,
+  "time_to_request_ms": 56,
+  "first_content_frame_ms": 1949,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 2277,
+      "cacheReadInputTokens": 62550,
+      "cacheCreationInputTokens": 12946,
+      "webSearchRequests": 0,
+      "costUSD": 0.161658,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 850,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

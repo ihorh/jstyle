@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 26527,
+  "stop_reason": "end_turn",
+  "session_id": "951d86ca-36ea-4e7d-a97c-5e81a169509c",
+  "total_cost_usd": 0.1527154,
+  "usage": {
+    "input_tokens": 10,
+    "cache_creation_input_tokens": 12713,
+    "cache_read_input_tokens": 64757,
+    "output_tokens": 1901,
+    "output_tokens_details": {
+      "thinking_tokens": 331
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 12713,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 1901,
+      "cacheReadInputTokens": 64757,
+      "cacheCreationInputTokens": 12713,
+      "webSearchRequests": 0,
+      "costUSD": 0.1527154,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 331,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 10,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Hi Sam, here's where tomasz's follow-up on #42 stands. The full thread is in `issues/42-quoting.md`, but you shouldn't need to read it to get started.\n\n**What #42 was about.** Maya's teams (billing and support analytics) split CRM exports whose `notes` column has line breaks inside quoted fields. RFC 4180 allows that. splitlane used to end a row at the first `\\n` regardless of quotes, so one record came out as two broken rows and their importer rejected the whole chunk. Devi had ignored quotes on purpose in 0.1. With quote tracking, one stray `\"` makes the reader treat the rest of the file as a single field. When she tried quote tracking, it did exactly that: a stray quote in row 12 of 400k rows turned everything after it into one row.\n\n**What got merged.** `read_row()` in `src/splitlane/split.py:8` now tracks quotes, so a newline inside quotes stays in the field. To keep a stray quote from swallowing the file, a row that grows past `--max-row-bytes` (default 64 KiB) gets cut at that limit and flagged as truncated. The reader then skips ahead to the next newline and carries on. The CLI prints how many rows were truncated at the end of the run (`cli.py:34`). Maya's scripts check for that warning, so don't change its wording without telling her.\n\n**The follow-up you're taking over.** tomasz pointed out that the skip after a truncation (`split.py:24-28`) stops at the next `\\n` even when that newline is inside quotes. The skip also doesn't track quotes, so after it the reader can come back in sync partway through a real multi-line field. tomasz thought this was probably rare and said it doesn't block anything.\n\nI worked out the next part from the code; it isn't in the thread. If the resync lands inside a quoted field, the rest of that field gets read as the start of a new row. Its quote then flips `in_quotes` the wrong way. That gives you misaligned rows with the wrong column count, which is the original #42 symptom, or another runaway row that gets truncated in turn. The truncation count only covers the rows that were cut, so those misaligned rows don't show up in the warning. A test that puts a stray quote just before a multi-line note would show which of the two happens.\n\n**Timing.** The #42 fix is in the Unreleased section for 0.4.0 and isn't released yet. According to devi's notes from Oct 28 (`notes/release-status.md`), the release is blocked on #57, a Windows-only crash, and Priya decides whether to ship. Your follow-up isn't part of that decision. It's fine to take it on after 0.4.0.",
+  "ttft_ms": 2387,
+  "type": "result",
+  "duration_ms": 26684,
+  "uuid": "713a2a00-7167-40eb-80b9-91f1f956ec7d",
+  "ttft_stream_ms": 2051,
+  "time_to_request_ms": 39,
+  "first_content_frame_ms": 2052,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 10,
+      "outputTokens": 1901,
+      "cacheReadInputTokens": 64757,
+      "cacheCreationInputTokens": 12713,
+      "webSearchRequests": 0,
+      "costUSD": 0.1527154,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 331,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

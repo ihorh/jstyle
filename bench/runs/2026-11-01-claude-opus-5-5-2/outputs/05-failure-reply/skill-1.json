@@ -1,0 +1,105 @@
+{
+  "duration_api_ms": 62185,
+  "stop_reason": "end_turn",
+  "session_id": "20c06592-5415-4c6b-b052-f2eed06d2738",
+  "total_cost_usd": 0.279344,
+  "usage": {
+    "input_tokens": 10,
+    "cache_creation_input_tokens": 16066,
+    "cache_read_input_tokens": 62552,
+    "output_tokens": 4328,
+    "output_tokens_details": {
+      "thinking_tokens": 2050
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 16066,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 12,
+      "outputTokens": 5906,
+      "cacheReadInputTokens": 68465,
+      "cacheCreationInputTokens": 19857,
+      "webSearchRequests": 0,
+      "costUSD": 0.279344,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2826,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 1,
+    "requested": {
+      "background": 0,
+      "foreground": 1,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 1,
+    "spawned_by_subagents": 0,
+    "completed": 1,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {
+      "general-purpose": 1
+    }
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 11,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Your export isn't UTF-8, and splitlane reads its input as UTF-8 unless you tell it otherwise. `file` says the CSV is ISO-8859 text. That's a family of encodings, but the most likely member is Latin-1 (ISO-8859-1). In Latin-1 the byte in the error, 0xe9, is `é`, so a name or city in the file has an accent. Exit status 3 is splitlane's code for \"couldn't decode the input.\"\n\nClear the output directory and run again with the encoding set:\n\n```bash\nrm -rf chunks\nsplitlane exports/customers-2026-10.csv --rows 20000 --out chunks --encoding latin-1\n```\n\nSplitlane creates `chunks/` again if it's missing. The `chunks/part-0001.csv` left over from the failed run holds only the rows splitlane got through before the error, so don't use it. The new run would overwrite that file anyway. Clearing the directory first just means every file in it comes from the run that worked.\n\nA successful run ends with `splitlane: wrote N chunk(s) to chunks/` and exits with status 0. Splitlane always writes chunks as UTF-8, whatever the input encoding, and it has no option to change that. If the tool that reads the chunks next expects Latin-1, set it to read UTF-8 instead.\n\nIt's worth spending a minute on one check. Latin-1 maps every possible byte to some character. If the file is really in another encoding, the run won't fail. It will finish and quietly write some characters wrong. Open a chunk in a text editor that reads UTF-8 (not Excel, which can make correct UTF-8 look broken) and find a row with an accented name.\n\n- If `é` and other accented letters look right, and nothing else looks strange, you're done.\n- If accented letters look right but curly quotes, dashes or `€` show up as other symbols, the export is probably Windows-1252. Excel and many Windows tools write that encoding, and the CRLF line endings that `file` reported point to a Windows origin. In that case, clear `chunks` again and run with `--encoding cp1252`.\n\n`--encoding` accepts any encoding name Python understands, so `latin1`, `iso-8859-1` and `windows-1252` work too.",
+  "ttft_ms": 1897,
+  "type": "result",
+  "duration_ms": 62381,
+  "uuid": "9aa8278a-731a-4700-9976-deaeaa98a0fc",
+  "ttft_stream_ms": 1356,
+  "time_to_request_ms": 35,
+  "first_content_frame_ms": 1357,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 12,
+      "outputTokens": 5906,
+      "cacheReadInputTokens": 68465,
+      "cacheCreationInputTokens": 19857,
+      "webSearchRequests": 0,
+      "costUSD": 0.279344,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2826,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

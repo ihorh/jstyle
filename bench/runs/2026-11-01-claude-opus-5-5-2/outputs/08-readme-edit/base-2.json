@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 20811,
+  "stop_reason": "end_turn",
+  "session_id": "ce2ff43e-09ec-47de-98bd-a6405e6f1dbb",
+  "total_cost_usd": 0.121398,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 10152,
+    "cache_read_input_tokens": 40250,
+    "output_tokens": 1605,
+    "output_tokens_details": {
+      "thinking_tokens": 408
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 10152,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1605,
+      "cacheReadInputTokens": 40250,
+      "cacheCreationInputTokens": 10152,
+      "webSearchRequests": 0,
+      "costUSD": 0.121398,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 408,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 8,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# splitlane\n\nSplit a large CSV file into smaller files with the same header.\n\n## Install\n\nFrom a checkout:\n\n```bash\npip install .\n```\n\n## Usage\n\n```bash\nsplitlane data/export.csv --rows 50000 --out chunks\n```\n\nThis writes `chunks/part-0001.csv`, `chunks/part-0002.csv`, and so on. Each\nchunk starts with the input's header row.\n\nOptions:\n\n- `--rows N`: rows per chunk, not counting the header. Default 100000.\n- `--out DIR`: output directory, created if missing. Default `out`.\n- `--max-row-bytes N`: longest row kept whole. Default 65536. See\n  [Long rows](#long-rows) below.\n- `--encoding NAME`: input encoding. Default `utf-8`.\n\n## Long rows\n\nA quoted field can contain newlines, as RFC 4180 allows. The field stays in\none row. Each row is limited to `--max-row-bytes`, measured in UTF-8 bytes\nand not counting the newline at the end. The limit stops one stray `\"` from\nturning the rest of the file into a single field.\n\nWhen a row goes over the limit, splitlane:\n\n1. Keeps the first `--max-row-bytes` bytes of the row and writes them to the\n   chunk as a normal row. The rest of the row is dropped, so the written row\n   can have missing columns or an unclosed quote.\n2. Skips ahead to the next newline, even if that newline is inside quotes, and\n   starts reading the next row there. If the long row had a quoted multi-line\n   field, the lines after the cut can come out as extra, broken rows.\n3. Keeps going. At the end of the run it prints a warning to stderr:\n\n   ```\n   splitlane: warning: 3 row(s) longer than 65536 bytes were truncated\n   ```\n\nThe exit status is still 0 when rows are truncated. If your pipeline must not\nlose data, check stderr for this warning, or raise `--max-row-bytes` above\nyour longest legitimate row. The header row has the same limit, but a cut\nheader is not included in the warning count.",
+  "ttft_ms": 2795,
+  "type": "result",
+  "duration_ms": 20923,
+  "uuid": "eee1cb3c-3deb-431d-8514-cbf9e6c683f8",
+  "ttft_stream_ms": 2112,
+  "time_to_request_ms": 34,
+  "first_content_frame_ms": 2112,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1605,
+      "cacheReadInputTokens": 40250,
+      "cacheCreationInputTokens": 10152,
+      "webSearchRequests": 0,
+      "costUSD": 0.121398,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 408,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

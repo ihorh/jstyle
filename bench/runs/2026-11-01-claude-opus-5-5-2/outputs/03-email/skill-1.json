@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 49600,
+  "stop_reason": "end_turn",
+  "session_id": "12072e8a-2f30-422c-b716-c16416e14281",
+  "total_cost_usd": 0.22099619999999998,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 15803,
+    "cache_read_input_tokens": 47901,
+    "output_tokens": 4248,
+    "output_tokens_details": {
+      "thinking_tokens": 2535
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 15803,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 4248,
+      "cacheReadInputTokens": 47901,
+      "cacheCreationInputTokens": 15803,
+      "webSearchRequests": 0,
+      "costUSD": 0.22099619999999998,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2535,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 14,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "**Subject:** 0.4.0: ship now, or wait for a Windows fix?\n\nHi Priya,\n\n0.4.0 is ready apart from one problem. I need you to decide whether we ship it now or wait until that problem is fixed.\n\n**What 0.4.0 brings**\n\nThe main fix is for issue #42. Until now, when a customer's notes contained a line break, splitlane split that customer's record in two. Billing and support analytics are both waiting for this fix. The release also gives clearer error messages. Everything in it has been tested on Linux and macOS.\n\nThere's one change the teams should know about before they upgrade. The output files get new names: `chunk_1.csv` becomes `part-0001.csv`. Any script that looks for the old names will need updating.\n\n**The problem**\n\nOn Windows, splitlane crashes if someone has one of the files from an earlier run open in Excel when it tries to replace that file. By then it has already replaced the files before that one, and the error message doesn't say how far it got. The person ends up with a folder that mixes new files with old ones, and no easy way to tell which is which.\n\nThese points matter for the decision:\n\n- It only happens on Windows. Billing and support analytics both run on Linux, so this problem doesn't affect them.\n- The current version, 0.3.1, has the same problem. Holding 0.4.0 back doesn't protect Windows users. They would keep running 0.3.1, which has it too.\n- We don't know how many of our users are on Windows, because we don't collect that information.\n- Fixing it properly means changing how splitlane saves every file. It would write all the files to a temporary place first, then move them into the folder only once the run has finished. I haven't estimated how long that will take.\n\nThe same mix of old and new files can also happen on any system, in two other cases. If a run stops partway, for example because the input file isn't in the format splitlane expects, the files written so far stay in the folder. And if a new run produces fewer files than the last one, the leftover files from the last run stay behind. The fix above would cover these cases too.\n\n**The options**\n\n1. **Ship 0.4.0 now, with a warning for Windows users.** The warning would tell them to close the files in Excel before they run splitlane. Billing and support analytics get their fix right away. Windows users still have the problem they already have today, but now they're warned about it.\n2. **Hold 0.4.0 until the Windows fix is done.** Windows users get the fix and the new release together. Billing and support analytics keep waiting, for a length of time I can't estimate yet.\n\nIf it would help, I can estimate the fix before you decide. Just let me know which option you'd like.\n\nThanks,\ndevi",
+  "ttft_ms": 2402,
+  "type": "result",
+  "duration_ms": 49760,
+  "uuid": "b5de131e-7f38-4d5c-a7fd-3e57165fef11",
+  "ttft_stream_ms": 2025,
+  "time_to_request_ms": 39,
+  "first_content_frame_ms": 2027,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 4248,
+      "cacheReadInputTokens": 47901,
+      "cacheCreationInputTokens": 15803,
+      "webSearchRequests": 0,
+      "costUSD": 0.22099619999999998,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2535,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

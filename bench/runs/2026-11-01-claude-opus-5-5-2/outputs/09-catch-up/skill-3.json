@@ -1,0 +1,105 @@
+{
+  "duration_api_ms": 79277,
+  "stop_reason": "end_turn",
+  "session_id": "d5f2231c-58b3-4566-806c-6b59ad4eb3f2",
+  "total_cost_usd": 0.341387,
+  "usage": {
+    "input_tokens": 12,
+    "cache_creation_input_tokens": 20170,
+    "cache_read_input_tokens": 89142,
+    "output_tokens": 5738,
+    "output_tokens_details": {
+      "thinking_tokens": 2413
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 20170,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 14,
+      "outputTokens": 7054,
+      "cacheReadInputTokens": 95055,
+      "cacheCreationInputTokens": 24146,
+      "webSearchRequests": 0,
+      "costUSD": 0.341387,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2853,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 1,
+    "requested": {
+      "background": 0,
+      "foreground": 1,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 1,
+    "spawned_by_subagents": 0,
+    "completed": 1,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {
+      "general-purpose": 1
+    }
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 15,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "I've written the catch-up message for Sam, below. I read the #42 thread, `split.py`, the changelog and the release notes. I also had a fresh reader go over a draft as Sam would, then clarified the parts it got stuck on: what a truncated row keeps, who everyone is, and what's actually being asked.\n\nThe section on what could go wrong is my own reading of the code. Nobody in the thread said it and I haven't tested it, and the message tells Sam that.\n\n---\n\nHi Sam,\n\nHere's the background on the #42 follow-up you're taking over from tomasz. The full thread is in `issues/42-quoting.md`. For orientation: maya reported the bug for the teams that depend on splitlane, devi wrote the fix, and tomasz reviewed it.\n\n**What #42 was about.** maya reported that splitlane split one row into two when a quoted field contained a line break. CRM exports have these in their `notes` column. Two teams that use splitlane, billing and support analytics, are waiting on the fix. Before #42, `read_row()` ignored quotes on purpose. devi worried that tracking quotes would let one stray `\"` turn the rest of the file into a single field. When devi tried quote tracking on a test file with one stray quote, that is what happened.\n\nThe fix merged on 2026-10-02. It tracks quotes but puts a cap on how long a row can get. `read_row()` counts the row's size in UTF-8 bytes. If the row goes past `--max-row-bytes` (default 65536), it keeps what it has read so far, throws away everything up to the next newline, and returns the row flagged as truncated. At the end of a run, the CLI prints `splitlane: warning: N row(s) longer than 65536 bytes were truncated` to stderr. maya's teams check for that warning in their scripts. So a stray quote now damages one row instead of the rest of the file. The fix will ship in 0.4.0.\n\n**The follow-up.** In the last comment on #42, tomasz pointed out a gap: after truncation, the skip goes to the next newline even when that newline is inside quotes. The code is at `src/splitlane/split.py:23-29`. The skip loop stops at the first `\\n` it finds, and the next call to `read_row()` starts with `in_quotes = False`. So if the first newline after the 65536-byte mark sits inside a real multi-line field, the reader picks up again in the middle of that field. tomasz guessed this is rare and said it doesn't block anything. Nobody has defined the work beyond that comment, and the follow-up has no issue of its own because #42 is closed. I'd open one, write a test that reproduces it, and then decide on a fix with devi.\n\n**What I think could go wrong.** This is my reading of the code. It isn't from the thread, and I haven't tested it. Once the reader picks up mid-field, it takes that field's closing `\"` as an opening quote. From then on it treats real row breaks as newlines inside quotes, so it glues the following rows together until it reaches another `\"`. If that quote comes before the byte limit, the merged row gets written out without being counted as truncated, and the warning never mentions it. maya's teams rely on that warning, so this is the case I'd test first.\n\nA separate point: the truncated row itself goes into the chunk as it is, and it can end inside an open quote. The importer maya's teams use might misread it. I don't know how that importer handles an unclosed quote.\n\n**Before you change it.**\n- `read_row()` reads one character at a time. In `docs/agent-rules-draft.md`, devi asks that it not get any slower. That file is a draft, and as far as I can tell there's no benchmark.\n- 0.4.0 hasn't shipped. It's held up by #57, a crash that only happens on Windows. Priya owns the release and is deciding whether to ship anyway (`notes/release-status.md`). This follow-up isn't part of that decision.",
+  "ttft_ms": 2333,
+  "type": "result",
+  "duration_ms": 79495,
+  "uuid": "e3594e4e-05d0-48d7-b52d-14f7bfcab7d2",
+  "ttft_stream_ms": 1938,
+  "time_to_request_ms": 44,
+  "first_content_frame_ms": 1938,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 14,
+      "outputTokens": 7054,
+      "cacheReadInputTokens": 95055,
+      "cacheCreationInputTokens": 24146,
+      "webSearchRequests": 0,
+      "costUSD": 0.341387,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2853,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

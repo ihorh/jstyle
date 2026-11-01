@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 19998,
+  "stop_reason": "end_turn",
+  "session_id": "3dbc1fac-4822-4e12-a586-a6165a8fdba8",
+  "total_cost_usd": 0.1241904,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 10370,
+    "cache_read_input_tokens": 45192,
+    "output_tokens": 1608,
+    "output_tokens_details": {
+      "thinking_tokens": 878
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 10370,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1608,
+      "cacheReadInputTokens": 45192,
+      "cacheCreationInputTokens": 10370,
+      "webSearchRequests": 0,
+      "costUSD": 0.1241904,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 878,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 6,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Hi devi, before this merges I'd like to suggest a different way to show progress.\n\nRight now the branch counts every row before it starts splitting, so it can show a percentage. That means it reads the whole input twice. On our biggest exports, the counting pass alone takes a good while. I haven't timed it, so I can't give you a number yet.\n\nMy suggestion is to drop the pre-count and show rows processed and chunks written instead of a percentage. That way we only read the input once. `split_file()` already reads the input row by row, so the change would only touch this branch's CLI code.\n\nWe'd lose the percentage and the ETA, and I know that matters. You've said before that users ask for the bar, so I'm not trying to brush that aside.\n\nThere's also a middle ground. We could estimate the percentage by dividing bytes read by the file size, which also skips the pre-count. The problem is accuracy. Rows vary in length, so the estimate will be off on files with long notes. You've talked with the users who want the bar, so you're in a better position than I am to judge whether that's close enough for them.\n\nIf it would help us decide, I can time the counting pass on one of the big exports first. What do you think?",
+  "ttft_ms": 1592,
+  "type": "result",
+  "duration_ms": 20103,
+  "uuid": "4194bcf6-89e7-436e-bb9f-ecfb39eda149",
+  "ttft_stream_ms": 1208,
+  "time_to_request_ms": 34,
+  "first_content_frame_ms": 1208,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1608,
+      "cacheReadInputTokens": 45192,
+      "cacheCreationInputTokens": 10370,
+      "webSearchRequests": 0,
+      "costUSD": 0.1241904,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 878,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 21938,
+  "stop_reason": "end_turn",
+  "session_id": "7b6cba7f-49ca-4ab1-92bb-20b0e8981530",
+  "total_cost_usd": 0.1155524,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 8755,
+    "cache_read_input_tokens": 27042,
+    "output_tokens": 2004,
+    "output_tokens_details": {
+      "thinking_tokens": 765
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 8755,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 2004,
+      "cacheReadInputTokens": 27042,
+      "cacheCreationInputTokens": 8755,
+      "webSearchRequests": 0,
+      "costUSD": 0.1155524,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 765,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 8,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Thanks for including the full log, it made this easy to diagnose.\n\n**What went wrong**\n\nThe file isn't UTF-8, and splitlane reads input as UTF-8 unless you tell it otherwise. Your `file` output shows it: `ISO-8859 text, with CRLF line terminators`. That usually means it was exported from a Windows tool or from Excel. Byte `0xe9` is `é` in that encoding, so a name or city with an accent stopped the run. Exit status 3 means \"cannot decode the input.\"\n\nIgnore the \"position 4183\" in the message. It's counted within the block being read at that moment, not from the start of the file, so it won't lead you to the bad row.\n\n**Don't use `chunks/part-0001.csv`.** The run stopped partway through the first chunk. That file has 183 lines (the header plus about 182 rows) instead of the 20000 rows you asked for. It's leftover output from a failed run, not a finished chunk.\n\n**What to do now**\n\n1. Delete the partial output:\n   ```bash\n   rm -r chunks\n   ```\n2. Run it again with the right input encoding. For a Windows or Excel export, use `cp1252`:\n   ```bash\n   splitlane exports/customers-2026-10.csv --rows 20000 --out chunks --encoding cp1252\n   ```\n   If that also exits with status 3, use `--encoding latin-1`. It accepts every byte, so it can't fail to decode. The trade-off is that a few characters `cp1252` handles correctly, like `€` and curly quotes, come out wrong.\n3. Check that it finished. You should see `splitlane: wrote N chunk(s) to chunks/` and exit status 0. If that line is missing, the run didn't complete.\n\nSome things that might help:\n\n- The chunks are always written as **UTF-8**, whatever the input encoding was, so anything downstream should read them as UTF-8.\n- The CRLF line endings are fine. Rows split correctly, and the chunks keep the same line endings.\n- If you can change the export settings, choose \"CSV UTF-8\" at the source. Then you won't need `--encoding` at all.\n\nI'll leave this open for now. If the re-run fails or the accented names look wrong in the output, post the new output here and we'll take another look.",
+  "ttft_ms": 2146,
+  "type": "result",
+  "duration_ms": 22022,
+  "uuid": "c31b41b7-3bbf-4821-bc80-c3023d9575b6",
+  "ttft_stream_ms": 1475,
+  "time_to_request_ms": 34,
+  "first_content_frame_ms": 1475,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 2004,
+      "cacheReadInputTokens": 27042,
+      "cacheCreationInputTokens": 8755,
+      "webSearchRequests": 0,
+      "costUSD": 0.1155524,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 765,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

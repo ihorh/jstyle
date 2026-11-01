@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 35249,
+  "stop_reason": "end_turn",
+  "session_id": "cea77057-0cd4-4750-a739-5678402504a1",
+  "total_cost_usd": 0.20074779999999998,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 15752,
+    "cache_read_input_tokens": 48899,
+    "output_tokens": 3246,
+    "output_tokens_details": {
+      "thinking_tokens": 1067
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 15752,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3246,
+      "cacheReadInputTokens": 48899,
+      "cacheCreationInputTokens": 15752,
+      "webSearchRequests": 0,
+      "costUSD": 0.20074779999999998,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1067,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 14,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# 0001: Keep quoted newlines inside the row, and cap runaway rows at `--max-row-bytes`\n\n- **Status:** Accepted. Merged on 2026-10-02, ships in 0.4.0.\n- **Issue:** #42\n- **Discussed by:** maya (reported it for the billing and support analytics teams), devi, tomasz\n\n## Context\n\nRFC 4180 lets a quoted CSV field contain a line break. CRM exports use this for free-text columns such as `notes`:\n\n```\nid,name,notes\n7,Ana,\"called twice\nasked for refund\"\n8,Bo,ok\n```\n\nThis input has two data rows. Up to 0.3.x, `read_row()` ended a row at the first `\\n` and ignored quotes, so splitlane wrote three rows here. The second of those rows had the wrong number of columns, and the downstream importer rejected the whole chunk. This blocked two teams.\n\nIgnoring quotes was a deliberate choice in 0.1. If the reader tracks quotes, one stray `\"` makes it treat the rest of the file as a single field. That risk turned out to be real. devi's first implementation was given a 400k-row file with a stray quote in row 12. It read everything after row 12 as one field and wrote a chunk containing a header and one enormous row.\n\nSo both simple options fail on real input:\n\n- **Ignore quotes:** every legitimate multi-line field breaks.\n- **Track quotes with no limit:** one malformed quote swallows the rest of the file.\n\n## Decision\n\n`read_row()` tracks quotes, and a newline inside quotes stays in the field. The existing `--max-row-bytes` limit (default 65536) bounds how far one row can grow:\n\n1. When a row passes the limit, the reader stops and keeps what it has read so far as the row.\n2. It discards input up to the next newline, or to the end of input, and resumes reading from there.\n3. It reports the row as truncated.\n\nA legitimate multi-line note stays far below the limit. A stray quote reaches the limit, damages one row, and the reader recovers at the next line. One damaged row is a much smaller failure than a swallowed file.\n\nWe rejected detecting a stray quote by counting lines in a quoted field, because a legitimate notes field can span many lines.\n\n## Truncation is reported, not silent\n\nA truncated row is shorter than the original, and an importer won't notice that on its own. So truncation is always reported:\n\n- **Library:** `read_row()` returns `(row, truncated)`, and `split_file()` returns `(written_files, truncated_count)`.\n- **CLI:** at the end of a run, it prints this to stderr:\n\n  ```\n  splitlane: warning: N row(s) longer than MAX bytes were truncated\n  ```\n\nThe exit status stays 0 when rows were truncated. The teams that requested the fix check for this warning in their scripts, so treat its wording as an interface. If you change it, say so in the changelog.\n\n## Consequences\n\n- Quoted newlines from spreadsheets and CRM exports now survive splitting.\n- A malformed quote costs one row instead of the rest of the file. The CLI warning reports it, but the run still succeeds.\n- Any row longer than `--max-row-bytes` is truncated, whether or not a stray quote caused it. If your data has legitimately long rows, raise the limit.\n- The truncated row is still written to its chunk, cut off partway. It can therefore have too few columns or an unclosed quote. (This is my reading of `read_row()` in `src/splitlane/split.py`. The issue thread doesn't discuss it.)\n\n## Known limitation\n\nAfter truncating a row, the reader skips to the next newline even when that newline is inside quotes. If the skip lands in the middle of a real multi-line field, the reader resumes mid-field with its quote state reversed. That can damage the rows that follow until the reader resyncs. tomasz raised this on 2026-10-03 as a follow-up. It's probably rare, so it didn't block the release, and it has no issue of its own yet.",
+  "ttft_ms": 2572,
+  "type": "result",
+  "duration_ms": 35342,
+  "uuid": "6aeac9f8-423a-48aa-9a6b-eaad9ba91443",
+  "ttft_stream_ms": 1540,
+  "time_to_request_ms": 34,
+  "first_content_frame_ms": 1541,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 3246,
+      "cacheReadInputTokens": 48899,
+      "cacheCreationInputTokens": 15752,
+      "webSearchRequests": 0,
+      "costUSD": 0.20074779999999998,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1067,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

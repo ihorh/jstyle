@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 24913,
+  "stop_reason": "end_turn",
+  "session_id": "b76b432c-da0d-4519-aa0e-03f764822d1c",
+  "total_cost_usd": 0.1264326,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 10193,
+    "cache_read_input_tokens": 39783,
+    "output_tokens": 1845,
+    "output_tokens_details": {
+      "thinking_tokens": 442
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 10193,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1845,
+      "cacheReadInputTokens": 39783,
+      "cacheCreationInputTokens": 10193,
+      "webSearchRequests": 0,
+      "costUSD": 0.1264326,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 442,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 8,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "# README.md\n\n```markdown\n# splitlane\n\nSplit a large CSV file into smaller files with the same header.\n\n## Install\n\nFrom a checkout:\n\n```bash\npip install .\n```\n\n## Usage\n\n```bash\nsplitlane data/export.csv --rows 50000 --out chunks\n```\n\nThis writes `chunks/part-0001.csv`, `chunks/part-0002.csv`, and so on. Each\nchunk starts with the input's header row.\n\nOptions:\n\n- `--rows N`: rows per chunk, not counting the header. Default 100000.\n- `--out DIR`: output directory, created if missing. Default `out`.\n- `--max-row-bytes N`: longest row kept whole. Default 65536. See\n  [Long rows](#long-rows).\n- `--encoding NAME`: input encoding. Default `utf-8`.\n\n## Long rows\n\nA quoted field can contain newlines, and the row stays whole, as RFC 4180\nsays. Rows that run past `--max-row-bytes` are **truncated, not rejected**:\n\n- The row is cut at `--max-row-bytes`. The size is counted in UTF-8 bytes,\n  without the line ending. The cut row is still written to the chunk. The rest\n  of the row is dropped up to the next newline, even if that newline is inside\n  quotes.\n- A truncated row can be malformed CSV, for example with a missing closing\n  quote or too few columns. If the skip stops inside a multi-line field, the\n  lines after it can come out as extra broken rows.\n- A stray, unmatched `\"` makes the reader treat the following lines as one\n  field. That row reaches the limit and gets truncated, and reading continues\n  on the next line. You lose one row, not the rest of the file.\n- The run still exits with status 0. At the end, splitlane prints a warning to\n  stderr:\n\n  ```\n  splitlane: warning: 3 row(s) longer than 65536 bytes were truncated\n  ```\n\n  If your scripts need complete rows, check stderr for this warning.\n- If the header row is too long, it is truncated as well, but it is not\n  counted in the warning.\n\nIf your data has legitimately large rows, raise the limit, for example\n`--max-row-bytes 1048576`.\n```\n\nI based this on the code in `src/splitlane/split.py` and `cli.py`, not just the changelog. Some points to check:\n\n- **Header truncation:** a header longer than the limit is cut too, but it isn't counted in the warning. That looks like a gap in the code rather than a design choice. I documented it as the code works today, but you may want to fix the code instead.\n- **Extra broken rows:** the README now covers how the skip can stop in the middle of a multi-line field. This is the follow-up tomasz raised at the end of issue #42.",
+  "ttft_ms": 2623,
+  "type": "result",
+  "duration_ms": 25025,
+  "uuid": "d0376f1c-5531-4189-a739-b3bb8e02e713",
+  "ttft_stream_ms": 2411,
+  "time_to_request_ms": 39,
+  "first_content_frame_ms": 2411,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 1845,
+      "cacheReadInputTokens": 39783,
+      "cacheCreationInputTokens": 10193,
+      "webSearchRequests": 0,
+      "costUSD": 0.1264326,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 442,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

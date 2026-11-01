@@ -1,0 +1,105 @@
+{
+  "duration_api_ms": 36932,
+  "stop_reason": "end_turn",
+  "session_id": "8ae721d4-4b9b-4015-a907-3b3b90f4816b",
+  "total_cost_usd": 0.1975694,
+  "usage": {
+    "input_tokens": 10,
+    "cache_creation_input_tokens": 12688,
+    "cache_read_input_tokens": 61324,
+    "output_tokens": 2307,
+    "output_tokens_details": {
+      "thinking_tokens": 1054
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 12688,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 12,
+      "outputTokens": 3279,
+      "cacheReadInputTokens": 67237,
+      "cacheCreationInputTokens": 16086,
+      "webSearchRequests": 0,
+      "costUSD": 0.1975694,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1496,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 1,
+    "requested": {
+      "background": 0,
+      "foreground": 1,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 1,
+    "spawned_by_subagents": 0,
+    "completed": 1,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {
+      "general-purpose": 1
+    }
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 7,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Hi devi, before this merges I'd like to suggest a change to how the progress bar gets its numbers.\n\nRight now the branch counts every row in the input before it starts splitting, so it can show a percentage. That means splitlane reads the whole input twice. On our biggest exports the counting pass alone takes a while. I haven't timed it, so I don't have a number for you yet.\n\nMy suggestion is to drop the pre-count and show rows processed and chunks written as the split runs. Then the input is read only once. `split_file()` already reads row by row, so I think the change stays in the CLI code on this branch, though you know that code better than I do.\n\nThis does cost something: we'd lose the percentage and the ETA. You've said users ask for the bar, and I don't want to throw that away lightly.\n\nThere might be a middle ground. We could estimate the percentage by dividing bytes read by file size, which also needs no pre-count. The catch is that rows vary in length, so the estimate will be off on files with long notes. I don't know yet whether it would be accurate enough for what users want from the bar.\n\nWhat do you think? Would either of these work for you?",
+  "ttft_ms": 1722,
+  "type": "result",
+  "duration_ms": 37111,
+  "uuid": "53e1c4e1-8bd7-4806-89a6-5dfb5c83aa73",
+  "ttft_stream_ms": 1292,
+  "time_to_request_ms": 33,
+  "first_content_frame_ms": 1293,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 12,
+      "outputTokens": 3279,
+      "cacheReadInputTokens": 67237,
+      "cacheCreationInputTokens": 16086,
+      "webSearchRequests": 0,
+      "costUSD": 0.1975694,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1496,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

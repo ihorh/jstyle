@@ -1,0 +1,103 @@
+{
+  "duration_api_ms": 23565,
+  "stop_reason": "end_turn",
+  "session_id": "68149139-060d-45a7-931e-6cd1431e07cb",
+  "total_cost_usd": 0.1248378,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 9673,
+    "cache_read_input_tokens": 27049,
+    "output_tokens": 2101,
+    "output_tokens_details": {
+      "thinking_tokens": 888
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 9673,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 2101,
+      "cacheReadInputTokens": 27049,
+      "cacheCreationInputTokens": 9673,
+      "webSearchRequests": 0,
+      "costUSD": 0.1248378,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 888,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 9,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Thanks for including the full log. It shows what happened.\n\n**What went wrong**\n\nYour export isn't UTF-8. `file` reports it as `ISO-8859 text` (Latin-1), and splitlane reads input as UTF-8 unless you tell it otherwise. Byte `0xe9` is `é` in Latin-1, so the first name or city with an accent stopped the run. Exit status 3 means splitlane couldn't decode the input.\n\n**About `chunks/part-0001.csv`**\n\nsplitlane writes rows as it reads them. It doesn't clean up when it stops early, so the file it was writing stays on disk. `part-0001.csv` has the header plus the 182 rows before the bad byte, which is fewer than the 20000 you asked for. Don't use it. That's a rough edge on our side, and we should either remove the partial output or say clearly that it's incomplete.\n\n**What to do now**\n\n1. Delete the partial output:\n   ```bash\n   rm -r chunks\n   ```\n   Do this before every rerun. splitlane overwrites chunk files with the same name, but it doesn't remove leftovers from an earlier run.\n\n2. Run it again and tell splitlane the input encoding:\n   ```bash\n   splitlane exports/customers-2026-10.csv --rows 20000 --out chunks --encoding latin-1\n   ```\n   The chunks are always written as UTF-8, so `é` and other accented characters come out correctly in the output.\n\n3. Check the summary at the end. It should say `splitlane: wrote N chunk(s) to chunks/` and exit with status 0. If it also prints a warning about truncated rows, tell us here.\n\nIf the export came from Excel or another Windows tool and you see wrong characters where `€` or curly quotes should be, use `--encoding cp1252` instead. Going by your `file` output, `latin-1` is the right choice.\n\nYour CRLF line endings are fine. splitlane keeps them as they are in the output.",
+  "ttft_ms": 2148,
+  "type": "result",
+  "duration_ms": 23642,
+  "uuid": "77a650d9-9231-4c25-badf-2fecd812b43b",
+  "ttft_stream_ms": 1479,
+  "time_to_request_ms": 34,
+  "first_content_frame_ms": 1480,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 2101,
+      "cacheReadInputTokens": 27049,
+      "cacheCreationInputTokens": 9673,
+      "webSearchRequests": 0,
+      "costUSD": 0.1248378,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 888,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

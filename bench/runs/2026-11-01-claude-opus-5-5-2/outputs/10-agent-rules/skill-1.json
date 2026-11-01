@@ -1,0 +1,105 @@
+{
+  "duration_api_ms": 75914,
+  "stop_reason": "end_turn",
+  "session_id": "20b50ae7-f3d5-4882-b75b-8accf89e74f4",
+  "total_cost_usd": 0.3054152,
+  "usage": {
+    "input_tokens": 12,
+    "cache_creation_input_tokens": 16406,
+    "cache_read_input_tokens": 81843,
+    "output_tokens": 4554,
+    "output_tokens_details": {
+      "thinking_tokens": 1490
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 16406,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-opus-5-5": {
+      "inputTokens": 14,
+      "outputTokens": 6855,
+      "cacheReadInputTokens": 87756,
+      "cacheCreationInputTokens": 20298,
+      "webSearchRequests": 0,
+      "costUSD": 0.3054152,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2685,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 1,
+    "requested": {
+      "background": 0,
+      "foreground": 1,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 1,
+    "spawned_by_subagents": 0,
+    "completed": 1,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {
+      "general-purpose": 1
+    }
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 12,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "I wrote the file below from the draft, then checked it against the code and ran a cold read with a fresh agent. Some of the draft's rules were unclear or clashed with each other, so I made these choices. Please check them before you commit:\n\n- **Bug-fix exception for defaults (rule 2):** I dropped it. The `--max-row-bytes` incident was an agent treating a failing test as a reason to change a default. Now a default that looks wrong gets raised with a maintainer instead of changed.\n- **Changelog for refactors:** the draft says internal refactors need no changelog line. But `CHANGELOG.md` already has one (\"Internal: move column counting into `split.py`\"). I kept the draft's rule.\n- **`--help`:** I said it's fine for `--help` to print to stdout, because that's argparse's default. The draft doesn't mention it; this is my reading.\n- **Who counts as a maintainer:** the file doesn't name anyone, because the repo doesn't say who the maintainers are.\n\n```markdown\n# AGENTS.md\n\nThese rules exist because agents have broken things here before. One renamed\nthe chunk files in a \"cleanup\" PR and broke a user's pipeline. Another changed\nthe `--max-row-bytes` default from 65536 to 1048576 to make a failing test\npass. When a rule blocks the change you want to make, stop and ask a maintainer\nrather than looking for a way around it. If the person you're working with is a\nmaintainer, their request counts.\n\n## Output File Names\n\nsplitlane writes chunks as `part-0001.csv`, `part-0002.csv`, and so on, inside\nthe `--out` directory (`src/splitlane/split.py`). Users' scripts depend on\nthese names, so don't change them, including the padding width.\n\nA maintainer may ask for a rename, as one did for the zero-padded names in\n0.4.0. When a maintainer asks, update the Usage section of `README.md` and add\na line to `CHANGELOG.md` in the same change.\n\n## CLI Defaults\n\nDon't change the default of any CLI option. These are the defaults, as\ndocumented in `README.md`:\n\n- `--rows`: 100000, set in `src/splitlane/cli.py`\n- `--out`: `out`, set in `src/splitlane/cli.py`\n- `--max-row-bytes`: 65536, set as `DEFAULT_MAX_ROW_BYTES` in\n  `src/splitlane/split.py`\n- `--encoding`: `utf-8`, set in `src/splitlane/cli.py`\n\nThe one exception is `--rows`, whose default may change once a maintainer\nagrees to it. A failing test is never a reason to change a default, so fix the\ncode or the test instead. If you think a default is itself a bug, say so and\nleave the decision to a maintainer.\n\n## Dependencies\n\nDon't add third-party dependencies. Anything from the standard library is\nfine. `pytest` is allowed for tests only, so code under `src/` must never\nimport it.\n\n## Changelog\n\nAdd a line to the `Unreleased` section of `CHANGELOG.md` for every change a\nuser could notice, written in the style of the entries already there. Two\nkinds of change need no line:\n\n- a refactor that leaves behavior unchanged\n- a change that only touches tests\n\nA refactor that changes behavior, even slightly, does need a line.\n\n## Output Streams\n\nEvery message splitlane prints goes to stderr, never stdout, and starts with\n`splitlane: `, as in `src/splitlane/cli.py`. argparse's own `--help` output\ngoes to stdout, and that's fine.\n\n`--version` will be an exception once it exists, and it will print to stdout.\nIt doesn't exist yet, so don't add it unless someone asks for it.\n\n## `read_row()` Performance\n\n`read_row()` in `src/splitlane/split.py` reads its input one character at a\ntime, so its inner loop runs for every character of the input. Don't make it\nslower. Keep that loop as lean as it is now, and ask a maintainer before adding\nwork to it, even for a bug fix.\n```",
+  "ttft_ms": 3847,
+  "type": "result",
+  "duration_ms": 76133,
+  "uuid": "4e604b42-3656-4270-a023-ce5024fba601",
+  "ttft_stream_ms": 2193,
+  "time_to_request_ms": 37,
+  "first_content_frame_ms": 2194,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-opus-5-5": {
+      "inputTokens": 14,
+      "outputTokens": 6855,
+      "cacheReadInputTokens": 87756,
+      "cacheCreationInputTokens": 20298,
+      "webSearchRequests": 0,
+      "costUSD": 0.3054152,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2685,
+      "canonicalModel": "claude-opus-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}
