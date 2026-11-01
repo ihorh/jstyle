@@ -14,7 +14,7 @@ Rerun these whenever a run they depend on changes:
 
 1. Sonnet against Opus, both without the skill.
 2. Opus without the skill against Opus with it.
-3. Opus without the skill against Sonnet with it.
+3. Sonnet without the skill against Sonnet with it.
 
 ## Which Side Gets Which Sample
 
@@ -22,7 +22,9 @@ One side of each comparison is privileged: the stronger model, or the side
 with the skill. The other side is disadvantaged.
 
 - **The privileged side always shows sample 1.** Samples are independent
-  draws, so sample 1 is a typical one, and no judgment picks it.
+  draws, so sample 1 is a typical one, and no judgment picks it. When the
+  privileged side is the side with the skill and sample 1 didn't load it, show
+  the first sample that did. The report says so for that task.
 - **The disadvantaged side shows its best sample,** chosen by the writer for
   the passage below. The report names the sample used.
 
@@ -48,6 +50,21 @@ excerpt runs about 60 to 200 words. Cut whole sentences, and mark a gap with
 | 09 Catch-up | The passage that describes the follow-up Sam takes over |
 | 10 Agent rules | The rule about output file names |
 
+## What to Look For
+
+Every report opens with this list, as written, so a reader judges each pair by
+the same questions:
+
+- **Holds attention.** Read from the top. Where did you first stumble, and
+  how far in was it?
+- **Correct.** Does every claim come from the project's files, or does some
+  fact appear from nowhere?
+- **Understood.** Could the task's reader act on this without opening another
+  file or asking?
+- **Parsed in one pass.** Did any sentence send you back to reread it?
+
+The first three reports, from 2026-11-01, list only the last three items.
+
 ## Order and Labels
 
 Each task labels its two excerpts A and B. The order comes from a seeded draw,
@@ -72,7 +89,7 @@ collects all ten in one collapsed table.
 Metadata table: runs, model IDs, Claude Code version, inputs commit,
 skill commit, samples, the sample rule.
 
-What to look for: the three fronts, one line each.
+What to look for: the list under What to Look For, as written.
 
 ## 01 README
 One line: the task, its reader, the passage.
