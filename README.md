@@ -218,7 +218,7 @@ want a second opinion, compare the runs yourself, or ask your own agent to.
 |---|---|
 | Sonnet 5.5 vs Opus 5.5, both without the skill | [2026-11-01](bench/reports/2026-11-01-sonnet-vs-opus-baseline.md) |
 | Opus 5.5 without the skill vs with it | [2026-11-01](bench/reports/2026-11-01-opus-without-vs-with-skill.md) |
-| Opus 5.5 without the skill vs Sonnet 5.5 with it | not yet run |
+| Sonnet 5.5 without the skill vs with it | [2026-11-01](bench/reports/2026-11-01-sonnet-without-vs-with-skill.md) |
 
 ## Background
 
