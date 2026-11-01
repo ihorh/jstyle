@@ -44,6 +44,12 @@ same computer. [Install and manage
 plugins](https://code.claude.com/docs/en/discover-plugins) in the Claude Code
 docs covers the other ways to install, scopes, and uninstalling.
 
+Updates don't arrive on their own. Claude Code turns auto-update off by
+default for marketplaces outside Anthropic's own, and this one is outside. To
+turn it on, run `/plugin`, select `jstyle` on the **Marketplaces** tab, and
+choose **Enable auto-update**. To update once instead, run
+`claude plugin update jstyle@jstyle` from your shell.
+
 Adding the marketplace clones the whole repository, benchmark included, though
 only the plugin folder is copied into a session. For a smaller clone, add the
 marketplace from your shell first, then install the plugin from it:
