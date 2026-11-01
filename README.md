@@ -52,25 +52,6 @@ marketplace from your shell first, then install `jstyle@jstyle`:
 claude plugin marketplace add ihorh/jstyle --sparse .claude-plugin plugins
 ```
 
-## Turn It Off and On
-
-To compare writing with and without the skill, turn it off and on again
-without uninstalling:
-
-- **In a terminal session,** run `/plugin`, and on the **Installed** tab press
-  **Space** on `jstyle`.
-- **In VS Code,** type `/plugins` and use the toggle next to `jstyle`.
-- **In the desktop app,** click **+**, then **Plugins**, then **Manage
-  plugins**.
-
-In the terminal and in VS Code, a change applies to the open session without
-a restart. In a terminal session,
-when reloading the plugins would invalidate the prompt cache, Claude Code
-warns you and leaves the change pending. Run `/reload-plugins --force` to apply
-it anyway. A skill that already loaded stays in the conversation, so start a
-new session for a clean comparison. The docs page above lists the other ways
-to do this, including from your shell.
-
 ## Using It
 
 Call it before you ask for a draft:
@@ -96,6 +77,35 @@ Where skills aren't supported, such as a chat app, you can:
 The skill was written for Claude and other recent models.
 [docs/models.md](docs/models.md) says what that means for its contents.
 
+## Turn It Off and On
+
+To compare writing with and without the skill, turn it off and on again
+without uninstalling:
+
+- **In a terminal session,** run `/plugin`, and on the **Installed** tab press
+  **Space** on `jstyle`.
+- **In VS Code,** type `/plugins` and use the toggle next to `jstyle`.
+- **In the desktop app,** click **+**, then **Plugins**, then **Manage
+  plugins**.
+
+In the terminal and in VS Code, a change applies to the open session without
+a restart. In a terminal session,
+when reloading the plugins would invalidate the prompt cache, Claude Code
+warns you and leaves the change pending. Run `/reload-plugins --force` to apply
+it anyway. A skill that already loaded stays in the conversation, so start a
+new session for a clean comparison. The docs page above lists the other ways
+to do this, including from your shell.
+
+## Other Languages and Models
+
+We have tested the skill only in English, and only with Claude models in
+Claude Code. Its principles and its handling of facts don't depend on English,
+so it is likely to help in other languages too. The sentence traps are written
+for English, and the skill lets each language's own grammar decide their
+details. If you use it in another language, or with another model or agent,
+we'd like to hear how it changed the prose: [open an
+issue](https://github.com/ihorh/jstyle/issues).
+
 ## What It Asks For
 
 The skill puts correct facts and a clear idea ahead of brevity. It works on
@@ -109,6 +119,15 @@ four levels:
   keeps the small words that let the rest read in one pass.
 - **Sentence traps.** It watches for patterns known to make a reader stop and
   reparse, such as garden-path sentences, stacked negations, and hidden actors.
+
+## Punctuation and Case
+
+[rules/punctuation-and-case.md](rules/punctuation-and-case.md) is a separate
+file, not part of the plugin. It asks for the Oxford comma, Chicago title case
+in headings, and punctuation that takes the style of the text it belongs to.
+It gives way to any style the document or the project already uses. If you
+like these conventions, put the file in your rules folder, such as
+`~/.claude/rules/`, or paste it into a system prompt.
 
 ## Benchmark Reports
 
@@ -125,6 +144,30 @@ want a second opinion, compare the runs yourself, or ask your own agent to.
 | Sonnet 5.5 vs Opus 5.5, both without the skill | [2026-11-01](bench/reports/2026-11-01-sonnet-vs-opus-baseline.md) |
 | Opus 5.5 without the skill vs with it | not yet run |
 | Opus 5.5 without the skill vs Sonnet 5.5 with it | not yet run |
+
+## Background
+
+The skill grew out of personal writing rules that Ihor H. has used in his
+Claude Code sessions for over three months. In October 2026, Claude measured
+its own output under those rules: 784 chat replies and 63 documents from 50
+sessions. The habits Ihor suspected, such as dropping the word *that*,
+explained little. Two habits he hadn't suspected cost more: phrases with no
+verb, often after a colon, in 3 to 4 of every 100 replies, and clauses nested
+three deep, in about 2 of every 100 sentences. That finding is why the skill
+targets compression.
+
+The skill also draws on writing and reading research:
+
+- **Garden-path sentences** (Bever, 1970). Readers slow down on a sentence
+  such as *I'll confirm your files match*, where a missing *that* invites the
+  wrong first reading (Ferreira and Henderson, 1990; Trueswell, Tanenhaus, and
+  Kello, 1993).
+- **The curse of knowledge** (Pinker, *The Sense of Style*, 2014). A writer's
+  own context fills the gaps in their text, which is why the skill asks for a
+  cold read.
+- **Revision as reordering** (Sommers, 1980). Experienced writers treat each
+  addition as a change to the whole, which is why the skill rereads one level
+  up after an edit.
 
 ## Disclaimer
 
