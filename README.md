@@ -17,10 +17,10 @@
 
 <br>
 
-**[Readers stay with it.](#how-it-writes)** It makes the first lines
-count, and keeps each sentence readable in one pass.
+**[Readers stay with your text.](#how-it-writes)** The skill makes the first
+lines count, and keeps each sentence readable in one pass.
 
-**[A cold read before you get it.](#cold-reads)** A fresh reader, with none
+**[Cold reads find the gaps.](#cold-reads)** A fresh reader, with none
 of the agent's context, points out what the agent can't see in its own text.
 
 Agents write well now, so what goes wrong is small. A text opens with
