@@ -256,10 +256,10 @@ The benchmark's sessions are cold: each one started fresh and wrote a
 single text. There, at API list price, a session with the skill cost about
 1.8 times as much as one without it. In a normal working session we expect
 the difference to be much smaller. The skill's own text loads once, and in a
-long session it soon becomes a small share. The rest goes to the drafting itself, and
-sometimes to a cold read: a subagent that reads the draft fresh, the way
-your reader will. The agent may skip it. In the benchmark, Opus ran one in
-12 of 30 sessions, and Sonnet in 1.
+long session it soon becomes a small share. The rest goes to the drafting
+itself, and sometimes to a cold read: a subagent that reads the draft fresh,
+the way your reader will. The agent may skip it. In the benchmark, Opus ran
+one in 12 of 30 sessions, and Sonnet in 1.
 
 ## Background
 

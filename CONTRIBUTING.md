@@ -64,8 +64,8 @@ others in the same commit.
 - **The plugin description** is the same in `plugin.json` and in the plugin's
   entry in `marketplace.json`.
 - **The plugin's README** restates parts of the main README's Using It, How It
-  Writes, Cold Reads, Disclaimer, and License sections. Its License section covers
-  only the plugin folder.
+  Writes, Cold Reads, Disclaimer, and License sections. Its License section
+  covers only the plugin folder.
 
 ## Checking Prose
 

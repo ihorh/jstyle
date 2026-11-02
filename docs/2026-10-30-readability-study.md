@@ -19,9 +19,10 @@ grammar is fine and the facts check out, yet some sentences have to be read
 twice. Ihor is one of those readers.
 
 Ihor maintains a set of Claude Code writing rules, kept in a private
-repository. They load into every Claude Code session Ihor runs. Ihor still kept stumbling over sentences Claude wrote under
-them. Claude measured its own output to find out why. This document records
-what it found, and what came out of it.
+repository. They load into every Claude Code session Ihor runs. Ihor still
+kept stumbling over sentences Claude wrote under them. Claude measured its
+own output to find out why. This document records what it found, and what
+came out of it.
 
 ## Question and Short Answer
 
