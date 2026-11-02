@@ -115,7 +115,21 @@ claude plugin install jstyle@jstyle
 
 Ask for the text as usual. The agent loads the skill when it writes for
 someone outside the conversation, such as an email or a README, and leaves it
-off for chat replies. To load it yourself, run `/jstyle:write`.
+off for chat replies.
+
+To load it yourself, start your request with the command:
+
+```
+/jstyle:write [your writing prompt]
+```
+
+Some agents and tools see the skill only after it has run once. If yours
+doesn't pick it up, run the command on its own first. The skill then stays in
+the conversation:
+
+```
+/jstyle:write
+```
 
 Where skills aren't supported, such as a chat app, you can:
 
