@@ -36,7 +36,7 @@ The rules began with a frustration many people shared.
   (STE), the language of aircraft maintenance manuals.
 - Ihor answered with writing rules of his own, and a script to check the
   mechanical ones.
-- Two months later, Anthropic's launch of Opus 5.5 quoted that frustration
+- In late September, Anthropic's launch of Opus 5.5 quoted that frustration
   back.
 
 ### What People Reported
@@ -72,8 +72,8 @@ New models in late September made it hard to tell what the rules still did.
 
 On 30 October, Claude measured its own writing to find what was still off.
 
-- It took the 50 most recent sessions: 784 chat replies and 63 documents,
-  about 7,600 sentences.
+- It took the 50 most recent sessions, mostly written by Opus 5.5: 784 chat
+  replies and 63 documents, about 7,600 sentences.
 - It counted word patterns, ran a grammar parser over every sentence, and read
   samples by hand to check each count.
 - Ihor went in with two guesses about what was wrong.
@@ -90,14 +90,8 @@ Neither of Ihor's guesses explained much.
   came up only about once in 65 sentences. Half of those came after *says*,
   as in "the log says it failed", which seldom misleads anyone.
 - **Placing related words far apart,** in a way that is cheap for a model and
-  hard for a person. Claude's linked words sat 2.2 to 2.4 words apart, in chat
+  hard for a person. Claude's mean dependency distance was 2.2 to 2.4, in chat
   and in documents alike. Liu (2008) found about 2.5 for English in general.
-
-### Dependency Distance
-
-Linguists measure the second guess as dependency distance: the number of words
-between a word and the word it grammatically depends on, such as a verb and its
-subject. A text that packs related words far apart scores high.
 
 ## What the Study Found
 
@@ -107,15 +101,25 @@ What cost the reader sat in sentence structure, not in single words.
   reader has to parse the sentence twice. A later slide explains why.
 - **Telegraphic style,** which nobody had suspected: phrases with no verb,
   often after a colon. They turned up in 3 to 4 of every 100 replies.
-- **Center embedding,** which nobody suspected either: a clause inside a
-  clause inside a clause, which Miller and Chomsky (1963) already singled out
-  as hard to follow. It turned up in about 2 of every 100 sentences, and
-  Claude judged 4 in 10 of those hard to read.
+- **Deep nesting,** which nobody suspected either: a clause inside a clause
+  inside a clause. It turned up in about 2 of every 100 sentences. Its
+  hardest kind is center embedding.
 - **Context, not only wording.** Some verbless phrases had a clear idea but
   had dropped the context the reader needed, so no rewording could fix them.
-- The first three became sentence traps in the skill, and the last changed its
-  third principle.
 
+### Center Embedding
+
+A clause sits in the middle of another clause, so the reader holds the outer
+one open until the inner one ends.
+
+- **One level reads fine:** "The report the team wrote was late."
+- **Two levels break down:** "The rat the cat the dog chased killed ate the
+  malt." Three subjects wait for three verbs, which arrive in reverse order.
+- **Nesting to one side stays easy:** "the dog that chased the cat that killed
+  the rat" is just as deep, but each clause closes before the next one opens.
+
+Miller and Chomsky (1963) traced the difficulty to the clauses held open, not
+to the depth.
 
 ### Two Examples
 
@@ -138,9 +142,6 @@ reader to a wrong reading.
   Henderson, 1990; Trueswell, Tanenhaus, and Kello, 1993).
 - When the same sentence is said out loud, stress and pauses mark where the
   clause starts, so it misleads nobody.
-- The rules had tested a sentence by asking whether you would say it out loud.
-  A garden path passes that test, and a model can't hear anyway. The skill now
-  names the failure itself: a word that sends the reader back.
 
 ### The Horse Raced Past the Barn Fell
 
@@ -201,8 +202,8 @@ The fix is a second reader who knows nothing about the session.
 - On a draft of about 1,000 words, the writer judged about half the reader's
   flags worth fixing. Two of those were garden paths the writer had read
   straight past.
-- Since version 0.4.0 of jstyle, the cold reader runs on a model a tier below
-  the writer's, such as Sonnet when Opus writes. Our reasoning: a smaller model
+- Since jstyle 0.4.0, the cold reader runs on a model a tier below the
+  writer's, such as Sonnet when Opus writes. Our reasoning: a smaller model
   shares fewer of the writer's guesses, so it stalls where a hurried person
   would, and it costs less.
 
@@ -221,6 +222,18 @@ The last piece came from reading rather than measuring.
 - So after an edit the skill rereads one level up, the paragraph and then the
   section. It rewrites only where the point has shifted, and asks before a
   rewrite outgrows a paragraph.
+
+## Clarity on Every Level
+
+Taken together, these findings put clarity on several levels at once, and
+work on one level can't make up for a gap on another.
+
+- **The idea and its context:** what the text means to say, and what the
+  reader needs to follow it.
+- **The whole text:** what comes first, and whether each addition still fits.
+- **The paragraph:** where its point lands.
+- **The sentence:** traps that make the reader parse twice.
+- **The word:** the small words that carry the logic.
 
 ## Where the Skill Parts Ways With Popular Advice
 
@@ -258,7 +271,6 @@ writing rules Ihor had used and refined in private for three months.
 - One surprise: asked to draft an email from a set of notes, Opus had the sender
   report a finding the notes never contained, in 2 of 3 samples. That became the
   skill's instruction to mark your own inferences as yours.
-- Versions 0.1.0 to 0.4.0 came out over its first two days.
 - The reports are in [bench/reports/](../bench/reports/).
 
 ## What Is Still Untested
@@ -274,8 +286,9 @@ Some parts of the skill rest on less than a measurement.
 - **The best cold-read model.** The default rests on our reasoning, and on one
   side-by-side run of Opus and Sonnet on Ihor's rule files.
 - **The benchmark and the trials.** Ten tasks, three samples each, and the
-  maintainer making blind picks. That is enough to steer an opinionated skill
-  with one maintainer, but it is not a controlled study.
+  maintainer making blind picks between outputs with and without the skill. That
+  is enough to steer an opinionated skill with one maintainer, but it is not a
+  controlled study.
 
 ## Sources
 
