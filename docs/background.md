@@ -202,21 +202,9 @@ The fix is a second reader who knows nothing about the session.
   flags worth fixing. Two of those were garden paths the writer had read
   straight past.
 - Since version 0.4.0 of jstyle, the cold reader runs on a model a tier below
-  the writer's, such as Sonnet when Opus writes.
-
-### Opus and Sonnet as Readers
-
-On Ihor's rule files, Opus and Sonnet each caught misreadings the other
-missed, and a misreading both made was nearly always worth fixing. The smaller
-model shares fewer of the writer's guesses, so it stalls where a hurried
-person would, and it costs less.
-
-### What Readers Ask For
-
-The readers had a bias of their own. Asked about a principle, they want a
-threshold or an exact rule, even where the principle leaves room for judgment
-on purpose. So the skill treats each question as a sign of where the reader
-got lost, and leaves the writer to find the cause.
+  the writer's, such as Sonnet when Opus writes. Our reasoning: a smaller model
+  shares fewer of the writer's guesses, so it stalls where a hurried person
+  would, and it costs less.
 
 ## Documents That Grow
 
@@ -283,9 +271,8 @@ Some parts of the skill rest on less than a measurement.
   has tested whether it helps.
 - **The approach itself.** That fewer rules make a better agent is Ihor's
   experience across many sessions and models, not a measured result.
-- **The best cold-read model.** The trials compared Opus and Sonnet on one set
-  of files. The default rests on that, and on the reasoning that a smaller
-  reader stalls where a hurried person would.
+- **The best cold-read model.** The default rests on our reasoning, and on one
+  side-by-side run of Opus and Sonnet on Ihor's rule files.
 - **The benchmark and the trials.** Ten tasks, three samples each, and the
   maintainer making blind picks. That is enough to steer an opinionated skill
   with one maintainer, but it is not a controlled study.
