@@ -19,11 +19,11 @@
 
 <br>
 
-**[Readers stay with your text.](#how-it-writes)** The skill makes the first
-lines count, and keeps each sentence readable in one pass.
-
-**[Cold reads find the gaps.](#cold-reads)** A fresh reader, with none
-of the agent's context, points out what the agent can't see in its own text.
+> **[Readers stay with your text.](#how-it-writes)** The skill makes the first
+> lines count, and keeps each sentence readable in one pass.
+>
+> **[Cold reads find the gaps.](#cold-reads)** A fresh reader, with none
+> of the agent's context, points out what the agent can't see in its own text.
 
 Agents write well now, so what goes wrong is small. A text opens with
 background instead of what the reader came for. A sentence has to be read
@@ -36,9 +36,9 @@ few decide whether they stay. The skill aims to make those words count.
 Your reader stays with you instead of asking their agent for a summary, and
 more of what you write gets read.
 
-The skill is for text a **person** will read: documentation and manuals, code
-comments and docstrings, emails and conversations, many kinds of blog
-posts, and perhaps marketing copy.
+> The skill is for text that a **person** will read, such as documentation and
+> manuals, code comments and docstrings, emails and conversations, many kinds
+> of blog posts, and perhaps marketing copy.
 
 It isn't for text that answers to a rulebook before a reader, such as legal
 documents, government papers, or machinery specifications. It's also
