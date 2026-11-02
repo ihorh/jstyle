@@ -60,11 +60,31 @@ nearly 3,000 upvotes on Reddit. A blog post by Paddo collects these and other
 reports. Anthropic's Opus 5.5 launch page quoted a customer: "Verbose,
 hard-to-follow output has been my biggest frustration with frontier models".
 
+## Simplified English Was in the Air
+
+The same summer, an old answer to unclear writing came back into fashion.
+
+- People started asking Claude to write in ASD-STE100, or Simplified
+  Technical English (STE), the language of aircraft maintenance manuals.
+- In late July, it inspired the first writing rules, with a script to check
+  the rules a script can check.
+- We looked to STE and similar standards for ideas, but none fit out of the
+  box.
+
+### ASD-STE100 That Summer
+
+In late July, people started asking Claude to report in ASD-STE100, and within
+days GitHub held skills built on it (Golubić, 2026). The timing suggests the
+same frustration with Opus 5, though nobody measured that. Andrej Karpathy
+recommended the standard in October, which spread it much further.
+
 ## Sources
 
 - Anthropic (2026). Launch pages for [Claude Opus
   5](https://www.anthropic.com/news/claude-opus-5) (24 July), [Claude Opus
   5.5](https://www.anthropic.com/claude-opus-5-5) (22 September), and [Claude
   Sonnet 5.5](https://www.anthropic.com/claude-sonnet-5-5) (28 September).
+- Golubić, K. (2026, 2 October). [ASD-STE100: what it is and what it has to
+  do with LLMs](https://kgolubic.com/posts/asd-ste100-and-llms/).
 - Paddo (2026, 2 September). [A dial worth turning: Claude Opus 5's
   prose](https://paddo.dev/blog/a-dial-worth-turning/).
