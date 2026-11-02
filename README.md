@@ -77,12 +77,11 @@ confirm adding the marketplace, and choose a scope:
 /plugin install jstyle --marketplace ihorh/jstyle
 ```
 
-`/plugins` opens the same plugin manager in the VS Code extension, and the
-desktop app has an **Add plugins** button under **+** next to the prompt box.
-A plugin you install in one of the three is available in the others on the
-same computer. [Install and manage
-plugins](https://code.claude.com/docs/en/discover-plugins) in the Claude Code
-docs covers the other ways to install, scopes, and uninstalling.
+The VS Code extension and the desktop app have plugin menus too. Add the
+`ihorh/jstyle` marketplace there first, then install `jstyle`. A plugin you
+install in one is available in the others on the same computer. [Install
+and manage plugins](https://code.claude.com/docs/en/discover-plugins) in the
+Claude Code docs covers the other ways to install, scopes, and uninstalling.
 
 Updates don't arrive on their own. Claude Code turns auto-update off by
 default for marketplaces outside Anthropic's own, and this one is outside. To
@@ -144,8 +143,7 @@ without uninstalling:
 - **In a terminal session,** run `/plugin`, and on the **Installed** tab press
   **Space** on `jstyle`.
 - **In VS Code,** type `/plugins` and use the toggle next to `jstyle`.
-- **In the desktop app,** click **+**, then **Plugins**, then **Manage
-  plugins**.
+- **In the desktop app,** use its plugin menu.
 
 > [!IMPORTANT]
 > Start a new session after each change. A skill that already loaded stays in
