@@ -1,6 +1,6 @@
 # **jstyle**
 
-An opinionated prose style for AI agent.
+An opinionated prose style for your AI agent.
 
 *November 2026*
 
@@ -13,7 +13,7 @@ It started with a reader who kept stumbling.
 - The grammar was fine, and the facts checked out.
 - Some sentences still had to be read twice.
 - Ihor had two theories about why
-  - A measurement proved both mostly wrong.
+  - A measurement showed both explained little.
 - A few other habits did cost the reader
   - They had names long before AI.
     - Garden-path sentence
@@ -30,10 +30,9 @@ and experience.
 
 | Part of the skill | Where it came from | What backs it |
 |---|---|---|
-| Be concise, never compressed | Orwell's rule on cutting words, reversed | A README rewrite under the first rules |
-| Collect Facts and Sources | A synopsis that took about ten rounds of rewording | One episode, August 2026 |
+| Be concise, never compressed | Orwell's rule on cutting words, reversed | [Where the skill parts ways with popular advice](#where-the-skill-parts-ways-with-popular-advice) |
 | Telegraphic style and center embedding | The readability study | A count over 50 sessions of Claude's own output |
-| Clarity comes from the idea and its context, not the wording | The first rules said "the idea", and the study added "its context" | Two examples from the study |
+| Clarity comes from the idea and its context, not the wording | The earlier rules said "the idea", and the study added "its context" | Two examples from the study |
 | Garden-path sentence | Reading research that explained a cost the study found | Published reading experiments |
 | Principles over rules, with worked examples | How Ihor has worked with agents through 2026 | His experience, and guidance Anthropic has published |
 | Cold Read | Talking the study over | Trials on Ihor's own rule files |
@@ -131,7 +130,8 @@ What cost the reader sat in sentence structure, not in single words.
 - **Telegraphic style,** which nobody had suspected: phrases with no verb,
   often after a colon. They turned up in 3 to 4 of every 100 replies.
 - **Center embedding,** which nobody suspected either: a clause inside a
-  clause inside a clause. It turned up in about 2 of every 100 sentences, and
+  clause inside a clause, which Miller and Chomsky (1963) already singled out
+  as hard to follow. It turned up in about 2 of every 100 sentences, and
   Claude judged 4 in 10 of those hard to read.
 - **Context, not only wording.** Some verbless phrases had a clear idea but
   had dropped the context the reader needed, so no rewording could fix them.
@@ -184,7 +184,7 @@ The obvious fix was a rule to always keep *that*. We didn't write one.
 
 ## Principles Over Rules
 
-That choice follows very speciffic way of working with agents.
+That choice follows a very specific way of working with agents.
 
 - Treat agents more like colleagues than like programs to configure.
 - Give them the principles and the intent behind a task.
@@ -257,8 +257,8 @@ The last piece came from reading rather than measuring.
 - An agent editing a document adds the new text and moves on, without asking
   what it displaced, so documents slowly grow.
 - Sommers (1980) found that experienced writers treat every addition as "a
-  reordering of the whole", while students mostly swap words. An agent adds like
-  an experienced writer, but skips the reread that should follow.
+  reordering of the whole", while students mostly swap words. An agent adds
+  freely, as experienced writers do, but skips the rework that should follow.
 - The opposite fails too: a model that rewrites a whole text unprompted tends to
   lose detail. The Agentic Context Engineering paper (Zhang and others, 2025)
   calls this "context collapse".
@@ -293,7 +293,8 @@ asks the writer to put back the small words a colon or a dash replaced.
 
 ## Building jstyle
 
-jstyle was built fresh, as a public plugin, on 1 November 2026.
+jstyle was built fresh, as a public plugin, on 1 November 2026. It drew on
+writing rules Ihor had used and refined in private for three months.
 
 - Before writing the skill, we ran its benchmark with no skill loaded: 10
   writing tasks, such as an email, a README, and release notes.
@@ -301,6 +302,7 @@ jstyle was built fresh, as a public plugin, on 1 November 2026.
 - One surprise: asked to draft an email from a set of notes, Opus had the sender
   report a finding the notes never contained, in 2 of 3 samples. That became the
   skill's instruction to mark your own inferences as yours.
+- Versions 0.1.0 to 0.4.0 came out over its first two days.
 - The reports are in [bench/reports/](../bench/reports/).
 
 ## What Is Still Untested
@@ -310,15 +312,15 @@ Some parts of the skill rest on less than a measurement.
 - **Reading cost.** The study counted how often each habit occurs. No one has
   timed or marked a human reading Claude's text.
 - **Read one level up.** It rests on research about human writers, and no trial
-  has run it.
+  has tested whether it helps.
 - **The approach itself.** That fewer rules make a better agent is Ihor's
   experience across many sessions and two model families, not a measured result.
 - **The best cold-read model.** The trials compared Opus and Sonnet on one set
   of files. The default rests on that, and on the reasoning that a smaller
   reader stalls where a hurried person would.
-- **The benchmark and the trials.** Ten tasks, three samples each, and one
-  reader making blind picks. That is enough to steer an opinionated skill with
-  one maintainer, but it is not a controlled study.
+- **The benchmark and the trials.** Ten tasks, three samples each, and the
+  maintainer making blind picks. That is enough to steer an opinionated skill
+  with one maintainer, but it is not a controlled study.
 
 ## Sources
 
