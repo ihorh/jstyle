@@ -270,6 +270,9 @@ explained little. Two habits he hadn't suspected cost more. Phrases with no
 verb, often after a colon, turned up in 3 to 4 of every 100 replies. Clauses
 nested three deep turned up in about 2 of every 100 sentences. Both became
 sentence traps in the skill: telegraphic style and center embedding.
+[How jstyle Came About](docs/background.md) tells the whole story, and [the
+study](docs/2026-10-30-readability-study.md) has some of its method and
+numbers.
 
 The skill also draws on writing and reading research:
 
