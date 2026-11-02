@@ -36,6 +36,7 @@ few decide whether they stay. The skill aims to make those words count.
 Your reader stays with you instead of asking their agent for a summary, and
 more of what you write gets read.
 
+> [!NOTE]
 > The skill is for text that a **person** will read, such as documentation and
 > manuals, code comments and docstrings, emails and conversations, many kinds
 > of blog posts, and perhaps marketing copy.
