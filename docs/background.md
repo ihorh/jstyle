@@ -44,8 +44,8 @@ The rules began with a frustration many people shared.
 By one count on the public model arena in August, Opus 5 answers averaged 510
 words, against 158 for Opus 4.5, with longer sentences and more clauses. A
 Claude Code hook that translated the model's output into plain English drew
-nearly 3,000 upvotes on Reddit. A blog post by Paddo collects these and other
-reports. Anthropic's Opus 5.5 launch page quoted a customer: "Verbose,
+nearly 3,000 upvotes on Reddit. A blog post by Paddo collects both, along with
+other reports. Anthropic's Opus 5.5 launch page quoted a customer: "Verbose,
 hard-to-follow output has been my biggest frustration with frontier models".
 
 ### STE That Summer
@@ -97,8 +97,8 @@ Neither of Ihor's guesses explained much.
 
 What cost the reader sat in sentence structure, not in single words.
 
-- **Garden paths.** A dropped *that* is rare, but where it misleads, the
-  reader has to parse the sentence twice. A later slide explains why.
+- **Garden paths.** A dropped *that* is rare, but each one that misleads
+  makes the reader parse the sentence twice. A later slide explains why.
 - **Telegraphic style,** which nobody had suspected: phrases with no verb,
   often after a colon. They turned up in 3 to 4 of every 100 replies.
 - **Deep nesting,** which nobody suspected either: a clause inside a clause
@@ -106,6 +106,16 @@ What cost the reader sat in sentence structure, not in single words.
   hardest kind is center embedding.
 - **Context, not only wording.** Some verbless phrases had a clear idea but
   had dropped the context the reader needed, so no rewording could fix them.
+
+### Two Examples
+
+"Your other two stores split on audience: you across all projects, and one
+repository" should have been "One store holds what I learn about you across
+all projects, and the other holds what I learn about one repository."
+
+Another reply asked about "a partitioned asset with an upstream that is a
+single unpartitioned asset that failed", and left the reader to work out which
+asset failed.
 
 ### Center Embedding
 
@@ -121,16 +131,6 @@ one open until the inner one ends.
 Miller and Chomsky (1963) traced the difficulty to the clauses held open, not
 to the depth.
 
-### Two Examples
-
-"Your other two stores split on audience: you across all projects, and one
-repository" should have been "One store holds what I learn about you across
-all projects, and the other holds what I learn about one repository."
-
-Another reply asked about "a partitioned asset with an upstream that is a
-single unpartitioned asset that failed", and left the reader to work out which
-asset failed.
-
 ## Garden Paths
 
 Psycholinguists call it a garden path when the start of a sentence leads the
@@ -141,7 +141,7 @@ reader to a wrong reading.
 - Readers slow down on such sentences when *that* is missing (Ferreira and
   Henderson, 1990; Trueswell, Tanenhaus, and Kello, 1993).
 - When the same sentence is said out loud, stress and pauses mark where the
-  clause starts, so it misleads nobody.
+  clause starts, so it rarely misleads.
 
 ### The Horse Raced Past the Barn Fell
 
@@ -213,9 +213,10 @@ The last piece came from reading rather than measuring.
 
 - An agent editing a document adds the new text and moves on, without asking
   what it displaced, so documents slowly grow.
-- Sommers (1980) found that experienced writers treat every addition as "a
-  reordering of the whole", while students mostly swap words. An agent adds
-  freely, as experienced writers do, but skips the rework that should follow.
+- Sommers (1980) found that experienced writers treat each addition or deletion
+  as "a reordering of the whole", while students mostly swap words. An agent
+  adds freely, as experienced writers do, but skips the rework that should
+  follow.
 - The opposite fails too: a model that rewrites a whole text unprompted tends to
   lose detail. The Agentic Context Engineering paper (Zhang and others, 2025)
   calls this "context collapse".
