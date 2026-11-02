@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "jstyle",
-      "description": "An opinionated prose style for agents that write for people: text that leads with what the reader came for and reads in one pass.",
+      "description": "An opinionated prose style for agents that write for people: text that leads with what the reader came for and takes one pass to follow.",
       "source": "./plugins/jstyle",
       "category": "productivity"
     }

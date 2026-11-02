@@ -1,6 +1,7 @@
 ---
 name: write
 description: Load before drafting text for a reader outside this conversation, such as a README, documentation, a docstring, release notes, a pitch, an email, or a draft shaped in chat. An opinionated house style that puts correct facts and clear ideas ahead of brevity.
+license: MIT
 ---
 
 # Write
@@ -174,9 +175,12 @@ for you.
 - **Ask for questions, not rewrites.** Tell it to read as that person, and to
   list what it had to reread, what it couldn't resolve, and what it would need
   another source to follow. For each one, it quotes the passage.
-- **Judge each question yourself.** Fix the ones that point at a real gap.
-  When one asks for a threshold or an exact definition, the text usually calls
-  for judgment there, and needs no rule.
+- **Judge each question yourself.** A question shows where the reader lost
+  the thread, not what to change. The cause may be a word, missing context, or
+  an idea you haven't settled yet, as the third principle says, so fix the
+  cause, which may sit outside the passage the reader quoted. Some questions
+  need no fix: a cold reader may ask for more precision than the text means to
+  give.
 - **Offer more when the person may want it:** a second reader on another
   model, more rounds until the text settles, or the readers' reports to see.
 
