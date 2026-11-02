@@ -266,11 +266,15 @@ one in 12 of 30 sessions, and Sonnet in 1.
 The skill grew out of personal writing rules that Ihor H. has used in his
 Claude Code sessions for over three months. In October 2026, Claude measured
 its own output under those rules: 784 chat replies and 63 documents from 50
-sessions. The habits Ihor suspected, such as dropping the word *that*,
-explained little. Two habits he hadn't suspected cost more. Phrases with no
-verb, often after a colon, turned up in 3 to 4 of every 100 replies. Clauses
-nested three deep turned up in about 2 of every 100 sentences. Both became
-sentence traps in the skill: telegraphic style and center embedding.
+sessions. What cost the reader sat in sentence structure, not in single words.
+A dropped *that*, one of the habits Ihor suspected, was rare, but each one
+that misled made a garden path. Phrases with no verb, often after a colon,
+turned up in 3 to 4 of every 100 replies. Clauses nested three deep turned up
+in about 2 of every 100 sentences. Some of the verbless phrases had also
+dropped context the reader needed, so no rewording could fix them. The first
+three findings became sentence traps in the skill: garden-path sentences,
+telegraphic style, and center embedding. The last one shaped its third
+principle, that clarity comes from the idea and its context.
 [How jstyle Came About](docs/background.md) tells the whole story, and [the
 study](docs/2026-10-30-readability-study.md) has some of its method and
 numbers.
