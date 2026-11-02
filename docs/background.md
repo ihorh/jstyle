@@ -43,10 +43,12 @@ and experience.
 
 The rules began with a frustration many people shared.
 
-- Claude Opus 5 came out on 24 July 2026.
-- Its answers ran long and dense, full of stock phrases.
-- Asking it to write plainly didn't help. Neither did a note in the agent's
-  memory.
+- Claude Opus 5 came out on 24 July 2026, and its answers ran long and dense,
+  full of stock phrases.
+- Many people turned to an existing standard, Simplified Technical English
+  (STE), the language of aircraft maintenance manuals.
+- Ihor answered with writing rules of his own, and a script to check the
+  mechanical ones.
 - Two months later, Anthropic's launch of Opus 5.5 quoted that frustration
   back.
 
@@ -59,23 +61,11 @@ nearly 3,000 upvotes on Reddit. A blog post by Paddo collects these and other
 reports. Anthropic's Opus 5.5 launch page quoted a customer: "Verbose,
 hard-to-follow output has been my biggest frustration with frontier models".
 
-## Simplified English Was in the Air
+### STE That Summer
 
-The same summer, an old answer to unclear writing came back into fashion.
-
-- People started asking Claude to write in ASD-STE100, or Simplified
-  Technical English (STE), the language of aircraft maintenance manuals.
-- In late July, it inspired the first writing rules, with a script to check
-  the rules a script can check.
-- We looked to STE and similar standards for ideas, but none fit out of the
-  box.
-
-### ASD-STE100 That Summer
-
-In late July, people started asking Claude to report in ASD-STE100, and within
-days GitHub held skills built on it (Golubić, 2026). The timing suggests the
-same frustration with Opus 5, though nobody measured that. Andrej Karpathy
-recommended the standard in October, which spread it much further.
+In late July, people started asking Claude to write in STE, formally
+ASD-STE100, and within days GitHub held skills built on it (Golubić, 2026). In October, Andrej
+Karpathy recommended the standard, which spread it much further.
 
 ## Good Enough and Slightly Off
 
