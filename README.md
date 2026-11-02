@@ -1,14 +1,27 @@
-# jstyle
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/readme/icon-a-dark.svg">
+    <img src=".github/readme/icon-a-light.svg" width="128" height="128" alt="jstyle logo: an ensō, a circle drawn in one brush stroke">
+  </picture>
+</p>
 
-> [!NOTE]
-> - **Judged blind.** The maintainer preferred drafts written with the skill
->   in 8 of 10 writing tasks with Opus 5.5, and in 6 of 10 with Sonnet 5.5.
-> - **More care per draft.** The agent may spend extra tokens sourcing its
->   facts and getting a second opinion from a subagent.
-> - **Early.** Tested in English, with Claude models, by one judge so far.
+<h1 align="center">jstyle</h1>
 
-An opinionated prose style for your AI agent, so more of what you write
-gets read.
+<p align="center"><i>An opinionated prose style for your AI agent,<br>so more of what you write gets read.</i></p>
+
+<p align="center">
+  <a href="#install">Install</a> ·
+  <a href="#an-example">An Example</a> ·
+  <a href="#how-it-writes">How It Writes</a>
+</p>
+
+<br>
+
+**[Readers stay with it.](#how-it-writes)** It makes the first lines
+count, and keeps each sentence readable in one pass.
+
+**[A cold read before you get it.](#cold-reads)** A fresh reader, with none
+of the agent's context, points out what the agent can't see in its own text.
 
 Agents write well now, so what goes wrong is small. A text opens with
 background instead of what the reader came for. A sentence has to be read
@@ -33,7 +46,7 @@ jstyle is a Claude Code plugin with one skill, `/jstyle:write`, which your
 agent loads automatically when it writes for someone else. The repository also
 holds a benchmark and other supporting material.
 
-## Before and After
+## An Example
 
 One task from the first **blind benchmark**: Opus 5.5 updates a CSV tool's
 README, so users learn how it handles very long rows before they run into
@@ -166,7 +179,7 @@ form](https://github.com/ihorh/jstyle/issues/new?template=feedback.yml) opens
 a new issue with one required box, and a few lines in it are enough. Issues
 are public.
 
-## What It Asks For
+## How It Writes
 
 The skill puts sourced facts and a clear idea ahead of brevity. It starts
 from the facts, then works from the idea down to the words.
