@@ -2,7 +2,7 @@
   "name": "jstyle",
   "displayName": "jstyle: an opinionated prose style",
   "description": "An opinionated prose style for agents that write for people: text that leads with what the reader came for and takes one pass to follow.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": {
     "name": "ihorh"
   },

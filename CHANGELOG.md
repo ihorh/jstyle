@@ -4,6 +4,13 @@ Versions of the jstyle plugin. A minor version changes how the agent writes or
 behaves. A patch changes wording or metadata without meaning to change
 behaviour. A major version would remove or rename something users rely on.
 
+## 0.4.0 (2026-11-02)
+
+- **Cold-read model:** where the agent can choose, the reader runs on a model
+  a tier below the agent's own, but no lower than a mid-tier model, such as
+  Sonnet for an Opus session. A second reader uses the agent's own model,
+  with the same floor. Before, the reader ran on the agent's own model.
+
 ## 0.3.0 (2026-11-02)
 
 - **Cold reads:** the agent now treats a reader's question as a sign of where

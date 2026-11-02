@@ -169,9 +169,9 @@ A cold read hands the text to a reader with none of your context. That reader
 finds the gaps your own reread passes over, since your context fills them in
 for you.
 
-- **Start a reader with the text and one line on who it's for,** on the same
-  model as your session: a subagent, or a new session. It never
-  sees this conversation, the files you read, your notes, or this skill.
+- **Start a reader with the text and one line on who it's for,** in a
+  subagent or a new session. It never sees this conversation, the files you
+  read, your notes, or this skill.
 - **Ask for questions, not rewrites.** Tell it to read as that person, and to
   list what it had to reread, what it couldn't resolve, and what it would need
   another source to follow. For each one, it quotes the passage.
@@ -181,8 +181,8 @@ for you.
   cause, which may sit outside the passage the reader quoted. Some questions
   need no fix: a cold reader may ask for more precision than the text means to
   give.
-- **Offer more when the person may want it:** a second reader on another
-  model, more rounds until the text settles, or the readers' reports to see.
+- **Offer more when the person may want it:** a second reader, more rounds
+  until the text settles, or the readers' reports to see.
 
 ## Environment
 
@@ -190,7 +190,13 @@ What a cold read takes depends on the tools you have.
 
 - **Where you can start a subagent or a new session,** run the cold read
   without asking, unless the person's instructions limit background work.
+- **Where you can choose the reader's model,** pick one a tier below yours. It
+  shares fewer of your guesses, so it stalls where a hurried person would, and
+  it costs less. With two readers, run the second on your own model. Go no
+  lower than a mid-tier model for either.
+- **For Claude models,** the first reader is Opus for a Fable session and
+  Sonnet for any other. A second reader runs on the session's own model, or on
+  Sonnet for a Haiku session.
 - **Where you can't,** suggest how the person could run one: open a new
   session or chat, paste the text with the request under "Ask for questions,
   not rewrites" in Cold Read, and bring back the questions.
-
