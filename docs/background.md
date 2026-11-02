@@ -171,20 +171,182 @@ the same effect. A reader takes *raced* as the main verb, and then *fell* has
 nowhere to go. The sentence means that the horse which was raced past the barn
 fell.
 
+## Why the Skill Bans No Words
+
+The obvious fix was a rule to always keep *that*. We didn't write one.
+
+- Other small words mark where a clause starts too, such as *which*, *who*, and
+  *whether*.
+- A rule about one word would teach the model to sprinkle it everywhere, and to
+  miss the next case.
+- So the skill bans no word or pattern anywhere. Each sentence trap names a
+  failure the writer can recognize, whatever words caused it.
+
+## Principles Over Rules
+
+That choice follows very speciffic way of working with agents.
+
+- Treat agents more like colleagues than like programs to configure.
+- Give them the principles and the intent behind a task.
+- Keep hard bans for what can't be undone, such as deleting files or
+  force-pushing.
+- Avoid long lists of rules. They make an agent worse rather than safer: it
+  hunts for loopholes, or applies a rule to the letter where the rule's point
+  doesn't hold. Ihor has seen this with Claude models, and with Gemini 2.5
+  and 3.
+
+### A Leap of Faith
+
+People often seem to get less from a model than it can give, because they
+bury it in rules. The leap of faith is to write for the most capable model you
+can afford, and to trust its judgment. That doesn't work with every model.
+
+### What Anthropic Says
+
+The idea isn't new, and Anthropic says something close to it. The
+[constitution](https://www.anthropic.com/constitution) it published for
+Claude in January 2026 says: "We generally favor cultivating good values and
+judgment over strict rules and decision procedures". Its [prompting
+guide](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
+suggests you "think of Claude as a brilliant but new employee who lacks
+context on your norms and workflows". It also warns that recent models
+overreact to instructions like "CRITICAL: You MUST use this tool".
+
+## The Writer Can't See Its Own Gaps
+
+Talking the study over turned up a problem no rule could fix.
+
+- A writer checking a draft still has the whole session in mind: what was
+  discussed, decided, and read.
+- That context fills every gap a stranger would fall into, so the draft passes
+  its writer's check.
+- Economists named this the curse of knowledge in 1989 (Camerer, Loewenstein,
+  and Weber), and Steven Pinker brought it to writers in *The Sense of Style*
+  (2014). We ran into it first, and found the name afterwards.
+
+## Cold Reads
+
+The fix is a second reader who knows nothing about the session.
+
+- The skill calls it a cold read. The reader gets only the text and one line on
+  who it's for, and is asked for questions rather than rewrites.
+- On a draft of about 1,000 words, the writer judged about half the reader's
+  flags worth fixing. Two of those were garden paths the writer had read
+  straight past.
+- Since version 0.4.0 of jstyle, the cold reader runs on a model a tier below
+  the writer's, such as Sonnet when Opus writes.
+
+### Opus and Sonnet as Readers
+
+On Ihor's rule files, Opus and Sonnet each caught misreadings the other
+missed, and a misreading both made was nearly always worth fixing. The smaller
+model shares fewer of the writer's guesses, so it stalls where a hurried
+person would, and it costs less.
+
+### What Readers Ask For
+
+The readers had a bias of their own. Asked about a principle, they want a
+threshold or an exact rule, even where the principle leaves room for judgment
+on purpose. So the skill treats each question as a sign of where the reader
+got lost, and leaves the writer to find the cause.
+
+## Documents That Grow
+
+The last piece came from reading rather than measuring.
+
+- An agent editing a document adds the new text and moves on, without asking
+  what it displaced, so documents slowly grow.
+- Sommers (1980) found that experienced writers treat every addition as "a
+  reordering of the whole", while students mostly swap words. An agent adds like
+  an experienced writer, but skips the reread that should follow.
+- The opposite fails too: a model that rewrites a whole text unprompted tends to
+  lose detail. The Agentic Context Engineering paper (Zhang and others, 2025)
+  calls this "context collapse".
+- So after an edit the skill rereads one level up, the paragraph and then the
+  section. It rewrites only where the point has shifted, and asks before a
+  rewrite outgrows a paragraph.
+
+## Where the Skill Parts Ways With Popular Advice
+
+Simplified Technical English and Orwell's rules serve their own readers well.
+For the style the skill aims at, most of their rules work against the reader.
+
+- **Word limits.** STE caps a sentence at 20 words in a procedure and 25 in a
+  description. A cap splits sentences at arbitrary points, and the pieces
+  often read worse than one longer sentence with a clear structure. In the
+  skill, length is a hint to look closer, and no word count decides.
+- **Cutting small words.** Orwell's rule "if it is possible to cut a word out,
+  always cut it out" leads to compressed prose. The skill cuts whole sentences
+  that carry nothing, and keeps the small words that carry the logic.
+- **A plain vocabulary.** STE limits the writer to a dictionary of approved
+  words. The skill leaves technical terms and names as they are.
+- **Active voice by rule.** The skill flags a passive only when it hides an
+  actor the writer knows.
+- **Strict rules in general.** In Ihor's experience, a model follows them to
+  the letter, and the prose comes out predictable and flat.
+
+### What the Skill Kept
+
+STE warns that dropping words to shorten a sentence creates ambiguity rather
+than clarity. The skill agrees, and goes further: its telegraphic-style trap
+asks the writer to put back the small words a colon or a dash replaced.
+
+## Building jstyle
+
+jstyle was built fresh, as a public plugin, on 1 November 2026.
+
+- Before writing the skill, we ran its benchmark with no skill loaded: 10
+  writing tasks, such as an email, a README, and release notes.
+- That way the skill spends words only on failures current models still make.
+- One surprise: asked to draft an email from a set of notes, Opus had the sender
+  report a finding the notes never contained, in 2 of 3 samples. That became the
+  skill's instruction to mark your own inferences as yours.
+- The reports are in [bench/reports/](../bench/reports/).
+
+## What Is Still Untested
+
+Some parts of the skill rest on less than a measurement.
+
+- **Reading cost.** The study counted how often each habit occurs. No one has
+  timed or marked a human reading Claude's text.
+- **Read one level up.** It rests on research about human writers, and no trial
+  has run it.
+- **The approach itself.** That fewer rules make a better agent is Ihor's
+  experience across many sessions and two model families, not a measured result.
+- **The best cold-read model.** The trials compared Opus and Sonnet on one set
+  of files. The default rests on that, and on the reasoning that a smaller
+  reader stalls where a hurried person would.
+- **The benchmark and the trials.** Ten tasks, three samples each, and one
+  reader making blind picks. That is enough to steer an opinionated skill with
+  one maintainer, but it is not a controlled study.
+
 ## Sources
 
 - Anthropic (2026). Launch pages for [Claude Opus
   5](https://www.anthropic.com/news/claude-opus-5) (24 July), [Claude Opus
   5.5](https://www.anthropic.com/claude-opus-5-5) (22 September), and [Claude
   Sonnet 5.5](https://www.anthropic.com/claude-sonnet-5-5) (28 September).
+- Anthropic (2026). [Claude's
+  constitution](https://www.anthropic.com/constitution), and [Prompting best
+  practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
 - ASD-STE100, Simplified Technical English, Issue 9.
 - Bever, T. G. (1970). The cognitive basis for linguistic structures. In
   J. R. Hayes (Ed.), *Cognition and the Development of Language*. Wiley.
+- Camerer, C., Loewenstein, G., & Weber, M. (1989). The curse of knowledge in
+  economic settings. *Journal of Political Economy*, 97(5), 1232–1254.
 - Ferreira and Henderson (1990), Trueswell, Tanenhaus, and Kello (1993), and
   Liu (2008): full references in [the
   study](2026-10-30-readability-study.md#sources).
 - Golubić, K. (2026, 2 October). [ASD-STE100: what it is and what it has to
   do with LLMs](https://kgolubic.com/posts/asd-ste100-and-llms/).
+- Miller, G. A., & Chomsky, N. (1963). Finitary models of language users. In
+  R. D. Luce, R. R. Bush, & E. Galanter (Eds.), *Handbook of Mathematical
+  Psychology*, Vol. 2. Wiley.
 - Orwell, G. (1946). Politics and the English language.
 - Paddo (2026, 2 September). [A dial worth turning: Claude Opus 5's
   prose](https://paddo.dev/blog/a-dial-worth-turning/).
+- Pinker, S. (2014). *The Sense of Style*. Viking.
+- Sommers, N. (1980). Revision strategies of student writers and experienced
+  adult writers. *College Composition and Communication*, 31(4), 378–388.
+- Zhang, Q., and others (2025). Agentic context engineering.
+  [arXiv:2510.04618](https://arxiv.org/abs/2510.04618).
