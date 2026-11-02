@@ -12,7 +12,7 @@ How one reader's frustration, a few wrong guesses, and much trial and error
 became a writing skill. Some parts we measured, some we borrowed, and some
 come from Ihor's own taste and experience.
 
-## What the Skill Fixes
+## What the Skill Watches For
 
 Small slips that leave prose good enough but slightly off. Several had names
 long before AI.
