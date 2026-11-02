@@ -64,8 +64,9 @@ hard-to-follow output has been my biggest frustration with frontier models".
 ### STE That Summer
 
 In late July, people started asking Claude to write in STE, formally
-ASD-STE100, and within days GitHub held skills built on it (Golubić, 2026). In October, Andrej
-Karpathy recommended the standard, which spread it much further.
+ASD-STE100, and within days GitHub held skills built on it (Golubić, 2026).
+In October, Andrej Karpathy recommended the standard, which spread it much
+further.
 
 ## Good Enough and Slightly Off
 
