@@ -78,13 +78,113 @@ days GitHub held skills built on it (Golubić, 2026). The timing suggests the
 same frustration with Opus 5, though nobody measured that. Andrej Karpathy
 recommended the standard in October, which spread it much further.
 
+## Good Enough and Slightly Off
+
+New models in late September made it hard to tell what the rules still did.
+
+- Anthropic announced Opus 5.5 and Sonnet 5.5 as writing more clearly than the
+  models before them.
+- The prose was good enough now, but it was unclear whether the rules or the
+  models deserved the credit.
+- Some rules still made a visible difference, and others no longer seemed
+  needed.
+- What remained was slightly off, in ways that were easier to feel than to
+  name.
+
+## The Study That Proved Us Wrong
+
+On 30 October, Claude measured its own writing to find what was still off.
+
+- It took the 50 most recent sessions: 784 chat replies and 63 documents,
+  about 7,600 sentences.
+- It counted word patterns, ran a grammar parser over every sentence, and read
+  samples by hand to check each count.
+- Ihor went in with two guesses about what was wrong.
+- [The full study](2026-10-30-readability-study.md) has the method and the
+  numbers.
+
+## Two Guesses That Didn't Hold
+
+Neither of Ihor's guesses explained much.
+
+- **Dropping optional words, *that* above all.** The habit is real. Where
+  *that* is optional, as in "confirm (that) the files match", Claude left it
+  out about 3 times in 4. But such sentences were rare, so a dropped *that*
+  came up only about once in 65 sentences. Half of those came after *says*,
+  as in "the log says it failed", which seldom misleads anyone.
+- **Placing related words far apart,** in a way that is cheap for a model and
+  hard for a person. Claude's linked words sat 2.2 to 2.4 words apart, in chat
+  and in documents alike. Liu (2008) found about 2.5 for English in general.
+
+### Dependency Distance
+
+Linguists measure the second guess as dependency distance: the number of words
+between a word and the word it grammatically depends on, such as a verb and its
+subject. A text that packs related words far apart scores high.
+
+## What the Study Found
+
+What cost the reader sat in sentence structure, not in single words.
+
+- **Garden paths.** A dropped *that* is rare, but where it misleads, the
+  reader has to parse the sentence twice. A later slide explains why.
+- **Telegraphic style,** which nobody had suspected: phrases with no verb,
+  often after a colon. They turned up in 3 to 4 of every 100 replies.
+- **Center embedding,** which nobody suspected either: a clause inside a
+  clause inside a clause. It turned up in about 2 of every 100 sentences, and
+  Claude judged 4 in 10 of those hard to read.
+- **Context, not only wording.** Some verbless phrases had a clear idea but
+  had dropped the context the reader needed, so no rewording could fix them.
+- The first three became sentence traps in the skill, and the last changed its
+  third principle.
+
+
+### Two Examples
+
+"Your other two stores split on audience: you across all projects, and one
+repository" should have been "One store holds what I learn about you across
+all projects, and the other holds what I learn about one repository."
+
+Another reply asked about "a partitioned asset with an upstream that is a
+single unpartitioned asset that failed", and left the reader to work out which
+asset failed.
+
+## Garden Paths
+
+Psycholinguists call it a garden path when the start of a sentence leads the
+reader to a wrong reading.
+
+- In "I'll confirm your files match", a reader first takes *your files* as the
+  thing confirmed. Then *match* sends them back to the start.
+- Readers slow down on such sentences when *that* is missing (Ferreira and
+  Henderson, 1990; Trueswell, Tanenhaus, and Kello, 1993).
+- When the same sentence is said out loud, stress and pauses mark where the
+  clause starts, so it misleads nobody.
+- The rules had tested a sentence by asking whether you would say it out loud.
+  A garden path passes that test, and a model can't hear anyway. The skill now
+  names the failure itself: a word that sends the reader back.
+
+### The Horse Raced Past the Barn Fell
+
+The classic garden path, from Bever (1970), uses a different construction to
+the same effect. A reader takes *raced* as the main verb, and then *fell* has
+nowhere to go. The sentence means that the horse which was raced past the barn
+fell.
+
 ## Sources
 
 - Anthropic (2026). Launch pages for [Claude Opus
   5](https://www.anthropic.com/news/claude-opus-5) (24 July), [Claude Opus
   5.5](https://www.anthropic.com/claude-opus-5-5) (22 September), and [Claude
   Sonnet 5.5](https://www.anthropic.com/claude-sonnet-5-5) (28 September).
+- ASD-STE100, Simplified Technical English, Issue 9.
+- Bever, T. G. (1970). The cognitive basis for linguistic structures. In
+  J. R. Hayes (Ed.), *Cognition and the Development of Language*. Wiley.
+- Ferreira and Henderson (1990), Trueswell, Tanenhaus, and Kello (1993), and
+  Liu (2008): full references in [the
+  study](2026-10-30-readability-study.md#sources).
 - Golubić, K. (2026, 2 October). [ASD-STE100: what it is and what it has to
   do with LLMs](https://kgolubic.com/posts/asd-ste100-and-llms/).
+- Orwell, G. (1946). Politics and the English language.
 - Paddo (2026, 2 September). [A dial worth turning: Claude Opus 5's
   prose](https://paddo.dev/blog/a-dial-worth-turning/).

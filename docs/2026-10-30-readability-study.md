@@ -8,6 +8,12 @@ private repository that holds his rules, and its commit IDs. The skill these
 findings later fed into is described in [How jstyle Came
 About](background.md).*
 
+*The opening below overstates the stumbling. By then the prose read well
+enough, and it was unclear whether the rules or the newer models deserved the
+credit. What remained was slightly off, in ways that were hard to name. [How
+jstyle Came About](background.md#good-enough-and-slightly-off) tells it that
+way.*
+
 Many people find AI-written text tiring to read, and struggle to say why. The
 grammar is fine and the facts check out, yet some sentences have to be read
 twice. Ihor is one of those readers.
