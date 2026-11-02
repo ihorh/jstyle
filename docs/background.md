@@ -165,30 +165,20 @@ The obvious fix was a rule to always keep *that*. We didn't write one.
 That choice follows a very specific way of working with agents.
 
 - Treat agents more like colleagues than like programs to configure.
-- Give them the principles and the intent behind a task.
+- Give them the principles and the intent behind a task, not a long list of
+  rules. Rules make an agent worse rather than safer: it hunts for loopholes,
+  or applies a rule to the letter where its point doesn't hold. Ihor has seen
+  this with Claude and with other agents and models.
 - Keep hard bans for what can't be undone, such as deleting files or
   force-pushing.
-- Avoid long lists of rules. They make an agent worse rather than safer: it
-  hunts for loopholes, or applies a rule to the letter where the rule's point
-  doesn't hold. Ihor has seen this with Claude models, and with Gemini 2.5
-  and 3.
+- Write for the most capable model you can afford. Weaker models may need
+  more rules.
 
-### A Leap of Faith
-
-People often seem to get less from a model than it can give, because they
-bury it in rules. The leap of faith is to write for the most capable model you
-can afford, and to trust its judgment. That doesn't work with every model.
-
-### What Anthropic Says
-
-The idea isn't new, and Anthropic says something close to it. The
-[constitution](https://www.anthropic.com/constitution) it published for
-Claude in January 2026 says: "We generally favor cultivating good values and
-judgment over strict rules and decision procedures". Its [prompting
+Anthropic's [constitution](https://www.anthropic.com/constitution) and
+[prompting
 guide](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
-suggests you "think of Claude as a brilliant but new employee who lacks
-context on your norms and workflows". It also warns that recent models
-overreact to instructions like "CRITICAL: You MUST use this tool".
+point the same way. The guide warns that recent models overreact to
+instructions like "CRITICAL: You MUST use this tool".
 
 ## The Writer Can't See Its Own Gaps
 
@@ -292,7 +282,7 @@ Some parts of the skill rest on less than a measurement.
 - **Read one level up.** It rests on research about human writers, and no trial
   has tested whether it helps.
 - **The approach itself.** That fewer rules make a better agent is Ihor's
-  experience across many sessions and two model families, not a measured result.
+  experience across many sessions and models, not a measured result.
 - **The best cold-read model.** The trials compared Opus and Sonnet on one set
   of files. The default rests on that, and on the reasoning that a smaller
   reader stalls where a hurried person would.
