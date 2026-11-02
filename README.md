@@ -13,6 +13,8 @@
   <a href="#install">Install</a> ·
   <a href="#an-example">An Example</a> ·
   <a href="#how-it-writes">How It Writes</a>
+  <br>
+  <sub><a href="#disclaimer">Disclaimer</a> · <a href="#license">License</a></sub>
 </p>
 
 <br>
