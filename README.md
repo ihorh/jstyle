@@ -37,9 +37,9 @@ Your reader stays with you instead of asking their agent for a summary, and
 more of what you write gets read.
 
 > [!NOTE]
-> The skill is for text that a **person** will read, such as documentation and
-> manuals, code comments and docstrings, emails and conversations, many kinds
-> of blog posts, and perhaps marketing copy.
+> The skill is for writing text that a **person** will read, such as
+> documentation and manuals, code comments and docstrings, emails and
+> conversations, many kinds of blog posts, and perhaps marketing copy.
 
 It isn't for text that answers to a rulebook before a reader, such as legal
 documents, government papers, or machinery specifications. It's also
