@@ -10,6 +10,7 @@
 <p align="center"><i>An opinionated prose style for your AI agent,<br>so more of what you write gets read.</i></p>
 
 <p align="center">
+  <a href="#using-it">Using It</a> ·
   <a href="#install">Install</a> ·
   <a href="#an-example">An Example</a> ·
   <a href="#how-it-writes">How It Writes</a>
@@ -49,6 +50,95 @@ jstyle is a Claude Code plugin with one skill, `/jstyle:write`, which your
 agent loads automatically when it writes for someone else. The repository also
 holds a benchmark and other supporting material.
 
+## Using It
+
+Ask for the text as usual. The agent loads the skill when it writes for
+someone outside the conversation, such as an email or a README, and leaves it
+off for chat replies.
+
+To load it yourself, start your request with the command:
+
+```
+/jstyle:write [your writing prompt]
+```
+
+A [cold read](#cold-reads) also works as a request of its own, on a change
+that you or the agent already made. Whoever reads the docs next starts without
+the context behind that change, just as a cold reader does. So a cold read
+suits any change to documentation, whether a person or an agent reads it: a
+README, an instructions file such as `CLAUDE.md`, or any other patch to the
+docs. For example:
+
+```
+/jstyle:write Give my README.md change to a cold reader. Will they get it?
+```
+
+Some agents and tools see the skill only after it has run once. If yours
+doesn't pick it up, run the command on its own first. The skill then stays in
+the conversation:
+
+```
+/jstyle:write
+```
+
+## Install
+
+In a Claude Code terminal session, version 2.1.275 or later, run this,
+confirm adding the marketplace, and choose a scope:
+
+```
+/plugin install jstyle --marketplace ihorh/jstyle
+```
+
+The VS Code extension and the desktop app have plugin menus too. Add the
+`ihorh/jstyle` marketplace there first, then install `jstyle`. A plugin you
+install in one is available in the others on the same computer. [Install
+and manage plugins](https://code.claude.com/docs/en/discover-plugins) in the
+Claude Code docs covers the other ways to install, scopes, and uninstalling.
+
+Updates don't arrive on their own. Claude Code turns auto-update off by
+default for marketplaces outside Anthropic's own, and this one is outside. To
+turn it on, run `/plugin`, select `jstyle` on the **Marketplaces** tab, and
+choose **Enable auto-update**. To update once instead, run
+`claude plugin update jstyle@jstyle` from your shell.
+
+Adding the marketplace clones the whole repository, benchmark included, though
+only the plugin folder is copied into a session. For a smaller clone, add the
+marketplace from your shell first, then install the plugin from it:
+
+```
+claude plugin marketplace add ihorh/jstyle --sparse .claude-plugin plugins
+claude plugin install jstyle@jstyle
+```
+
+Where skills aren't supported, such as a chat app, you can:
+
+- paste [SKILL.md](plugins/jstyle/skills/write/SKILL.md) into the context
+  before asking for a draft, or
+- add a line to your instructions file that points at it, such as: "Before
+  drafting text for a reader outside this conversation, read
+  `<path>/SKILL.md` and follow it."
+
+The skill was written for Claude and other recent models.
+[docs/models.md](docs/models.md) says what that means for its contents.
+
+## Turn It Off and On
+
+To compare writing with and without the skill, turn it off and on again
+without uninstalling:
+
+- **In a terminal session,** run `/plugin`, and on the **Installed** tab press
+  **Space** on `jstyle`.
+- **In VS Code,** type `/plugins` and use the toggle next to `jstyle`.
+- **In the desktop app,** use its plugin menu.
+
+> [!IMPORTANT]
+> Start a new session after each change. A skill that already loaded stays in
+> the conversation, so an open session can't show writing without it.
+
+[Install and manage plugins](https://code.claude.com/docs/en/discover-plugins)
+lists the other ways to turn a plugin off and on, including from your shell.
+
 ## An Example
 
 One task from the first **blind benchmark**: Opus 5.5 updates a CSV tool's
@@ -83,117 +173,6 @@ version without the skill is the best of its three tries, and the one with
 the skill is its first. The
 [report](bench/reports/2026-11-01-opus-without-vs-with-skill.md) has the rest
 of the story: nine more tasks, and the reason behind every pick.
-
-## Install
-
-In a Claude Code terminal session, version 2.1.275 or later, run this,
-confirm adding the marketplace, and choose a scope:
-
-```
-/plugin install jstyle --marketplace ihorh/jstyle
-```
-
-The VS Code extension and the desktop app have plugin menus too. Add the
-`ihorh/jstyle` marketplace there first, then install `jstyle`. A plugin you
-install in one is available in the others on the same computer. [Install
-and manage plugins](https://code.claude.com/docs/en/discover-plugins) in the
-Claude Code docs covers the other ways to install, scopes, and uninstalling.
-
-Updates don't arrive on their own. Claude Code turns auto-update off by
-default for marketplaces outside Anthropic's own, and this one is outside. To
-turn it on, run `/plugin`, select `jstyle` on the **Marketplaces** tab, and
-choose **Enable auto-update**. To update once instead, run
-`claude plugin update jstyle@jstyle` from your shell.
-
-Adding the marketplace clones the whole repository, benchmark included, though
-only the plugin folder is copied into a session. For a smaller clone, add the
-marketplace from your shell first, then install the plugin from it:
-
-```
-claude plugin marketplace add ihorh/jstyle --sparse .claude-plugin plugins
-claude plugin install jstyle@jstyle
-```
-
-## Using It
-
-Ask for the text as usual. The agent loads the skill when it writes for
-someone outside the conversation, such as an email or a README, and leaves it
-off for chat replies.
-
-To load it yourself, start your request with the command:
-
-```
-/jstyle:write [your writing prompt]
-```
-
-A [cold read](#cold-reads) also works as a request of its own, on a change
-that you or the agent already made. Whoever reads the docs next starts without
-the context behind that change, just as a cold reader does. So a cold read
-suits any change to documentation, whether a person or an agent reads it: a
-README, an instructions file such as `CLAUDE.md`, or any other patch to the
-docs. For example:
-
-```
-/jstyle:write Give my README.md change to a cold reader. Will they get it?
-```
-
-Some agents and tools see the skill only after it has run once. If yours
-doesn't pick it up, run the command on its own first. The skill then stays in
-the conversation:
-
-```
-/jstyle:write
-```
-
-Where skills aren't supported, such as a chat app, you can:
-
-- paste [SKILL.md](plugins/jstyle/skills/write/SKILL.md) into the context
-  before asking for a draft, or
-- add a line to your instructions file that points at it, such as: "Before
-  drafting text for a reader outside this conversation, read
-  `<path>/SKILL.md` and follow it."
-
-The skill was written for Claude and other recent models.
-[docs/models.md](docs/models.md) says what that means for its contents.
-
-### Cold Reads
-
-Some text gets one chance with a reader who doesn't share the writer's context,
-such as an email, a README, or release notes. For that text, the skill asks the
-agent for a cold read before it hands the text over. A subagent or a new
-session gets only the text and one line on who it's for, and lists what it had
-to reread or couldn't follow. A writer can't find these gaps alone, because
-their own context fills them in. Chat replies and small edits skip this step.
-
-A cold read costs extra tokens and time. Where the agent can choose the
-reader's model, the skill suggests one a tier below its own, such as Sonnet for
-an Opus session. In the maintainer's use, the smaller reader costs less and
-guesses less where the text leaves a gap. Where the agent can start a subagent,
-the skill tells it to run one without asking, unless your instructions limit
-background work. If that's a concern, add a line to your instructions file,
-such as "Ask before starting a subagent."
-
-> [!TIP]
-> Agents are careful with tokens, so they may skip the cold read, or check
-> only the sentence they changed. When a text matters, ask in the chat: "Run
-> a cold read on this," or "Reread the whole section after that change."
-
-## Turn It Off and On
-
-To compare writing with and without the skill, turn it off and on again
-without uninstalling:
-
-- **In a terminal session,** run `/plugin`, and on the **Installed** tab press
-  **Space** on `jstyle`.
-- **In VS Code,** type `/plugins` and use the toggle next to `jstyle`.
-- **In the desktop app,** use its plugin menu.
-
-> [!IMPORTANT]
-> Start a new session after each change. A skill that already loaded stays in
-> the conversation, so an open session can't show writing without it.
-
-[Install and manage plugins](https://code.claude.com/docs/en/discover-plugins)
-lists the other ways to turn a plugin off and on, including from your shell.
 
 ## Other Languages and Models
 
@@ -231,6 +210,28 @@ from the facts, then works from the idea down to the words.
 
 Looking back at the blind picks, the maintainer finds that most of the
 difference came at the paragraph level.
+
+## Cold Reads
+
+Some text gets one chance with a reader who doesn't share the writer's context,
+such as an email, a README, or release notes. For that text, the skill asks the
+agent for a cold read before it hands the text over. A subagent or a new
+session gets only the text and one line on who it's for, and lists what it had
+to reread or couldn't follow. A writer can't find these gaps alone, because
+their own context fills them in. Chat replies and small edits skip this step.
+
+A cold read costs extra tokens and time. Where the agent can choose the
+reader's model, the skill suggests one a tier below its own, such as Sonnet for
+an Opus session. In the maintainer's use, the smaller reader costs less and
+guesses less where the text leaves a gap. Where the agent can start a subagent,
+the skill tells it to run one without asking, unless your instructions limit
+background work. If that's a concern, add a line to your instructions file,
+such as "Ask before starting a subagent."
+
+> [!TIP]
+> Agents are careful with tokens, so they may skip the cold read, or check
+> only the sentence they changed. When a text matters, ask in the chat: "Run
+> a cold read on this," or "Reread the whole section after that change."
 
 ## Punctuation and Case
 
