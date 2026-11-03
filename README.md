@@ -52,34 +52,33 @@ holds a benchmark and other supporting material.
 
 ## Using It
 
-Ask for the text as usual. The agent loads the skill when it writes for
-someone outside the conversation, such as an email or a README, and leaves it
-off for chat replies.
-
-To load it yourself, start your request with the command:
+**To write a text,** ask for it as usual:
 
 ```
-/jstyle:write [your writing prompt]
+Add a section to README.md on how to run the tests.
 ```
 
-A [cold read](#cold-reads) also works as a request of its own, on a change
-that you or the agent already made. Whoever reads the docs next starts without
-the context behind that change, just as a cold reader does. So a cold read
-suits any change to documentation, whether a person or an agent reads it: a
-README, an instructions file such as `CLAUDE.md`, or any other patch to the
-docs. For example:
+**To load the skill yourself,** start your prompt with its command:
 
 ```
-/jstyle:write Give my README.md change to a cold reader. Will they get it?
+/jstyle:write Draft an email to the team about the release slip.
 ```
 
-Some agents and tools see the skill only after it has run once. If yours
-doesn't pick it up, run the command on its own first. The skill then stays in
-the conversation:
+**To check a change,** show it to a [cold reader](#cold-reads):
 
 ```
-/jstyle:write
+/jstyle:write Show my README.md change to a cold reader. Will they get it?
 ```
+
+Most agents load the skill automatically when they write for someone outside
+the conversation, such as an email or a README, and leave it off for chat
+replies. With some agents, the command loads it more reliably.
+
+A cold read gives your text a fresh pair of eyes. A reader with none of your
+context trips over a term you never defined, or a step you skipped as obvious.
+That matters most when the reader can't ask you, as with a README, or an
+instructions file such as `CLAUDE.md`, whose next reader is an agent starting
+from scratch.
 
 ## Install
 
@@ -110,6 +109,10 @@ marketplace from your shell first, then install the plugin from it:
 claude plugin marketplace add ihorh/jstyle --sparse .claude-plugin plugins
 claude plugin install jstyle@jstyle
 ```
+
+Some agents and tools see the skill only after it has run once. If yours
+doesn't pick it up, run `/jstyle:write` on its own first, and the skill stays
+in the conversation.
 
 Where skills aren't supported, such as a chat app, you can:
 
