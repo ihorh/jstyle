@@ -126,6 +126,17 @@ To load it yourself, start your request with the command:
 /jstyle:write [your writing prompt]
 ```
 
+A [cold read](#cold-reads) also works as a request of its own, on a change
+that you or the agent already made. Whoever reads the docs next starts without
+the context behind that change, just as a cold reader does. So a cold read
+suits any change to documentation, whether a person or an agent reads it: a
+README, an instructions file such as `CLAUDE.md`, or any other patch to the
+docs. For example:
+
+```
+/jstyle:write Give my README.md change to a cold reader. Will they get it?
+```
+
 Some agents and tools see the skill only after it has run once. If yours
 doesn't pick it up, run the command on its own first. The skill then stays in
 the conversation:
